@@ -1,0 +1,72 @@
+%%
+%% This is file `footnotehyper.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% footnotehyper.dtx  (with options: `package')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from footnotehyper.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file footnotehyper.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%%
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{footnotehyper}%
+ [2016/04/18 v0.9 hyperref aware footnote.sty (JFB)]
+%%
+%% Package: footnotehyper
+%% Version: 0.9 (2016/04/18)
+%% License: LPPL 1.3c
+%% Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
+%%
+\DeclareOption*{\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown.}}
+\ProcessOptions\relax
+\RequirePackage{footnote}
+\AtBeginDocument{\@ifpackageloaded{hyperref}{}{\PackageWarning{footnotehyper}
+  {hyperref package not loaded!^^J This
+   will surely end up in zillions of error messages.}}}
+\def\fn@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
+                                      \else\expandafter\@firstofone\fi
+    {\ifmeasuring@\expandafter\@gobbletwo\fi}%
+    \FNH@fn@fntext }
+\long\def\FNH@fn@fntext #1{%
+  \global\setbox\fn@notes\vbox
+     {\unvbox\fn@notes
+      \fn@startnote
+      \@makefntext
+       {\rule\z@\footnotesep\ignorespaces
+        \ifHy@nesting\expandafter\ltx@firstoftwo
+                \else\expandafter\ltx@secondoftwo
+        \fi
+        {\expandafter\hyper@@anchor\expandafter{\Hy@footnote@currentHref}{#1}}%
+        {\Hy@raisedlink
+          {\expandafter\hyper@@anchor\expandafter{\Hy@footnote@currentHref}%
+          {\relax}}%
+         \let\@currentHref\Hy@footnote@currentHref
+         \let\@currentlabelname\@empty
+         #1}%
+      \@finalstrut\strutbox }%
+      \fn@endnote }%
+}
+\def\spewnotes {\endgroup
+    \if@savingnotes\else\ifvoid\fn@notes\else
+    \begingroup\let\@makefntext\@empty
+               \let\@finalstrut\@gobble
+               \let\rule\@gobbletwo
+               \H@@footnotetext{\unvbox\fn@notes}%
+    \endgroup\fi\fi
+}
+\endinput
+%%
+%% End of file `footnotehyper.sty'.

@@ -1,0 +1,106 @@
+<!-- -->
+
+    Source:  footnotehyper.dtx (v0.9 2016/04/18)
+    Author:  Jean-Francois B.
+    Info:    hyperref aware footnote.sty
+    License: LPPL 1.3c or later
+    Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
+
+ABSTRACT
+========
+
+The `footnote` package by Mark Wooding dates back to 1997 and has
+not been made `hyperref` compatible. The aim of the present
+package is to do that. It is barely tested and its state is what I
+found sufficiently well-working on a current LaTeX document of
+mine, I have not attempted any in-depth analysis of all possible
+situations. As version number is at `v0.9`, there is room for
+incorporating suggestions until reaching final `v1.0`. I promise
+not to find a mathematical constant in-between and I will
+certainly not play the `999..9` game à la XeTeX.
+
+For those who don't know: the `footnote` package allows via
+`\savenotes` to gather footnotes and later release them via
+`\spewnotes`. Thus footnotes emitted from tabulars or minipages
+are not separated from the general document stream of footnotes,
+and are printed with the others at bottom of page. This works also
+for environments like `framed` (1) from the eponymous package and
+avoids the `\footnotemark/\footnotetext` approach, which anyhow is
+not immediately `hyperref` compatible. The `footnote` package has
+a facility to patch any user-chosen environment to do the
+`\savenotes/\spewnotes` automatically.
+
+This package provides no facility for handling footnotes from floating
+environments.
+
+It will load `footnote` but it is up to the user to take care of
+`hyperref`.
+
+(1): in case of multi-page content, the footnotes are delivered in
+the last page.
+
+INSTALLATION
+============
+
+The simplest is to download
+
+>  <http://mirrors.ctan.org/install/macros/latex/contrib/footnotehyper.tds.zip>
+
+and to then run `unzip footnotehyper.tds.zip -d <DEST>` where
+`<DEST>` is a TDS-compliant repertory.
+
+Else, to extract the package (.sty) and driver (.tex) files from
+footnotehyper.dtx:
+
+- if footnotehyper.ins is present:   etex footnotehyper.ins
+- without footnotehyper.ins:         etex footnotehyper.dtx
+
+It is also possible to run latex or pdflatex directly on
+footnotehyper.dtx.
+
+At least three ways to produce footnotehyper.pdf (method (1) is
+preferred):
+
+1. latex footnotehyper.tex (thrice), then dvipdfmx
+2. pdflatex footnotehyper.dtx (thrice)
+3. latex footnotehyper.dtx (thrice), then dvips, then ps2pdf
+
+Method (1) produces the smallest pdf files.
+Options can be set in footnotehyper.tex:
+
+- scrdoc class options (paper size, font size, ...)
+- with or without source code,
+- with dvipdfmx or with latex+dvips or pdflatex.
+
+Installation:
+
+    footnotehyper.sty    -> TDS:tex/latex/footnotehyper/footnotehyper.sty
+    footnotehyper.dtx    -> TDS:source/latex/footnotehyper/footnotehyper.dtx
+    footnotehyper.pdf    -> TDS:doc/latex/footnotehyper/footnotehyper.pdf
+    README.md            -> TDS:doc/latex/footnotehyper/README.md
+
+The other files may be discarded.
+
+LICENSE
+=======
+
+This Work may be distributed and/or modified under the conditions
+of the LaTeX Project Public License, version 1.3c. This version of
+this license is in:
+
+> <http://www.latex-project.org/lppl/lppl-1-3c.txt>
+
+and the latest version of this license is in:
+
+> <http://www.latex-project.org/lppl.txt>
+
+Version 1.3 or later is part of all distributions of
+LaTeX version 2005/12/01 or later.
+
+The Author of this Work is:
+
+- Jean-Francois B. `<jfbu on github>`
+
+This Work consists of the main source file footnotehyper.dtx and the
+derived files footnotehyper.sty, footnotehyper.ins, footnotehyper.tex,
+footnotehyper.pdf, footnotehyper.dvi.
