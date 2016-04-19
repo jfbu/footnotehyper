@@ -1,35 +1,43 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.99 2017/02/16)
+    Source:  footnotehyper.dtx (v0.9a 2016/04/19)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
-    License: LPPL 1.3c
-    Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
+    License: LPPL 1.3c or later
+    Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 
 ABSTRACT
 ========
 
-The `footnote` package by Mark Wooding (`1997/01/28` `1.13`)
-allows to gather footnotes (`\begin{savenotes}`) and later insert
-them (after `\end{savenotes}`) at the bottom of the page, even
-if the intervening material consists of tabulars, minipages or
-framed contents for example. One can also use the
-`\savenotes/\spewnotes` syntax.
+The `footnote` package by Mark Wooding dates back to 1997 and has
+not been made `hyperref` compatible. The aim of the present
+package is to do that. It is barely tested and its state is what I
+found sufficiently well-working on a current LaTeX document of
+mine, I have not attempted any in-depth analysis of all possible
+situations. As version number is at `v0.9a`, there is room for
+incorporating suggestions until reaching final `v1.0`. I promise
+not to find a mathematical constant in-between and I will
+certainly not play the `999..9` game à la XeTeX.
 
-Also, `footnote.sty` provides a `footnote` environment which
-allows to insert verbatim material.
+For those who don't know: the `footnote` package allows via
+`\savenotes` to gather footnotes and later release them via
+`\spewnotes`. Thus footnotes emitted from tabulars or minipages
+are not separated from the general document stream of footnotes,
+and are printed with the others at bottom of page. This works also
+for environments like `framed` (1) from the eponymous package and
+avoids the `\footnotemark/\footnotetext` approach, which anyhow is
+not immediately `hyperref` compatible. The `footnote` package has
+a facility to patch any user-chosen environment to do the
+`\savenotes/\spewnotes` automatically.
 
-Earlier releases of the present `footnotehyper` package added
-patches for `hyperref` compatibility and some bugfixes, addressing
-in particular the incompatibility with `color/xcolor`, and with
-`babel-frenchb`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `v0.99` all macros are defined
-internally and the `footnote` package is not loaded at all.
+This package provides no facility for handling footnotes from floating
+environments.
 
-The same user interface is kept. In case `hyperref` is absent, or
-is loaded with `hyperfootnotes=false` option, `footnotehyper`
-deactivates itself. The order of loading of `footnotehyper`
-and `hyperref` is inconsequential.
+It will load `footnote` but it is up to the user to take care of
+`hyperref`.
+
+(1): in case of multi-page content, the footnotes are delivered in
+the last page.
 
 INSTALLATION
 ============
@@ -44,9 +52,9 @@ footnotehyper.dtx:
 At least three ways to produce footnotehyper.pdf (method (1) is
 preferred):
 
-1. latex footnotehyper.tex (twice), then dvipdfmx
-2. pdflatex footnotehyper.dtx (twice)
-3. latex footnotehyper.dtx (twice), then dvips, then ps2pdf
+1. latex footnotehyper.tex (thrice), then dvipdfmx
+2. pdflatex footnotehyper.dtx (thrice)
+3. latex footnotehyper.dtx (thrice), then dvips, then ps2pdf
 
 Method (1) produces the smallest pdf files.
 Options can be set in footnotehyper.tex:
