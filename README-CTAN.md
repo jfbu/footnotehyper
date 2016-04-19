@@ -1,6 +1,6 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9a 2016/04/19)
+    Source:  footnotehyper.dtx (v0.9c 2016/04/19)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c or later
@@ -14,14 +14,15 @@ not been made `hyperref` compatible. The aim of the present
 package is to do that. It is barely tested and its state is what I
 found sufficiently well-working on a current LaTeX document of
 mine, I have not attempted any in-depth analysis of all possible
-situations. As version number is at `v0.9a`, there is room for
+situations. As version number is at `v0.9c`, there is room for
 incorporating suggestions until reaching final `v1.0`. I promise
 not to find a mathematical constant in-between and I will
 certainly not play the `999..9` game à la XeTeX.
 
 For those who don't know: the `footnote` package allows via
 `\savenotes` to gather footnotes and later release them via
-`\spewnotes`. Thus footnotes emitted from tabulars or minipages
+`\spewnotes` (one can also use a `savenotes` environment.)
+Thus footnotes emitted from tabulars or minipages
 are not separated from the general document stream of footnotes,
 and are printed with the others at bottom of page. This works also
 for environments like `framed` (1) from the eponymous package and
@@ -33,8 +34,11 @@ a facility to patch any user-chosen environment to do the
 This package provides no facility for handling footnotes from floating
 environments.
 
-It will load `footnote` but it is up to the user to take care of
-`hyperref`.
+Some issues from `footnote.sty` made it incompatible with the
+`color` and `xcolor` packages; this is corrected by `footnotehyper`.
+
+The loading of `hyperref` (either before or after) is mandatory
+but left to the user.
 
 (1): in case of multi-page content, the footnotes are delivered in
 the last page.

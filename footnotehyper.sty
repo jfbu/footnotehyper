@@ -23,25 +23,30 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2016/04/19 v0.9a hyperref aware footnote.sty (JFB)]
+ [2016/04/19 v0.9c hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 0.9a (2016/04/19)
+%% Version: 0.9c (2016/04/19)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 %%
-\DeclareOption*{\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown.}}
+\DeclareOption*{\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
 \ProcessOptions\relax
-\RequirePackage{footnote}
-\AtBeginDocument{\@ifpackageloaded{hyperref}{}{\PackageWarning{footnotehyper}
-  {hyperref package not loaded!^^J This
-   will surely end up in zillions of error messages.}}}
+\let\FNH@@makefntext\@makefntext\let\@makefntext\@firstofone
+\RequirePackage{footnote}%
+\let\@makefntext\FNH@@makefntext
+\let\FNH@footnote    \footnote
+\let\FNH@footnotetext\footnotetext
+\let\footnote    \fn@latex@@footnote
+\let\footnotetext\fn@latex@@footnotetext
+\AtBeginDocument{\@ifpackageloaded{hyperref}{}{\PackageError{footnotehyper}%
+  {hyperref package not loaded!^^JThat's not easily forgiven..}%
+  {I am sure you know what to do. Else, think hard: yes you can!}}}%
 \def\fn@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
                                       \else\expandafter\@firstofone\fi
     {\ifmeasuring@\expandafter\@gobbletwo\fi}%
-    \FNH@fn@fntext }
-\long\def\FNH@fn@fntext #1{%
-  \global\setbox\fn@notes\vbox
+    \FNH@fn@fntext }%
+\long\def\FNH@fn@fntext #1{\global\setbox\fn@notes\vbox
      {\unvbox\fn@notes
       \fn@startnote
       \@makefntext
@@ -58,7 +63,7 @@
          #1}%
       \@finalstrut\strutbox }%
       \fn@endnote }%
-}
+}%
 \def\spewnotes {\endgroup
     \if@savingnotes\else\ifvoid\fn@notes\else
     \begingroup\let\@makefntext\@empty
@@ -66,7 +71,46 @@
                \let\rule\@gobbletwo
                \H@@footnotetext{\unvbox\fn@notes}%
     \endgroup\fi\fi
-}
+}%
+\def\fn@endnote  {\color@endgroup}%
+\def\fn@endfntext{%
+    \@finalstrut\strutbox
+    \fn@postfntext
+    \fn@endnote
+    \egroup
+    \begingroup
+    \let\@makefntext\@empty
+    \let\@finalstrut\@gobble
+    \let\rule\@gobbletwo
+    \H@@footnotetext{\unvbox\z@}%
+    \endgroup
+}%
+\let\endfootnote     \fn@endfntext
+\let\endfootnotetext \endfootnote
+\AtBeginDocument {%
+    \let\fn@latex@@footnote    \footnote
+    \let\fn@latex@@footnotetext\footnotetext
+    \let\footnote    \FNH@footnote
+    \let\footnotetext\FNH@footnotetext
+}%
+\AtBeginDocument
+   {\expandafter\FNH@check@a\@makefntext{1.2!3?4,}\FNH@@@1.2!3?4,\FNH@@@\relax}%
+\long\def\FNH@check@a #11.2!3?4,#2\FNH@@@#3{%
+     \ifx\relax#3\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
+     {\FNH@bad@footnote@env}%
+     {\long\def\fn@prefntext{#1}\long\def\fn@postfntext{#2}\FNH@check@b}%
+}%
+\def\FNH@check@b #1\relax{\expandafter\expandafter\expandafter\FNH@check@c
+    \expandafter\meaning\expandafter\fn@prefntext
+                            \meaning\fn@postfntext1.2!3?4,\FNH@check@c\relax
+}%
+\def\FNH@check@c #11.2!3?4,#2#3\relax
+   {\ifx\FNH@check@c#2\expandafter\@gobble\fi\FNH@bad@footnote@env}%
+\def\FNH@bad@footnote@env {\PackageWarning{footnotehyper}%
+        {The footnote environment from package footnote^^J%
+         will be dysfunctional, sorry (not my fault...)}%
+    \let\fn@prefntext\@empty\let\fn@postfntext\@empty
+}%
 \endinput
 %%
 %% End of file `footnotehyper.sty'.
