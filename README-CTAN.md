@@ -1,6 +1,6 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9c 2016/04/19)
+    Source:  footnotehyper.dtx (v0.9d 2016/04/21)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c or later
@@ -13,11 +13,7 @@ The `footnote` package by Mark Wooding dates back to 1997 and has
 not been made `hyperref` compatible. The aim of the present
 package is to do that. It is barely tested and its state is what I
 found sufficiently well-working on a current LaTeX document of
-mine, I have not attempted any in-depth analysis of all possible
-situations. As version number is at `v0.9c`, there is room for
-incorporating suggestions until reaching final `v1.0`. I promise
-not to find a mathematical constant in-between and I will
-certainly not play the `999..9` game à la XeTeX.
+mine.
 
 For those who don't know: the `footnote` package allows via
 `\savenotes` to gather footnotes and later release them via
@@ -35,7 +31,8 @@ This package provides no facility for handling footnotes from floating
 environments.
 
 Some issues from `footnote.sty` made it incompatible with the
-`color` and `xcolor` packages; this is corrected by `footnotehyper`.
+`color` and `xcolor` packages; this is corrected by `footnotehyper`. The
+compatibility with `babel-frenchb` is improved, too.
 
 The loading of `hyperref` (either before or after) is mandatory
 but left to the user.
