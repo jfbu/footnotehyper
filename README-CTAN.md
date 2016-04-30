@@ -1,6 +1,6 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9d 2016/04/21)
+    Source:  footnotehyper.dtx (v0.9e 2016/04/30)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c or later
@@ -11,9 +11,8 @@ ABSTRACT
 
 The `footnote` package by Mark Wooding dates back to 1997 and has
 not been made `hyperref` compatible. The aim of the present
-package is to do that. It is barely tested and its state is what I
-found sufficiently well-working on a current LaTeX document of
-mine.
+package is to do that. Its state is what I found sufficiently
+well-working on a current LaTeX document of mine.
 
 For those who don't know: the `footnote` package allows via
 `\savenotes` to gather footnotes and later release them via
@@ -53,9 +52,9 @@ footnotehyper.dtx:
 At least three ways to produce footnotehyper.pdf (method (1) is
 preferred):
 
-1. latex footnotehyper.tex (thrice), then dvipdfmx
-2. pdflatex footnotehyper.dtx (thrice)
-3. latex footnotehyper.dtx (thrice), then dvips, then ps2pdf
+1. latex footnotehyper.tex (twice), then dvipdfmx
+2. pdflatex footnotehyper.dtx (twice)
+3. latex footnotehyper.dtx (twice), then dvips, then ps2pdf
 
 Method (1) produces the smallest pdf files.
 Options can be set in footnotehyper.tex:

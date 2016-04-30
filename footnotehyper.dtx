@@ -1,20 +1,20 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <21-04-2016 at 11:40:54 CEST>}
+\def\dtxtimestamp {Time-stamp: <30-04-2016 at 20:34:58 CEST>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 0.9d (2016/04/21)
+%% Version: 0.9e (2016/04/30)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 %%
 %</!readme>
 %<*insfile|tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2016/04/21}
-\def\docdate        {2016/04/21}
-\def\pkgversion     {v0.9d}
+\def\pkgdate        {2016/04/30}
+\def\docdate        {2016/04/30}
+\def\pkgversion     {v0.9e}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</insfile|tex>
 %<*none>
@@ -25,7 +25,7 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 0.9d (2016/04/21)
+% Version: 0.9e (2016/04/30)
 % License: LPPL 1.3c
 % Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 %
@@ -54,7 +54,7 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9d 2016/04/21)
+    Source:  footnotehyper.dtx (v0.9e 2016/04/30)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c or later
@@ -66,9 +66,8 @@ ABSTRACT
 
 The `footnote` package by Mark Wooding dates back to 1997 and has
 not been made `hyperref` compatible. The aim of the present
-package is to do that. It is barely tested and its state is what I
-found sufficiently well-working on a current LaTeX document of
-mine.
+package is to do that. Its state is what I found sufficiently
+well-working on a current LaTeX document of mine.
 
 For those who don't know: the `footnote` package allows via
 `\savenotes` to gather footnotes and later release them via
@@ -109,9 +108,9 @@ footnotehyper.dtx:
 At least three ways to produce footnotehyper.pdf (method (1) is
 preferred):
 
-1. latex footnotehyper.tex (thrice), then dvipdfmx
-2. pdflatex footnotehyper.dtx (thrice)
-3. latex footnotehyper.dtx (thrice), then dvips, then ps2pdf
+1. latex footnotehyper.tex (twice), then dvipdfmx
+2. pdflatex footnotehyper.dtx (twice)
+3. latex footnotehyper.dtx (twice), then dvips, then ps2pdf
 
 Method (1) produces the smallest pdf files.
 Options can be set in footnotehyper.tex:
@@ -156,7 +155,7 @@ footnotehyper.pdf, footnotehyper.dvi.
 %</readme>
 %<*tex>-------------------------------------------------------------------------
 %%
-%% run latex thrice on this file footnotehyper.tex then dvipdfmx on
+%% run latex twice on this file footnotehyper.tex then dvipdfmx on
 %% footnotehyper.dvi to produce the documentation footnotehyper.pdf, with
 %% source code included.
 %%
@@ -199,7 +198,7 @@ footnotehyper.pdf, footnotehyper.dvi.
 \Msg{*}
 \Msg{*     \pkgname.sty} 
 \Msg{*}
-\Msg{* To produce the documentation run latex thrice on file \pkgname.tex}
+\Msg{* To produce the documentation run latex twice on file \pkgname.tex}
 \Msg{* and then run dvipdfmx on file \pkgname.dvi.}
 \Msg{*}
 \Msg{* Happy TeXing!}
@@ -247,7 +246,7 @@ footnotehyper.pdf, footnotehyper.dvi.
 \Msg{*\space\space\space\space \pkgname.sty^^J}%
 \Msg{*^^J}%
 \Msg{* To produce the documentation with source code included run latex^^J}%
-\Msg{* thrice on file \pkgname.tex and then dvipdfmx on \pkgname.dvi^^J}%
+\Msg{* twice on file \pkgname.tex and then dvipdfmx on \pkgname.dvi^^J}%
 \Msg{*^^J}%
 \Msg{* Happy TeXing!^^J}%
 \Msg{*^^J}%
@@ -370,13 +369,12 @@ pdfpagemode=UseNone}
   From source file \texttt{\pkgname.dtx} of \dtxtimestamp.\par
 \end{center}
 
-\MakeShortVerb{\`}% global effect !
+\MakeShortVerb{\`}%
 \begin{abstract}
-  The `footnote` package by \textsc{Mark Wooding} dates back to 1997 and
-  has not been made `hyperref` compatible. The aim of the present
-  package is to do that. It is barely tested and its state is what
-  I found sufficiently well-working on a current LaTeX document of
-  mine.
+  The `footnote` package by \textsc{Mark Wooding} dates back to
+  1997 and has not been made `hyperref` compatible. The aim of the
+  present package is to do that. Its state is what I found
+  sufficiently well-working on a current LaTeX document of mine.
 
   For those who don't know: the `footnote` package allows via
   `\savenotes` to gather footnotes and later release them via
@@ -414,7 +412,9 @@ but left to the user.
 \section{Usage}
 
 Do \emph{not} load |footnote|, leave that job to \fnh. You \emph{must} load
-|hyperref|.
+|hyperref|.\footnote{Since |0.9e| \fnh deactivates itself
+  gracefully if |hyperref| is not loaded, or under |hyperref| option
+  |hyperfootnotes=false|.}
 
 Then you can use |\savenotes/\spewnotes| or the equivalent |savenotes|
 environment; there is also a |footnote| environment, but its set-up during
@@ -497,8 +497,11 @@ Use of the \texttt{footnote} \emph{environment} with some verbatim material%
   \verb|&$^%\[}$|
 \end{footnote}
 \end{verbatim}
-And one more normal footnote.\footnote{You didn't want a footnote from
-  \emph{inside} the verbatim I hope ...}
+And one more normal footnote.\footnote{\fnh deactivates itself if
+  |hyperfootnotes=false| option to |hyperref| is detected.
+  Essentially, it only
+fixes then the incompatibilities between |footnote.sty| and
+|color/xcolor/babel-frenchb| packages.}
 
 \StopEventually{\end{document}\endinput}
 \makeatletter
@@ -554,7 +557,7 @@ And one more normal footnote.\footnote{You didn't want a footnote from
 % \begin{macro}{\@makefntext}
 % \begin{macro}{\footnote}
 % \begin{macro}{\footnotetext}
-% We load |footnote| but leave the |hyperref| handling to the user.
+% We load |footnote| but leave to the user to take care of |hyperref|.
 %
 % As we need to intercept some re-definitions done by |footnote| we will first
 % check if it is already loaded.
@@ -571,35 +574,69 @@ And one more normal footnote.\footnote{You didn't want a footnote from
  {\PackageWarning{footnotehyper}{Please next time do not load footnote,^^J
     but leave that to me, that is much safer.}}
  {\let\FNH@@makefntext\@makefntext\let\@makefntext\@firstofone
-  \RequirePackage{footnote}\relax
+  \RequirePackage{footnote}
   \let\@makefntext\FNH@@makefntext
  }%
 \let\FNH@fn@footnote    \footnote    
 \let\FNH@fn@footnotetext\footnotetext
 \let\footnote    \fn@latex@@footnote
 \let\footnotetext\fn@latex@@footnotetext
-\AtBeginDocument{\@ifpackageloaded{hyperref}{}{\PackageError{footnotehyper}%
-  {hyperref package not loaded!^^Jhow many errors will you get ?...}%
-  {...I am sure you know what to do next time!}}}%
 %    \end{macrocode}
 % \end{macro}\end{macro}\end{macro}
-% \begin{macro}{\fn@fntext}
-% Some |amsmath| complications. I change the coding, but same effect as
-% original.
+% There are some |\let|'s done by |footnote.sty| in what appears to be
+% premature ways.
 %    \begin{macrocode}
-\def\fn@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
-                                      \else\expandafter\@firstofone\fi
-    {\ifmeasuring@\expandafter\@gobbletwo\fi}%
-    \FNH@fn@fntext }%
+\AtBeginDocument {%
+    \let\fn@latex@@footnote    \footnote
+    \let\fn@latex@@footnotetext\footnotetext
+    \let\footnote    \FNH@fn@footnote
+    \let\footnotetext\FNH@fn@footnotetext
+}%
+%    \end{macrocode}
+% \begin{macro}{\FNH@inactive}
+% We intervene (for real) only if |hyperfootnotes| option of |hyperref| applies.
+%    \begin{macrocode}
+\AtBeginDocument{\@ifpackageloaded{hyperref}
+  {\ifHy@hyperfootnotes
+    \let\fn@fntext \FNH@fn@fntext
+    \let\spewnotes \FNH@spewnotes
+    \let\endsavenotes\spewnotes
+    \let\fn@endfntext\FNH@fn@endfntext
+   \else
+     \FNH@inactive
+   \fi }\FNH@inactive 
+    \let\endfootnote\fn@endfntext
+    \let\endfootnotetext\endfootnote
+}%
+\def\FNH@fixendfntext\@finalstrut\strutbox\fn@postfntext
+    {\@finalstrut\strutbox\fn@postfntext\fn@endnote}%
+\def\FNH@inactive {%
+    \expandafter\expandafter\expandafter\def
+    \expandafter\expandafter\expandafter\fn@endfntext
+    \expandafter\expandafter\expandafter
+       {\expandafter\FNH@fixendfntext\fn@endfntext}%
+    \PackageInfo{footnotehyper}{hyperref package not loaded,^^J
+     or hyperfootnotes=false option; I did not activate myself and only^^J
+     patched footnote.sty for color/xcolor/babel-frenchb compatibility}}%
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}{\FNH@fn@fntext}
+% Some |amsmath| complications. I change the coding, but same effect as
+% original.
+%    \begin{macrocode}
+\def\FNH@fn@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
+                                      \else\expandafter\@firstofone\fi
+    {\ifmeasuring@\expandafter\@gobbletwo\fi}%
+    \FNH@fn@fntext@i }%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\FNH@fn@fntext@i}
 % Note: original \cs{fn@fntext} had no \cs{long}, which looks wrong.
 %
 % We do the \cs{ifHy@nesting} test although hyperref's manual
 % says ``Allows links to be nested; no drivers currently support this.''
 %    \begin{macrocode}
-\long\def\FNH@fn@fntext #1{\global\setbox\fn@notes\vbox
+\long\def\FNH@fn@fntext@i #1{\global\setbox\fn@notes\vbox
      {\unvbox\fn@notes
       \fn@startnote
       \@makefntext
@@ -619,13 +656,13 @@ And one more normal footnote.\footnote{You didn't want a footnote from
 }%
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\spewnotes}
-% \begin{macro}{endsavenotes}
+% \begin{macro}{\FNH@spewnotes}
+% \begin{macro}{\FNH@endsavenotes}
 %   The final touch in our hack is to patch the original \cs{spewnotes} for it
 %   to use the original, non-hyperref modified, version of \cs{@footnotetext}.
-%   And let's not forget \cs{endsavenotes}.
+%   And let's not forget \cs{endsavenotes} (done at begin document).
 %    \begin{macrocode}
-\def\spewnotes {\endgroup
+\def\FNH@spewnotes {\endgroup
     \if@savingnotes\else\ifvoid\fn@notes\else
     \begingroup\let\@makefntext\@empty
                \let\@finalstrut\@gobble
@@ -633,10 +670,9 @@ And one more normal footnote.\footnote{You didn't want a footnote from
                \H@@footnotetext{\unvbox\fn@notes}%
     \endgroup\fi\fi
 }%
-\let\endsavenotes\spewnotes
 %    \end{macrocode}
 % \end{macro}\end{macro}
-% \begin{macro}{\fn@endfntext}
+% \begin{macro}{\FNH@fn@endfntext}
 % \begin{macro}{\fn@endnote}
 % We now take care of |footnote.sty|'s |footnote| environment. The original
 % \cs{fn@endfntext} is lacking a \cs{fn@endnote}, and this meant that
@@ -648,7 +684,7 @@ And one more normal footnote.\footnote{You didn't want a footnote from
 % target.
 %    \begin{macrocode}
 \def\fn@endnote  {\color@endgroup}%
-\def\fn@endfntext{%
+\def\FNH@fn@endfntext{%
     \@finalstrut\strutbox
     \fn@postfntext
     \fn@endnote
@@ -668,24 +704,12 @@ And one more normal footnote.\footnote{You didn't want a footnote from
           {\relax}}%
          \let\@currentHref\Hy@footnote@currentHref
          \let\@currentlabelname\@empty
-         \unvbox\z@}
+         \unvbox\z@}%
     }%
     \endgroup
 }%
-\let\endfootnote     \fn@endfntext
-\let\endfootnotetext \endfootnote
 %    \end{macrocode}
 % \end{macro}\end{macro}
-% There are some |\let|'s done by |footnote.sty| in what appears to be
-% premature ways.
-%    \begin{macrocode}
-\AtBeginDocument {%
-    \let\fn@latex@@footnote    \footnote
-    \let\fn@latex@@footnotetext\footnotetext
-    \let\footnote    \FNH@fn@footnote
-    \let\footnotetext\FNH@fn@footnotetext
-}%
-%    \end{macrocode}
 % \begin{macro}{\@makefntext}
 % \begin{macro}{\fn@prefntext}
 % \begin{macro}{\fn@postfntext}
