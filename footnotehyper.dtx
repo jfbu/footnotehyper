@@ -1,20 +1,20 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <30-04-2016 at 20:34:58 CEST>}
+\def\dtxtimestamp {Time-stamp: <03-10-2016 at 23:00:16 CEST>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 0.9e (2016/04/30)
+%% Version: 0.9f (2016/10/03)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 %%
 %</!readme>
 %<*insfile|tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2016/04/30}
-\def\docdate        {2016/04/30}
-\def\pkgversion     {v0.9e}
+\def\pkgdate        {2016/10/03}
+\def\docdate        {2016/10/03}
+\def\pkgversion     {v0.9f}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</insfile|tex>
 %<*none>
@@ -25,7 +25,7 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 0.9e (2016/04/30)
+% Version: 0.9f (2016/10/03)
 % License: LPPL 1.3c
 % Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 %
@@ -54,45 +54,33 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9e 2016/04/30)
+    Source:  footnotehyper.dtx (v0.9f 2016/10/03)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
-    License: LPPL 1.3c or later
+    License: LPPL 1.3c
     Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 
 
 ABSTRACT
 ========
 
-The `footnote` package by Mark Wooding dates back to 1997 and has
-not been made `hyperref` compatible. The aim of the present
-package is to do that. Its state is what I found sufficiently
-well-working on a current LaTeX document of mine.
+The `footnote` package by Mark Wooding (which dates back to 1997)
+allows to gather footnotes (`\savenotes`) and later insert them
+(`\spewnotes`) at the bottom of the page, even if the intervening
+material consists of tabulars, minipages or framed contents for
+example. There is a command to patch any given environment to do
+the `\savenotes/\spewnotes` commands automatically. Also there is
+a `footnote` environment which allows to insert verbatim material.
 
-For those who don't know: the `footnote` package allows via
-`\savenotes` to gather footnotes and later release them via
-`\spewnotes` (one can also use a `savenotes` environment.) 
-Thus footnotes emitted from tabulars or minipages
-are not separated from the general document stream of footnotes,
-and are printed with the others at bottom of page. This works also
-for environments like `framed` (1) from the eponymous package and
-avoids the `\footnotemark/\footnotetext` approach, which anyhow is
-not immediately `hyperref` compatible. The `footnote` package has
-a facility to patch any user-chosen environment to do the
-`\savenotes/\spewnotes` automatically.
+The `footnotehyper` package loads `footnote.sty` and rewrites a
+number of its commands to add `hyperref` awareness and to fix some
+issues, particularly the one of incompatibility with
+`color/xcolor`. The incompatibility with `babel-frenchb` is
+addressed, too. In case of absence of `hyperref`, `footnotehyper`
+limits itself to partially fix some of these issues.
 
-This package provides no facility for handling footnotes from floating
-environments.
-
-Some issues from `footnote.sty` made it incompatible with the
-`color` and `xcolor` packages; this is corrected by `footnotehyper`. The
-compatibility with `babel-frenchb` is improved, too.
-
-The loading of `hyperref` (either before or after) is mandatory
-but left to the user.
-
-(1): in case of multi-page content, the footnotes are delivered in
-the last page.
+This package provides no facility dedicated to footnotes from
+floating environments.
 
 
 INSTALLATION
@@ -172,7 +160,7 @@ footnotehyper.pdf, footnotehyper.dvi.
 %</tex>-------------------------------------------------------------------------
 %<*insfile>---------------------------------------------------------------------
 %%
-%% Run etex on this file to extract from footnotehyper.dtx:
+%% Run tex on this file to extract from footnotehyper.dtx:
 %%        footnotehyper.sty, footnotehyper.tex, and README.md
 %%
 %% Refer to README.md for installation instructions, if needed.
@@ -204,11 +192,6 @@ footnotehyper.pdf, footnotehyper.dvi.
 \Msg{* Happy TeXing!}
 \Msg{*}
 \Msg{************************************************************************}
-\ifx\numexpr\undefined
-\Msg{* warning: to get correct utf-8 encoded README.md}%
-\Msg{* do 'etex \pkgname.ins' and not 'tex \pkgname.ins'}%
-\Msg{************************************************************************}
-\fi
 \endbatchfile
 %</insfile>---------------------------------------------------------------------
 %<*none>------------------------------------------------------------------------
@@ -268,13 +251,6 @@ footnotehyper.pdf, footnotehyper.dvi.
     \file{\pkgname.sty}{\from{\pkgname.dtx}{package}}}%
 \endgroup
 \fi % end of file extraction (from etex/latex/pdflatex run on \pkgname.dtx)
-\ifnum\noetex=1 % warning for README.md
-    \expandafter\def\expandafter\MessageDeFin\expandafter
-{\MessageDeFin
-\Msg{* warning: to get correct utf-8 encoded README.md ^^J}%
-\Msg{* do 'etex \pkgname.dtx' and not 'tex \pkgname.dtx' ^^J}%
-\Msg{********************************************************************^^J}}%
-\fi
 \ifnum\extractfiles=0 % tex/etex/xetex/etc on \pkgname.dtx, files extracted, stop
       \MessageDeFin\expandafter\end
 \fi
@@ -371,34 +347,23 @@ pdfpagemode=UseNone}
 
 \MakeShortVerb{\`}%
 \begin{abstract}
-  The `footnote` package by \textsc{Mark Wooding} dates back to
-  1997 and has not been made `hyperref` compatible. The aim of the
-  present package is to do that. Its state is what I found
-  sufficiently well-working on a current LaTeX document of mine.
+The `footnote` package by Mark \textsc{Wooding} (which dates back to 1997)
+allows to gather footnotes (`\savenotes`) and later insert them
+(`\spewnotes`) at the bottom of the page, even if the intervening
+material consists of tabulars, minipages or framed contents for
+example. There is a command to patch any given environment to do
+the `\savenotes/\spewnotes` commands automatically. Also there is
+a `footnote` environment which allows to insert verbatim material.
 
-  For those who don't know: the `footnote` package allows via
-  `\savenotes` to gather footnotes and later release them via
-  `\spewnotes` (one can also use a `savenotes` environment.) Thus
-  footnotes emitted from tabulars or minipages are not separated
-  from the general document stream of footnotes, and are printed
-  with the others at bottom of page. This works also for
-  environments like `framed`%
-%
-%\footnote
-\space({in case of multi-page content, the footnotes are delivered in the last
-page})
-%
-from the eponymous package and avoids the `\footnotemark/\footnotetext`
-approach, which anyhow is not immediately `hyperref` compatible. The
-`footnote` package has a facility to patch any user-chosen environment to
-do the `\savenotes/\spewnotes` automatically.
+The \fnh package loads `footnote.sty` and rewrites a number of its
+commands to add `hyperref` awareness and to fix some issues,
+particularly the one of incompatibility with `color/xcolor`. The
+incompatibility with `babel-frenchb` is addressed, too. In case of
+absence of `hyperref`, \fnh limits itself to partially fix some of
+these issues.
 
-Some issues from `footnote.sty` made it incompatible with the
-`color` and `xcolor` packages; this is corrected by \fnh. The
-compatibility with `babel-frenchb` has been improved, too.
-
-The loading of `hyperref` (either before or after) is mandatory
-but left to the user.
+This package provides no facility dedicated to footnotes from
+floating environments.
 \end{abstract}
 \DeleteShortVerb{\`}
 
@@ -411,8 +376,8 @@ but left to the user.
 
 \section{Usage}
 
-Do \emph{not} load |footnote|, leave that job to \fnh. You \emph{must} load
-|hyperref|.\footnote{Since |0.9e| \fnh deactivates itself
+DON'T load |footnote|, leave that job to \fnh. You \emph{must} load
+|hyperref|.\footnote{Since |v0.9e| \fnh deactivates itself
   gracefully if |hyperref| is not loaded, or under |hyperref| option
   |hyperfootnotes=false|.}
 
@@ -496,19 +461,76 @@ Use of the \texttt{footnote} \emph{environment} with some verbatim material%
 \begin{footnote}
   \verb|&$^%\[}$|
 \end{footnote}
+which was coded as:
+<let's avoid infinite recursion ;-) >
 \end{verbatim}
-And one more normal footnote.\footnote{\fnh deactivates itself if
-  |hyperfootnotes=false| option to |hyperref| is detected.
-  Essentially, it only
-fixes then the incompatibilities between |footnote.sty| and
-|color/xcolor/babel-frenchb| packages.}
+And here a use of |\footnotemark|\footnotemark\ 
+followed by a |footnotetext| environment.
+\begin{footnotetext}
+  This one uses the normal footnote counter and the hyperlink works.
+\end{footnotetext}
+Now a use of |\footnotemark[N]|\footnotemark[99] followed with a
+|footnotetext| environment using the same optional argument |[N]|.
+No hyperfootnote link is then inserted by |hyperref|.%
+\begin{footnotetext}[99]
+  |hyperref| puts no hyperlink in this case, which is similar to
+  the |\footnotemark[N]/\footnotetext[N]{<foo>}| context (there is
+  no such problem with using the |[N]| with a |\footnote| or with
+  a |footnote| environment.) 
+\end{footnotetext}
+And a final footnote, with a |footnote| environment using an
+optional argument |[N]|.%
+\begin{footnote}[100]\csname @minipagetrue\endcsname % to reduce
+                                % framed inserted vertical spacing
+  \begin{framed}
+    \noindent\fnh deactivates itself if |hyperfootnotes=false| option to
+    |hyperref| is detected, or if |hyperref| is not loaded at all.
+    Essentially, it only then fixes some of the incompatibilities
+    between |footnote.sty| and |color/xcolor/babel-frenchb|
+    packages. But the bug making the |footnote| environment
+    optional argument unusable remains unfixed by \fnh if
+    |hyperref| has not been detected.
+  \end{framed}
+\end{footnote}
+No problem with the hyperlink, then.
+
+\section{Notes}
+
+The |footnote| environment of |footnote.sty| had various issues
+but as \fnh initially focused only on |\savenotes/\spewnotes| I
+became aware only at the time of |v0.9f| of the error when this
+environment is used with the optional |[N]| parameter; this is a
+different bug than the one of incompatibility with |color/xcolor|.
+The |v0.9f| release fixes this new problem (no extensive
+tests were done.)
+
+During this I realized (this is unrelated to |footnote| package or
+\fnh) that there is a typesetting interference of |hyperref| with
+|babel+frenchb| in the case of the |\footnotemark[N]| syntax. \fnh
+does not fix that. I reported the problem and perhaps an upstream
+fix will come at a later date (tested with |hyperref 6.83q| and
+|frenchb 3.2c|).
+
+The |hyperref| package inserts no hyperlink in case of
+|\footnotemark[N]/\footnotetext[N]|. This is not modified by \fnh.
+
+The |footnote.sty| package patches the \LaTeX\ kernel |\parbox|. I had not
+realized that earlier, and starting with \fnh |v0.9f| the patch is undone.
+But the re-defined macro is made available as |\fnparbox|.
+
+\medskip
+
+At this stage, \fnh rewrites large parts of the original
+|footnote.sty| code. Perhaps a later release will not load at all
+the original package (but it will keep the |\savenotes/\spewnotes|
+interface.)
 
 \StopEventually{\end{document}\endinput}
 \makeatletter
     \let\check@percent\original@check@percent
 \makeatother
 
-%\clearpage
+\newgeometry{left=4cm, hscale=0.72}
 \section{Implementation}
 
 \small
@@ -548,6 +570,14 @@ fixes then the incompatibilities between |footnote.sty| and
 %
 %</none>
 %<*package>
+% It is surely difficult to understand the code here as its expansion depends on
+% some macros whose definitions are still in |footnote.sty| and used with no
+% modification here: the most important are |\savenotes|, |\fn@startnote|, and
+% |\fn@startfntext| (which is used only for the environment form.) Obviously the
+% macros here depend on what these three do. 
+%
+% Surely, next release of \fnh will drop entirely the idea of patching
+% |footnote.sty| and will contain all definitions.
 % \begin{macro}{no options}
 %    \begin{macrocode}
 \DeclareOption*{\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
@@ -557,86 +587,110 @@ fixes then the incompatibilities between |footnote.sty| and
 % \begin{macro}{\@makefntext}
 % \begin{macro}{\footnote}
 % \begin{macro}{\footnotetext}
+% \begin{macro}{\parbox}
+% \begin{macro}{\fn@endnote}
 % We load |footnote| but leave to the user to take care of |hyperref|.
 %
-% As we need to intercept some re-definitions done by |footnote| we will first
-% check if it is already loaded.
+% As we need to intercept some re-definitions done by
+% |footnote.sty| we will first check if it is already loaded.
 %
 % If \cs{@makefntext} has been customized and its argument is not visible at
 % top level in its meaning, then loading |footnote.sty| will fail with a low
 % level \TeX\ error. We save its meaning and replace it by an innocuous one
 % for the time being. We will come back to this at begin document.
+%
+% |footnote.sty| modifies |\parbox|. We (|v0.9f|) undo the patch, because
+% modifying |\parbox| in any way for no good reason is BAD.
+%
+% The |\fn@endnote| was |\let| to |\color@endgroup| which is bad as it fails if
+% |color/xcolor| is not yet loaded. Besides its presence was missing from some
+% needed place (see later).
 % 
-% We also postpone to at begin document the redefinitions of \cs{footnote} and
+% We postpone to at begin document the redefinitions of \cs{footnote} and
 % \cs{footnotetext}.
 %    \begin{macrocode}
 \@ifpackageloaded{footnote}
- {\PackageWarning{footnotehyper}{Please next time do not load footnote,^^J
-    but leave that to me, that is much safer.}}
+ {\PackageWarningNoLine{footnotehyper}%
+  {Please next time do not load package footnote,^^J
+ but leave that to me. For the time being, I will start by undoing the^^J
+ modifications it did to \string\parbox. Use \string\fnparbox\space if needed.}%
+ }
  {\let\FNH@@makefntext\@makefntext\let\@makefntext\@firstofone
   \RequirePackage{footnote}
   \let\@makefntext\FNH@@makefntext
  }%
-\let\FNH@fn@footnote    \footnote    
-\let\FNH@fn@footnotetext\footnotetext
-\let\footnote    \fn@latex@@footnote
-\let\footnotetext\fn@latex@@footnotetext
+\let\fnparbox\parbox\let\parbox\fn@parbox
+\let\FNH@fn@footnote    \footnote     % footnote.sty's \footnote will get
+\let\FNH@fn@footnotetext\footnotetext % redefined later. We preserve also
+\let\footnote    \fn@latex@@footnote  % the meaning of \footnote from prior
+\let\footnotetext\fn@latex@@footnotetext % to the loading of footnote.sty
+\def\fn@endnote  {\color@endgroup}%
 %    \end{macrocode}
-% \end{macro}\end{macro}\end{macro}
+% \end{macro}\end{macro}\end{macro}\end{macro}\end{macro}
 % There are some |\let|'s done by |footnote.sty| in what appears to be
 % premature ways.
 %    \begin{macrocode}
 \AtBeginDocument {%
-    \let\fn@latex@@footnote    \footnote
+    \let\fn@latex@@footnote    \footnote % meaning of \footnote at end of preamble
     \let\fn@latex@@footnotetext\footnotetext
-    \let\footnote    \FNH@fn@footnote
-    \let\footnotetext\FNH@fn@footnotetext
 }%
 %    \end{macrocode}
 % \begin{macro}{\FNH@inactive}
-% We intervene (for real) only if |hyperfootnotes| option of |hyperref| applies.
+% Apart from fixing some of the bugs with |footnote.sty|'s footnote
+% environment, we intervene only if |hyperfootnotes| option of |hyperref|
+% applies.
 %    \begin{macrocode}
 \AtBeginDocument{\@ifpackageloaded{hyperref}
   {\ifHy@hyperfootnotes
-    \let\fn@fntext \FNH@fn@fntext
-    \let\spewnotes \FNH@spewnotes
+    \let\fn@fntext \FNH@hyper@fntext
+    \let\spewnotes \FNH@hyper@spewnotes
     \let\endsavenotes\spewnotes
-    \let\fn@endfntext\FNH@fn@endfntext
+    \let\fn@endfntext\FNH@fixed@endfntext
+    \let\footnote    \FNH@fixed@footnote
+    \let\footnotetext\FNH@fixed@footnotetext
    \else
      \FNH@inactive
-   \fi }\FNH@inactive 
+   \fi }{\FNH@inactive}% 
     \let\endfootnote\fn@endfntext
     \let\endfootnotetext\endfootnote
 }%
-\def\FNH@fixendfntext\@finalstrut\strutbox\fn@postfntext
+%    \end{macrocode}
+% |v0.9e| did a partial fix of the |footnote| environment from |footnote.sty|,
+% |v0.9f| fix is more complete but is applied only if |hyperref| is present with
+% option |hyperfootnotes=true|.
+%    \begin{macrocode}
+\def\FNH@fix@endfntext\@finalstrut\strutbox\fn@postfntext
     {\@finalstrut\strutbox\fn@postfntext\fn@endnote}%
 \def\FNH@inactive {%
+    \let\footnote    \FNH@fn@footnote
+    \let\footnotetext\FNH@fn@footnotetext
     \expandafter\expandafter\expandafter\def
     \expandafter\expandafter\expandafter\fn@endfntext
     \expandafter\expandafter\expandafter
-       {\expandafter\FNH@fixendfntext\fn@endfntext}%
-    \PackageInfo{footnotehyper}{hyperref package not loaded,^^J
-     or hyperfootnotes=false option; I did not activate myself and only^^J
-     patched footnote.sty for color/xcolor/babel-frenchb compatibility}}%
+       {\expandafter\FNH@fix@endfntext\fn@endfntext}%
+    \PackageInfo{footnotehyper}%
+     {hyperref package not loaded or hyperfootnotes^^J
+  =false option; I did not activate myself and only patched footnote.sty^^J
+  for color/xcolor compatibility, leaving some other issues unfixed.}}%
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\FNH@fn@fntext}
+% \begin{macro}{\FNH@hyper@fntext}
 % Some |amsmath| complications. I change the coding, but same effect as
-% original.
+% in original |\fn@fntext|.
 %    \begin{macrocode}
-\def\FNH@fn@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
+\def\FNH@hyper@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
                                       \else\expandafter\@firstofone\fi
     {\ifmeasuring@\expandafter\@gobbletwo\fi}%
-    \FNH@fn@fntext@i }%
+    \FNH@hyper@fntext@i }%
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\FNH@fn@fntext@i}
+% \begin{macro}{\FNH@hyper@fntext@i}
 % Note: original \cs{fn@fntext} had no \cs{long}, which looks wrong.
 %
 % We do the \cs{ifHy@nesting} test although hyperref's manual
 % says ``Allows links to be nested; no drivers currently support this.''
 %    \begin{macrocode}
-\long\def\FNH@fn@fntext@i #1{\global\setbox\fn@notes\vbox
+\long\def\FNH@hyper@fntext@i #1{\global\setbox\fn@notes\vbox
      {\unvbox\fn@notes
       \fn@startnote
       \@makefntext
@@ -656,13 +710,12 @@ fixes then the incompatibilities between |footnote.sty| and
 }%
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\FNH@spewnotes}
-% \begin{macro}{\FNH@endsavenotes}
+% \begin{macro}{\FNH@hyper@spewnotes}
 %   The final touch in our hack is to patch the original \cs{spewnotes} for it
 %   to use the original, non-hyperref modified, version of \cs{@footnotetext}.
 %   And let's not forget \cs{endsavenotes} (done at begin document).
 %    \begin{macrocode}
-\def\FNH@spewnotes {\endgroup
+\def\FNH@hyper@spewnotes {\endgroup
     \if@savingnotes\else\ifvoid\fn@notes\else
     \begingroup\let\@makefntext\@empty
                \let\@finalstrut\@gobble
@@ -671,55 +724,91 @@ fixes then the incompatibilities between |footnote.sty| and
     \endgroup\fi\fi
 }%
 %    \end{macrocode}
-% \end{macro}\end{macro}
-% \begin{macro}{\FNH@fn@endfntext}
-% \begin{macro}{\fn@endnote}
-% We now take care of |footnote.sty|'s |footnote| environment. The original
-% \cs{fn@endfntext} is lacking a \cs{fn@endnote}, and this meant that
-% |footnote.sty| was incompatible with |color/xcolor| packages. Also this
-% \cs{fn@endnote} was |\let| to |\color@endgroup| which is wrong.
+% \end{macro}
+% \begin{macro}{\FNH@fixed@endfntext}
+%   We now take care of |footnote.sty|'s |footnote| environment. The original
+%   \cs{fn@endfntext} is lacking a \cs{fn@endnote}, and this meant that
+%   |footnote.sty| was incompatible with |color/xcolor| packages. Also this
+%   \cs{fn@endnote} was |\let| to |\color@endgroup| which is wrong.
 %
-% And we need our usual replacement of \cs{@footnotetext} by
-% \cs{H@@footnotetext}. And this time (|v0.9d|) let's not forget the hyperlink
-% target.
+%   Furthermore, independently of presence of the |\color/xcolor| issue, the
+%   |footnote.sty|'s |footnote| environment raised an error if used with an
+%   optional argument. |v0.9f| addresses this issue.
+%
+%   The |footnotetext| environment adds a complication, in case of optional
+%   argument we should not try to set up a link due to the fact that |hyperref|
+%   does not support them for |\footnotemark[N]/\footnotetext[N]| syntax.
+%   And we need to make sure that the |footnote| and |footnotetext| environments
+%   obey the |\savenotes/\spewnotes| mechanism.
+%
+%   To handle all of this we code things completely differently from
+%   |footnote.sty|, its |\fn@getmark| isn't used at all.
 %    \begin{macrocode}
-\def\fn@endnote  {\color@endgroup}%
-\def\FNH@fn@endfntext{%
+\def\FNH@fixed@endfntext {%
     \@finalstrut\strutbox
     \fn@postfntext
     \fn@endnote
-    \egroup
-    \begingroup
-    \let\@makefntext\@empty
-    \let\@finalstrut\@gobble
-    \let\rule\@gobbletwo
-    \H@@footnotetext
-    {\ifHy@nesting\expandafter\ltx@firstoftwo
-             \else\expandafter\ltx@secondoftwo
-        \fi
-        {\expandafter\hyper@@anchor
-         \expandafter{\Hy@footnote@currentHref}{\unvbox\z@}}%
-        {\Hy@raisedlink
-          {\expandafter\hyper@@anchor\expandafter{\Hy@footnote@currentHref}%
-          {\relax}}%
-         \let\@currentHref\Hy@footnote@currentHref
-         \let\@currentlabelname\@empty
-         \unvbox\z@}%
-    }%
+    \egroup\FNH@endfntext@next % will decide if link or no link
+}%
+\def\FNH@endfntext@link {\begingroup
+    \let\@makefntext\@empty\let\@finalstrut\@gobble\let\rule\@gobbletwo
+    \@footnotetext {\unvbox\z@}%
     \endgroup
 }%
+\def\FNH@endfntext@nolink {\begingroup
+    \let\@makefntext\@empty\let\@finalstrut\@gobble
+    \let\rule\@gobbletwo
+    \if@savingnotes\expandafter\fn@fntext\else\expandafter\H@@footnotetext\fi
+    {\unvbox\z@}\endgroup
+}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\FNH@fixed@footnote}
+% \begin{macro}{\FNH@fixed@footnotetext}
+%    \begin{macrocode}
+\def\FNH@fixed@footnote {\ifx\@currenvir\fn@footnote
+    \expandafter\FNH@footnoteenv\else\expandafter\fn@latex@@footnote\fi }%
+\def\FNH@footnoteenv {\@ifnextchar[\FNH@xfootnoteenv%]
+    {\stepcounter\@mpfn
+     \protected@xdef\@thefnmark{\thempfn}\@footnotemark
+     \def\FNH@endfntext@next{\FNH@endfntext@link}\fn@startfntext}}%
+\def\FNH@xfootnoteenv [#1]{%
+    \begingroup
+     \csname c@\@mpfn\endcsname #1\relax
+     \unrestored@protected@xdef\@thefnmark{\thempfn}%
+    \endgroup\@footnotemark\def\FNH@endfntext@next{\FNH@endfntext@link}%
+    \fn@startfntext}%
+\def\FNH@fixed@footnotetext {\ifx\@currenvir\fn@footnotetext
+  \expandafter\FNH@footnotetextenv\else\expandafter\fn@latex@@footnotetext\fi}%
+\def\FNH@footnotetextenv {\@ifnextchar[\FNH@xfootnotetextenv%]
+    {\protected@xdef\@thefnmark{\thempfn}%
+     \def\FNH@endfntext@next{\FNH@endfntext@link}\fn@startfntext}}%
+\def\FNH@xfootnotetextenv [#1]{%
+    \begingroup
+     \csname c@\@mpfn\endcsname #1\relax
+     \unrestored@protected@xdef\@thefnmark{\thempfn}%
+    \endgroup\def\FNH@endfntext@next{\FNH@endfntext@nolink}%
+    \fn@startfntext }%
 %    \end{macrocode}
 % \end{macro}\end{macro}
 % \begin{macro}{\@makefntext}
 % \begin{macro}{\fn@prefntext}
 % \begin{macro}{\fn@postfntext}
-%   The |footnote.sty|'s mechanism for setting up a |footnote| environment is
-%   doomed to failure if the parameter in |\@makefntext| is not visible at top
-%   level in its meaning. This is the case with babel-frenchb at begin
-%   document. It is also wrong if the parameter is used multiple times. Let's
-%   figure it out; and a special rescue for |footnote+babel+frenchb|... notice
-%   that these checks will fail (rather, they are skipped) if |footnote|'s
-%   loading was done by the user and not by |footnotehyper|.
+%   The definitions of |\fn@prefntext| and |\fn@prefntext| (which are needed for
+%   the |footnote| environment, within |\fn@startfntext| and |\fn@endfntext|)
+%   are from a daring analysis done inside |footnote.sty| of |\@makefntext|. It
+%   may very easily fail to give a sensible result. \fnh does a check of its own
+%   to determine if that was the case but can't salvage the situation, except
+%   for hard-coded rescues like done here with |frenchb|. In particular the
+%   mechanism is doomed to failure if the parameter in |\@makefntext| is not
+%   visible at top level in its meaning. It is also wrong if the parameter is
+%   used multiple times. These checks will fail (rather, they are skipped) if
+%   |footnote|'s loading was done by the user and not by |footnotehyper|.
+%
+%   Note: there is an interference which I could fix here between |hyperref|
+%   and |frenchb| regarding |\footnotemark[NUM]|, but it is better to wait it
+%   is fixed on |frenchb| side (or |hyperref|'s side !), else my own fix might
+%   badly interfere with the ``official'' one |;-)|.
 %    \begin{macrocode}
 \ifx\FNH@@makefntext\undefined\expandafter\@gobble
    \else\expandafter\AtBeginDocument\fi
@@ -745,19 +834,16 @@ fixes then the incompatibilities between |footnote.sty| and
 \def\FNH@check@c #11.2!3?4,#2#3\relax 
    {\ifx\FNH@check@c#2\expandafter\@gobble\fi\FNH@bad@footnote@env}%
 \def\FNH@bad@footnote@env 
-{%
-    \PackageWarning{footnotehyper}%
-     {The footnote environment from package footnote^^J%
-      will be dysfunctional, sorry (not my fault...). You may try to mail
-      me^^Jthe preamble and/or only the next lines:}%
+{\PackageWarningNoLine{footnotehyper}%
+ {The footnote environment from package footnote^^J
+  will be dysfunctional, sorry (not my fault...). You may try to mail me the^^J
+  preamble and/or only the next lines:}%
     \typeout{\meaning\@makefntext}%
     \let\fn@prefntext\@empty\let\fn@postfntext\@empty  
 }%
 \endinput
 %    \end{macrocode}
 % \end{macro}\end{macro}\end{macro}
-% Let me say again I have barely tested on a few examples that it
-% does at all work! One of the main tests being the present documentation\dots
 % \MakePercentComment
 \Finale
 %%

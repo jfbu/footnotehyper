@@ -1,43 +1,31 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9e 2016/04/30)
+    Source:  footnotehyper.dtx (v0.9f 2016/10/03)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
-    License: LPPL 1.3c or later
+    License: LPPL 1.3c
     Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 
 ABSTRACT
 ========
 
-The `footnote` package by Mark Wooding dates back to 1997 and has
-not been made `hyperref` compatible. The aim of the present
-package is to do that. Its state is what I found sufficiently
-well-working on a current LaTeX document of mine.
+The `footnote` package by Mark Wooding (which dates back to 1997)
+allows to gather footnotes (`\savenotes`) and later insert them
+(`\spewnotes`) at the bottom of the page, even if the intervening
+material consists of tabulars, minipages or framed contents for
+example. There is a command to patch any given environment to do
+the `\savenotes/\spewnotes` commands automatically. Also there is
+a `footnote` environment which allows to insert verbatim material.
 
-For those who don't know: the `footnote` package allows via
-`\savenotes` to gather footnotes and later release them via
-`\spewnotes` (one can also use a `savenotes` environment.)
-Thus footnotes emitted from tabulars or minipages
-are not separated from the general document stream of footnotes,
-and are printed with the others at bottom of page. This works also
-for environments like `framed` (1) from the eponymous package and
-avoids the `\footnotemark/\footnotetext` approach, which anyhow is
-not immediately `hyperref` compatible. The `footnote` package has
-a facility to patch any user-chosen environment to do the
-`\savenotes/\spewnotes` automatically.
+The `footnotehyper` package loads `footnote.sty` and rewrites a
+number of its commands to add `hyperref` awareness and to fix some
+issues, particularly the one of incompatibility with
+`color/xcolor`. The incompatibility with `babel-frenchb` is
+addressed, too. In case of absence of `hyperref`, `footnotehyper`
+limits itself to partially fix some of these issues.
 
-This package provides no facility for handling footnotes from floating
-environments.
-
-Some issues from `footnote.sty` made it incompatible with the
-`color` and `xcolor` packages; this is corrected by `footnotehyper`. The
-compatibility with `babel-frenchb` is improved, too.
-
-The loading of `hyperref` (either before or after) is mandatory
-but left to the user.
-
-(1): in case of multi-page content, the footnotes are delivered in
-the last page.
+This package provides no facility dedicated to footnotes from
+floating environments.
 
 INSTALLATION
 ============

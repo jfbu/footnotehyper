@@ -23,59 +23,67 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2016/04/30 v0.9e hyperref aware footnote.sty (JFB)]
+ [2016/10/03 v0.9f hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 0.9e (2016/04/30)
+%% Version: 0.9f (2016/10/03)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
 %%
 \DeclareOption*{\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
 \ProcessOptions\relax
 \@ifpackageloaded{footnote}
- {\PackageWarning{footnotehyper}{Please next time do not load footnote,^^J
-    but leave that to me, that is much safer.}}
+ {\PackageWarningNoLine{footnotehyper}%
+  {Please next time do not load package footnote,^^J
+ but leave that to me. For the time being, I will start by undoing the^^J
+ modifications it did to \string\parbox. Use \string\fnparbox\space if needed.}%
+ }
  {\let\FNH@@makefntext\@makefntext\let\@makefntext\@firstofone
   \RequirePackage{footnote}
   \let\@makefntext\FNH@@makefntext
  }%
-\let\FNH@fn@footnote    \footnote
-\let\FNH@fn@footnotetext\footnotetext
-\let\footnote    \fn@latex@@footnote
-\let\footnotetext\fn@latex@@footnotetext
+\let\fnparbox\parbox\let\parbox\fn@parbox
+\let\FNH@fn@footnote    \footnote     % footnote.sty's \footnote will get
+\let\FNH@fn@footnotetext\footnotetext % redefined later. We preserve also
+\let\footnote    \fn@latex@@footnote  % the meaning of \footnote from prior
+\let\footnotetext\fn@latex@@footnotetext % to the loading of footnote.sty
+\def\fn@endnote  {\color@endgroup}%
 \AtBeginDocument {%
-    \let\fn@latex@@footnote    \footnote
+    \let\fn@latex@@footnote    \footnote % meaning of \footnote at end of preamble
     \let\fn@latex@@footnotetext\footnotetext
-    \let\footnote    \FNH@fn@footnote
-    \let\footnotetext\FNH@fn@footnotetext
 }%
 \AtBeginDocument{\@ifpackageloaded{hyperref}
   {\ifHy@hyperfootnotes
-    \let\fn@fntext \FNH@fn@fntext
-    \let\spewnotes \FNH@spewnotes
+    \let\fn@fntext \FNH@hyper@fntext
+    \let\spewnotes \FNH@hyper@spewnotes
     \let\endsavenotes\spewnotes
-    \let\fn@endfntext\FNH@fn@endfntext
+    \let\fn@endfntext\FNH@fixed@endfntext
+    \let\footnote    \FNH@fixed@footnote
+    \let\footnotetext\FNH@fixed@footnotetext
    \else
      \FNH@inactive
-   \fi }\FNH@inactive
+   \fi }{\FNH@inactive}%
     \let\endfootnote\fn@endfntext
     \let\endfootnotetext\endfootnote
 }%
-\def\FNH@fixendfntext\@finalstrut\strutbox\fn@postfntext
+\def\FNH@fix@endfntext\@finalstrut\strutbox\fn@postfntext
     {\@finalstrut\strutbox\fn@postfntext\fn@endnote}%
 \def\FNH@inactive {%
+    \let\footnote    \FNH@fn@footnote
+    \let\footnotetext\FNH@fn@footnotetext
     \expandafter\expandafter\expandafter\def
     \expandafter\expandafter\expandafter\fn@endfntext
     \expandafter\expandafter\expandafter
-       {\expandafter\FNH@fixendfntext\fn@endfntext}%
-    \PackageInfo{footnotehyper}{hyperref package not loaded,^^J
-     or hyperfootnotes=false option; I did not activate myself and only^^J
-     patched footnote.sty for color/xcolor/babel-frenchb compatibility}}%
-\def\FNH@fn@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
+       {\expandafter\FNH@fix@endfntext\fn@endfntext}%
+    \PackageInfo{footnotehyper}%
+     {hyperref package not loaded or hyperfootnotes^^J
+  =false option; I did not activate myself and only patched footnote.sty^^J
+  for color/xcolor compatibility, leaving some other issues unfixed.}}%
+\def\FNH@hyper@fntext {\ifx\ifmeasuring@\undefined\expandafter\@secondoftwo
                                       \else\expandafter\@firstofone\fi
     {\ifmeasuring@\expandafter\@gobbletwo\fi}%
-    \FNH@fn@fntext@i }%
-\long\def\FNH@fn@fntext@i #1{\global\setbox\fn@notes\vbox
+    \FNH@hyper@fntext@i }%
+\long\def\FNH@hyper@fntext@i #1{\global\setbox\fn@notes\vbox
      {\unvbox\fn@notes
       \fn@startnote
       \@makefntext
@@ -93,7 +101,7 @@
       \@finalstrut\strutbox }%
       \fn@endnote }%
 }%
-\def\FNH@spewnotes {\endgroup
+\def\FNH@hyper@spewnotes {\endgroup
     \if@savingnotes\else\ifvoid\fn@notes\else
     \begingroup\let\@makefntext\@empty
                \let\@finalstrut\@gobble
@@ -101,31 +109,46 @@
                \H@@footnotetext{\unvbox\fn@notes}%
     \endgroup\fi\fi
 }%
-\def\fn@endnote  {\color@endgroup}%
-\def\FNH@fn@endfntext{%
+\def\FNH@fixed@endfntext {%
     \@finalstrut\strutbox
     \fn@postfntext
     \fn@endnote
-    \egroup
-    \begingroup
-    \let\@makefntext\@empty
-    \let\@finalstrut\@gobble
-    \let\rule\@gobbletwo
-    \H@@footnotetext
-    {\ifHy@nesting\expandafter\ltx@firstoftwo
-             \else\expandafter\ltx@secondoftwo
-        \fi
-        {\expandafter\hyper@@anchor
-         \expandafter{\Hy@footnote@currentHref}{\unvbox\z@}}%
-        {\Hy@raisedlink
-          {\expandafter\hyper@@anchor\expandafter{\Hy@footnote@currentHref}%
-          {\relax}}%
-         \let\@currentHref\Hy@footnote@currentHref
-         \let\@currentlabelname\@empty
-         \unvbox\z@}%
-    }%
+    \egroup\FNH@endfntext@next % will decide if link or no link
+}%
+\def\FNH@endfntext@link {\begingroup
+    \let\@makefntext\@empty\let\@finalstrut\@gobble\let\rule\@gobbletwo
+    \@footnotetext {\unvbox\z@}%
     \endgroup
 }%
+\def\FNH@endfntext@nolink {\begingroup
+    \let\@makefntext\@empty\let\@finalstrut\@gobble
+    \let\rule\@gobbletwo
+    \if@savingnotes\expandafter\fn@fntext\else\expandafter\H@@footnotetext\fi
+    {\unvbox\z@}\endgroup
+}%
+\def\FNH@fixed@footnote {\ifx\@currenvir\fn@footnote
+    \expandafter\FNH@footnoteenv\else\expandafter\fn@latex@@footnote\fi }%
+\def\FNH@footnoteenv {\@ifnextchar[\FNH@xfootnoteenv%]
+    {\stepcounter\@mpfn
+     \protected@xdef\@thefnmark{\thempfn}\@footnotemark
+     \def\FNH@endfntext@next{\FNH@endfntext@link}\fn@startfntext}}%
+\def\FNH@xfootnoteenv [#1]{%
+    \begingroup
+     \csname c@\@mpfn\endcsname #1\relax
+     \unrestored@protected@xdef\@thefnmark{\thempfn}%
+    \endgroup\@footnotemark\def\FNH@endfntext@next{\FNH@endfntext@link}%
+    \fn@startfntext}%
+\def\FNH@fixed@footnotetext {\ifx\@currenvir\fn@footnotetext
+  \expandafter\FNH@footnotetextenv\else\expandafter\fn@latex@@footnotetext\fi}%
+\def\FNH@footnotetextenv {\@ifnextchar[\FNH@xfootnotetextenv%]
+    {\protected@xdef\@thefnmark{\thempfn}%
+     \def\FNH@endfntext@next{\FNH@endfntext@link}\fn@startfntext}}%
+\def\FNH@xfootnotetextenv [#1]{%
+    \begingroup
+     \csname c@\@mpfn\endcsname #1\relax
+     \unrestored@protected@xdef\@thefnmark{\thempfn}%
+    \endgroup\def\FNH@endfntext@next{\FNH@endfntext@nolink}%
+    \fn@startfntext }%
 \ifx\FNH@@makefntext\undefined\expandafter\@gobble
    \else\expandafter\AtBeginDocument\fi
 {%
@@ -150,11 +173,10 @@
 \def\FNH@check@c #11.2!3?4,#2#3\relax
    {\ifx\FNH@check@c#2\expandafter\@gobble\fi\FNH@bad@footnote@env}%
 \def\FNH@bad@footnote@env
-{%
-    \PackageWarning{footnotehyper}%
-     {The footnote environment from package footnote^^J%
-      will be dysfunctional, sorry (not my fault...). You may try to mail
-      me^^Jthe preamble and/or only the next lines:}%
+{\PackageWarningNoLine{footnotehyper}%
+ {The footnote environment from package footnote^^J
+  will be dysfunctional, sorry (not my fault...). You may try to mail me the^^J
+  preamble and/or only the next lines:}%
     \typeout{\meaning\@makefntext}%
     \let\fn@prefntext\@empty\let\fn@postfntext\@empty
 }%
