@@ -1,31 +1,35 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v0.9f 2016/10/03)
+    Source:  footnotehyper.dtx (v1.0 2017/03/07)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
 
 ABSTRACT
 ========
 
-The `footnote` package by Mark Wooding (which dates back to 1997)
-allows to gather footnotes (`\savenotes`) and later insert them
-(`\spewnotes`) at the bottom of the page, even if the intervening
-material consists of tabulars, minipages or framed contents for
-example. There is a command to patch any given environment to do
-the `\savenotes/\spewnotes` commands automatically. Also there is
-a `footnote` environment which allows to insert verbatim material.
+The `footnote` package by Mark Wooding (`1997/01/28` `1.13`)
+allows to gather footnotes (`\begin{savenotes}`) and later insert
+them (after `\end{savenotes}`) at the bottom of the page, even
+if the intervening material consists of tabulars, minipages or
+framed contents for example. One can also use the
+`\savenotes/\spewnotes` syntax.
 
-The `footnotehyper` package loads `footnote.sty` and rewrites a
-number of its commands to add `hyperref` awareness and to fix some
-issues, particularly the one of incompatibility with
-`color/xcolor`. The incompatibility with `babel-frenchb` is
-addressed, too. In case of absence of `hyperref`, `footnotehyper`
-limits itself to partially fix some of these issues.
+Also, `footnote.sty` provides a `footnote` environment which
+allows to insert verbatim material.
 
-This package provides no facility dedicated to footnotes from
-floating environments.
+Earlier releases of the present `footnotehyper` package added
+patches for `hyperref` compatibility and some bugfixes, addressing
+in particular the incompatibility with `color/xcolor`, and with
+`babel-frenchb`, and also fixing the `footnote` environment with
+optional argument `[NUM]`. Since `v0.99` all macros are defined
+internally and the `footnote` package is not loaded at all.
+
+The same user interface is kept. Since `v1.0` it is possible to
+use `footnotehyper` also in absence of `hyperref` or when the latter is
+loaded with its `hyperfootnotes=false` option. The order of loading of
+`footnotehyper` and `hyperref` is inconsequential.
 
 INSTALLATION
 ============
