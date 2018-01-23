@@ -23,12 +23,12 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2017/03/07 v1.0 hyperref aware footnote.sty (JFB)]
+ [2018/01/23 v1.1 hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.0 (2017/03/07)
+%% Version: 1.1 (2018/01/23)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
 %%
 \DeclareOption*%
     {\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
@@ -41,6 +41,7 @@
     \let\FNH@latex@footnote    \footnote
     \let\FNH@latex@footnotetext\footnotetext
     \let\FNH@H@@footnotetext   \@footnotetext
+    \let\FNH@H@@mpfootnotetext \@mpfootnotetext
     \newenvironment{savenotes}
         {\FNH@savenotes\ignorespaces}{\FNH@spewnotes\ignorespacesafterend}%
     \let\spewnotes      \FNH@spewnotes
@@ -51,6 +52,7 @@
     \@ifpackageloaded{hyperref}
      {\ifHy@hyperfootnotes
          \let\FNH@H@@footnotetext\H@@footnotetext
+         \let\FNH@H@@mpfootnotetext\H@@mpfootnotetext
       \else
          \let\FNH@hyper@fntext\FNH@nohyp@fntext
       \fi}%
@@ -107,7 +109,7 @@
     \FNH@savingnotestrue
     \let\@footnotetext    \FNH@hyper@fntext
     \let\@mpfootnotetext  \FNH@hyper@fntext
-    \let\H@@mpfootnotetext\FNH@nohyp@fntext % fool hyperref's \@xfootnotetext
+    \let\H@@mpfootnotetext\FNH@nohyp@fntext % fool hyperref's \@xfootnotenext
     \FNH@width\columnwidth
     \let\FNH@colwidth\FNH@width
     \global\setbox\FNH@notes\box\voidb@x
@@ -129,7 +131,11 @@
      \let\@makefntext\@empty
      \let\@finalstrut\@gobble
      \let\rule\@gobbletwo
-     \FNH@H@@footnotetext{\unvbox\FNH@notes}%
+     \ifx\@footnotetext\@mpfootnotetext
+        \expandafter\FNH@H@@mpfootnotetext
+     \else
+        \expandafter\FNH@H@@footnotetext
+     \fi{\unvbox\FNH@notes}%
     \endgroup
    \fi
   \fi

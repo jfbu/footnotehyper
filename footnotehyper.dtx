@@ -1,20 +1,20 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <07-03-2017 at 11:11:11 CET>}
+\def\dtxtimestamp {Time-stamp: <23-01-2018 at 20:31:53 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.0 (2017/03/07)
+%% Version: 1.1 (2018/01/23)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
 %%
 %</!readme>
 %<*insfile|tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2017/03/07}
-\def\docdate        {2017/03/07}
-\def\pkgversion     {v1.0}
+\def\pkgdate        {2018/01/23}
+\def\docdate        {2018/01/23}
+\def\pkgversion     {v1.1}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</insfile|tex>
 %<*none>
@@ -25,9 +25,9 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.0 (2017/03/07)
+% Version: 1.1 (2018/01/23)
 % License: LPPL 1.3c
-% Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
+% Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
 %
 % This Work may be distributed and/or modified under the conditions
 % of the LaTeX Project Public License, version 1.3c. This version of
@@ -54,11 +54,11 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.0 2017/03/07)
+    Source:  footnotehyper.dtx (v1.1 2018/01/23)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
 
 
 ABSTRACT
@@ -392,6 +392,13 @@ interface.
 Since |v1.0|, \fnh is usable also in absence of |hyperref| or when
 the latter was passed |hyperfootnotes=false| option.
 
+Version |v1.1| fixes a bug which arose when |savenotes| environment was used
+\emph{inside} a minipage: footnotes were disappearing!%
+%
+\footnote{Thanks to François Pantigny for reporting the bug.}
+%
+See related remarks at end of \autoref{sec:notes}.
+
 The package thus provides:
 \begin{itemize}
 \item a |savenotes| environment which re-routes footnotes and delivers them at
@@ -554,7 +561,7 @@ And a final footnote, done with |\begin{footnote}[57]|%
 \end{footnote}.
 There is no problem with the hyperlink, then.
 
-\section{Notes}
+\section{Notes}\label{sec:notes}
 
 A few items worth of mention:
 \begin{itemize}[nosep]
@@ -591,6 +598,18 @@ A few items worth of mention:
 \item some environments typeset multiple times their contents,
   which causes issues; \fnh takes provisions only to handle the
   |amsmath| measuring step.
+\item
+  \LaTeX2e has some features when using footnotes in |minipage|'s
+  which are themselves in a |minipage| which may also have footnotes externally
+  to the internal minipages... try it out with some |\fbox|es around the
+  sub-|minipages|, to see.
+
+  \fnh behaves like original package |footnote| in such contexts. Only
+  reasonable usage seems to embed the entire contents of the external minipage
+  in a |savenotes| environment. But there will anyhow be collisions of the
+  alphabetic enumerations. These collisions are there with or without \fnh (or
+  |footnote.sty|.) I did not make any attempt, nor intend to in future, to
+  address in an automatized manner these problematic contexts.
 \end{itemize}
 
 \StopEventually{\end{document}\endinput}
@@ -673,6 +692,7 @@ A few items worth of mention:
     \let\FNH@latex@footnote    \footnote
     \let\FNH@latex@footnotetext\footnotetext
     \let\FNH@H@@footnotetext   \@footnotetext
+    \let\FNH@H@@mpfootnotetext \@mpfootnotetext
     \newenvironment{savenotes}
         {\FNH@savenotes\ignorespaces}{\FNH@spewnotes\ignorespacesafterend}%
     \let\spewnotes      \FNH@spewnotes
@@ -683,6 +703,7 @@ A few items worth of mention:
     \@ifpackageloaded{hyperref}
      {\ifHy@hyperfootnotes
          \let\FNH@H@@footnotetext\H@@footnotetext
+         \let\FNH@H@@mpfootnotetext\H@@mpfootnotetext
       \else
          \let\FNH@hyper@fntext\FNH@nohyp@fntext
       \fi}%
@@ -782,7 +803,7 @@ A few items worth of mention:
     \FNH@savingnotestrue
     \let\@footnotetext    \FNH@hyper@fntext
     \let\@mpfootnotetext  \FNH@hyper@fntext
-    \let\H@@mpfootnotetext\FNH@nohyp@fntext % fool hyperref's \@xfootnotetext
+    \let\H@@mpfootnotetext\FNH@nohyp@fntext % fool hyperref's \@xfootnotenext
     \FNH@width\columnwidth
     \let\FNH@colwidth\FNH@width
     \global\setbox\FNH@notes\box\voidb@x
@@ -802,6 +823,10 @@ A few items worth of mention:
 % This uses \cs{FNH@H@@footnotetext} which is the
 % \cs{H@@footnotetext} |hyperref|'s preserved original
 % meaning of \cs{@footnotetext} not creating a link target.
+%
+% |v1.1| fixes the bug about disappearing footnotes if |savenotes| environment
+% is used inside a minipage. I had never really considered such usage, hence
+% missed realizing there was a bug.
 %    \begin{macrocode}
 \def\FNH@spewnotes {%
   \endgroup
@@ -811,7 +836,11 @@ A few items worth of mention:
      \let\@makefntext\@empty
      \let\@finalstrut\@gobble
      \let\rule\@gobbletwo
-     \FNH@H@@footnotetext{\unvbox\FNH@notes}%
+     \ifx\@footnotetext\@mpfootnotetext
+        \expandafter\FNH@H@@mpfootnotetext
+     \else
+        \expandafter\FNH@H@@footnotetext
+     \fi{\unvbox\FNH@notes}%
     \endgroup
    \fi
   \fi

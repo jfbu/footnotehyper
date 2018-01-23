@@ -1,10 +1,10 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.0 2017/03/07)
+    Source:  footnotehyper.dtx (v1.1 2018/01/23)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2017 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
 
 ABSTRACT
 ========
