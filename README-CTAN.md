@@ -1,10 +1,10 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1 2018/01/23)
+    Source:  footnotehyper.dtx (v1.1a 2019/11/07)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2019 Jean-Francois B. <jfbu on github>.
 
 ABSTRACT
 ========
@@ -34,22 +34,31 @@ loaded with its `hyperfootnotes=false` option. The order of loading of
 INSTALLATION
 ============
 
-To extract the package (.sty) and driver (.tex) files from
-footnotehyper.dtx:
+The recommended way is to first extract the package (.sty)
+and driver (.tex) files from footnotehyper.dtx via
 
-- if footnotehyper.ins is present:   etex footnotehyper.ins
-- without footnotehyper.ins:         etex footnotehyper.dtx
-- or run latex or pdflatex directly on footnotehyper.dtx
+    tex footnotehyper.dtx
 
-At least three ways to produce footnotehyper.pdf (method (1) is
-preferred):
+and then produce the documentation via
 
-1. latex footnotehyper.tex (twice), then dvipdfmx
-2. pdflatex footnotehyper.dtx (twice)
-3. latex footnotehyper.dtx (twice), then dvips, then ps2pdf
+    latex footnotehyper.tex (twice)
+    dvipdfmx footnotehyper.dvi
 
-Method (1) produces the smallest pdf files.
-Options can be set in footnotehyper.tex:
+It is also possible to produce simultaneously the package
+and the documentation via one of these two routes:
+
+    pdflatex footnotehyper.dtx (twice)
+
+or
+
+    latex footnotehyper.dtx (twice)
+    dvips
+    ps2pdf
+
+The method using the extracted file footnotehyper.tex produces
+the smallest pdf file and is the officially preferred one as
+it allows to set options in footnotehyper.tex to customize the
+footnotehyper.pdf file:
 
 - scrdoc class options (paper size, font size, ...)
 - with or without source code,
@@ -84,6 +93,6 @@ The Author of this Work is:
 
 - Jean-Francois B. `<jfbu on github>`
 
-This Work consists of the main source file footnotehyper.dtx and the
-derived files footnotehyper.sty, footnotehyper.ins, footnotehyper.tex,
+This Work consists of the main source file footnotehyper.dtx
+and the derived files footnotehyper.sty, footnotehyper.tex,
 footnotehyper.pdf, footnotehyper.dvi.

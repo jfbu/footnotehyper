@@ -23,16 +23,21 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2018/01/23 v1.1 hyperref aware footnote.sty (JFB)]
+ [2019/11/07 v1.1a hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.1 (2018/01/23)
+%% Version: 1.1a (2019/11/07)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2018 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2019 Jean-Francois B. <jfbu on github>.
 %%
 \DeclareOption*%
     {\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
 \ProcessOptions\relax
+\@ifclassloaded{beamer}
+    {\PackageWarningNoLine{footnotehyper}{This package is
+        incompatible with the beamer class. Aborting input..}%
+     \endinput}
+    {}%
 \newbox\FNH@notes
 \newdimen\FNH@width
 \let\FNH@colwidth\columnwidth
@@ -233,8 +238,9 @@
 \def\FNH@bad@makefntext@alert{%
     \PackageWarningNoLine{footnotehyper}%
       {^^J The footnote environment will not be fully functional, sorry.^^J
-       You may try to email the author with the following information:}%
-    \typeout{\meaning\@makefntext}%
+       You may try to email the author this meaning of \string\@makefntext:^^J
+       \meaning\@makefntext^^J
+       together with the used preamble}%
     \let\FNH@prefntext\@empty\let\FNH@postfntext\@empty
 }%
 \def\makesavenoteenv{\@ifnextchar[\FNH@msne@ii\FNH@msne@i}%]
