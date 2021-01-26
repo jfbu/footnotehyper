@@ -23,12 +23,12 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2019/11/07 v1.1a hyperref aware footnote.sty (JFB)]
+ [2021/01/26 v1.1b hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.1a (2019/11/07)
+%% Version: 1.1b (2021/01/26)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2019 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %%
 \DeclareOption*%
     {\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
@@ -223,9 +223,20 @@
                \FNH@@@1.2!3?4,\FNH@@@\relax
 }%
 \long\def\FNH@check@a #11.2!3?4,#2\FNH@@@#3{%
-    \ifx\relax#3\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
-    \FNH@bad@makefntext@alert
-    {\def\FNH@prefntext{#1}\def\FNH@postfntext{#2}\FNH@check@b}%
+    \ifx\relax#3\FNH@bad@makefntext@alert
+    \else
+      \edef\FNH@restore@{\catcode`\noexpand\@\the\catcode`\@\relax}%
+      \makeatletter
+      \ifx\@makefntextFB\undefined
+      \expandafter\@gobble\else\expandafter\@firstofone\fi
+      {\@ifclassloaded{memoir}%
+           {\ifFBFrenchFootnotes\expandafter\@gobble\fi}%
+           {}}%
+      \@secondoftwo
+      \scantokens{\def\FNH@prefntext{#1}\def\FNH@postfntext{#2}}%
+      \FNH@restore@
+      \expandafter\FNH@check@b
+    \fi
 }%
 \def\FNH@check@b #1\relax{%
     \expandafter\expandafter\expandafter\FNH@check@c

@@ -1,20 +1,20 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <07-11-2019 at 17:09:56 CET>}
+\def\dtxtimestamp {Time-stamp: <26-01-2021 at 15:33:03 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.1a (2019/11/07)
+%% Version: 1.1b (2021/01/26)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2019 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %%
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2019/11/07}
-\def\docdate        {2019/11/07}
-\def\pkgversion     {v1.1a}
+\def\pkgdate        {2021/01/26}
+\def\docdate        {2021/01/26}
+\def\pkgversion     {v1.1b}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -25,9 +25,9 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.1a (2019/11/07)
+% Version: 1.1b (2021/01/26)
 % License: LPPL 1.3c
-% Copyright (C) 2016-2019 Jean-Francois B. <jfbu on github>.
+% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %
 % This Work may be distributed and/or modified under the conditions
 % of the LaTeX Project Public License, version 1.3c. This version of
@@ -54,11 +54,11 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1a 2019/11/07)
+    Source:  footnotehyper.dtx (v1.1b 2021/01/26)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2019 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 
 
 ABSTRACT
@@ -386,6 +386,31 @@ But the constructability of the |footnote/footnotetext| environments depends
 on how |\@makefntext| has been customized by the class or other packages; a
 warning is issued if the situation appears to be desperate.\footnote{original
   |footnote.sty| could end up in a low level \TeX\ error.}
+
+\begin{framed}
+  Some details: \fnh inherits from |footnote| original package the aim to
+  convert the macro |\@makefntext| into two parts, the first one to be inserted
+  at the start of a footnote in environment form, the second one at its end.
+  It thus hopes that the replacement text of |\@makefntext| contains only once
+  its parameter token |#1|, and that it is used unbraced.
+
+  \fnh has a more robust, but still naive, way of analysing this than the
+  original package. But even seemingly innocent redefinitions such as the one
+  of |beamer| which was last time I checked (that was in 2019):
+\begin{verbatim}
+macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark
+{\@makefnmark }
+\usebeamertemplate ***{footnote}
+\end{verbatim}
+   is not compatible. Since |v1.1a|, \fnh simply aborts under |beamer| class.
+
+  The package could possibly be much improved here, but at update |v1.1b| it
+  simply adds a specific fix to handle a problem of another type arising with
+  |memoir| together with |babel-french|. This specific fix uses a bit daring
+  |\scantokens| so we have limited it to these exact circumstances. It has not
+  been thoroughly tested, please make bug reports if needed.
+\end{framed}
+
 
 It should be recalled that in case of |\footnotemark[N]| and
 |\footnotetext[N]{...}| mark-up |hyperref| creates no hyperlink. This is not
@@ -954,6 +979,10 @@ A few items worth of mention:
 %   of |\@makefntext| is not visible at top level in its meaning or is used
 %   there multiple times. We also insert here some code to handle especially
 %   the case of |babel-frenchb|.
+%
+%   As |\ifFBFrenchFootnotes| is not a \TeX\ boolean if |babel-frenchb| isn't
+%   loaded, we have to work around this for |\if..\fi| pairs.
+%
 %    \begin{macrocode}
 \AtBeginDocument{\let\FNH@@makefntext\@makefntext
    \ifx\@makefntextFB\undefined
@@ -963,10 +992,41 @@ A few items worth of mention:
    \expandafter\FNH@check@a\FNH@@makefntext{1.2!3?4,}%
                \FNH@@@1.2!3?4,\FNH@@@\relax
 }%
+%    \end{macrocode}
+%   ``Daring analysis'' is un understatement. At |v1.1b| we add a dangerous
+%   twist to fix a memoir + frenchb triggered issue: if the
+%   |\@makefntext|, as in memoir + frenchb situation, uses |\def| syntax to
+%   define a macro with parameter we had a problem with the |#| token not
+%   being doubled in the replacement fetched by
+%   |\FNH@check@a|. As expedient work-around we fix this by adding a
+%   |\scantokens| wrapper. The induced end of line space will only be from
+%   loading of \fnh itself, so we can ignore. Problem is we
+%   assume here |\@makefntext| does not rely on weird catcodes. Very
+%   problematic if LaTeX3 syntax is used. So I add a layer a security to do
+%   this \emph{only} under memoir + frenchb situation. Which is a pity
+%   as it could be more generally useful. But let's wait for bug reports if
+%   really needed.
+%
+%   Maybe I should add some user interface to customize directly what
+%   |\FNH@prefntext| and |\FNH@postfntext| do, but I am aiming today for a
+%   quick bug fix, as we are |2021/01/26| and first heard of the bug on
+%   |2020/06/15|.
+%    \begin{macrocode}
 \long\def\FNH@check@a #11.2!3?4,#2\FNH@@@#3{%
-    \ifx\relax#3\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
-    \FNH@bad@makefntext@alert
-    {\def\FNH@prefntext{#1}\def\FNH@postfntext{#2}\FNH@check@b}%
+    \ifx\relax#3\FNH@bad@makefntext@alert
+    \else
+      \edef\FNH@restore@{\catcode`\noexpand\@\the\catcode`\@\relax}%
+      \makeatletter
+      \ifx\@makefntextFB\undefined
+      \expandafter\@gobble\else\expandafter\@firstofone\fi
+      {\@ifclassloaded{memoir}%
+           {\ifFBFrenchFootnotes\expandafter\@gobble\fi}%
+           {}}%
+      \@secondoftwo
+      \scantokens{\def\FNH@prefntext{#1}\def\FNH@postfntext{#2}}%
+      \FNH@restore@
+      \expandafter\FNH@check@b
+    \fi
 }%
 \def\FNH@check@b #1\relax{%
     \expandafter\expandafter\expandafter\FNH@check@c
