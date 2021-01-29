@@ -23,10 +23,10 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2021/01/26 v1.1b hyperref aware footnote.sty (JFB)]
+ [2021/01/29 v1.1c hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.1b (2021/01/26)
+%% Version: 1.1c (2021/01/29)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %%
@@ -40,6 +40,7 @@
     {}%
 \newbox\FNH@notes
 \newdimen\FNH@width
+\newtoks\FNH@toks % 1.1c
 \let\FNH@colwidth\columnwidth
 \newif\ifFNH@savingnotes
 \AtBeginDocument {%
@@ -129,7 +130,22 @@
   \fi
 }%
 \def\FNH@spewnotes {%
-  \endgroup
+  \if@endpe\ifx\par\@@par\FNH@toks{}\else
+     \FNH@toks\expandafter{\expandafter
+              \def\expandafter\par\expandafter{\par}\@endpetrue}%
+     \expandafter\expandafter\expandafter
+     \FNH@toks
+     \expandafter\expandafter\expandafter
+     {\expandafter\the\expandafter\FNH@toks
+      \expandafter\def\expandafter\@par\expandafter{\@par}}%
+     \expandafter\expandafter\expandafter
+     \FNH@toks
+     \expandafter\expandafter\expandafter
+     {\expandafter\the\expandafter\FNH@toks
+      \expandafter\everypar\expandafter{\the\everypar}}\fi
+  \else\FNH@toks{}\fi
+  \expandafter
+  \endgroup\the\FNH@toks
   \ifFNH@savingnotes\else
    \ifvoid\FNH@notes\else
     \begingroup

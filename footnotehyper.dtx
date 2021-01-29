@@ -1,20 +1,20 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <26-01-2021 at 15:33:03 CET>}
+\def\dtxtimestamp {Time-stamp: <29-01-2021 at 19:18:01 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.1b (2021/01/26)
+%% Version: 1.1c (2021/01/29)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %%
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2021/01/26}
-\def\docdate        {2021/01/26}
-\def\pkgversion     {v1.1b}
+\def\pkgdate        {2021/01/29}
+\def\docdate        {2021/01/29}
+\def\pkgversion     {v1.1c}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -25,7 +25,7 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.1b (2021/01/26)
+% Version: 1.1c (2021/01/29)
 % License: LPPL 1.3c
 % Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %
@@ -54,7 +54,7 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1b 2021/01/26)
+    Source:  footnotehyper.dtx (v1.1c 2021/01/29)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
@@ -249,7 +249,8 @@ footnotehyper.pdf, footnotehyper.dvi.
    \PassOptionsToPackage{dvipdfm}{geometry}
    \PassOptionsToPackage{bookmarks=true}{hyperref}
    \PassOptionsToPackage{dvipdfmx-outline-open}{hyperref}
-   \PassOptionsToPackage{dvipdfmx-outline-open}{bookmark}
+% obsolète
+%   \PassOptionsToPackage{dvipdfmx-outline-open}{bookmark}
    %
    \def\pgfsysdriver{pgfsys-dvipdfm.def}
 \else
@@ -353,47 +354,70 @@ loaded with its `hyperfootnotes=false` option. The order of loading of
            \obeyspaces\obeylines %
 \pkgLicense\endgroup
 
-\section{Usage}
+\section{Changes}
 
-Since |v0.99|, \fnh does not
-load package
-|footnote.sty|\footnote{\url{http://ctan.org/pkg/footnote}}
-anymore, and is even incompatible with it at it uses the same user
-interface.
+\begin{description}
+\item[v0.9c (2016/04/19)] First release: adapt original package to be
+  |hyperref| and |color/xcolor| compatible.
 
-Since |v1.0|, \fnh is usable also in absence of |hyperref| or when
-the latter was passed |hyperfootnotes=false| option.
+\item[v0.9e (2016/04/30)] Abort in absence of |hyperref|. Compatibility with
+  |babel-french|.
 
-Version |v1.1| fixes a bug which arose when |savenotes| environment was used
-\emph{inside} a minipage: footnotes were disappearing!%
+\item[v0.99 (2017/02/16)] Do not load package
+  |footnote.sty|\footnote{\url{http://ctan.org/pkg/footnote}} anymore. 
+
+  From then on \fnh is
+  incompatible with it at it uses the same user interface.
+
+\item[v1.0 (2017/03/07)] Be usable also in absence of |hyperref| or when the
+  latter was passed |hyperfootnotes=false| option.
+
+\item[v1.1 (2018/01/23)] Fix bug which arose when |savenotes| environment was used
+  \emph{inside} a minipage: footnotes were disappearing!%
 %
-\footnote{Thanks to François Pantigny for reporting the bug.
-  A later suggestion of the same is to let the package do nothing under
-  Beamer class, and this is what |v1.1a 2019/11/07| does.}
+\footnote{Thanks to François Pantigny for reporting the bug. A later
+  suggestion of the same is to let the package do nothing under Beamer class,
+  and this is what |v1.1a 2019/11/07| does.}
 %
 See related remarks at end of \autoref{sec:notes}.
 
-The package thus provides:
-\begin{itemize}
-\item a |savenotes| environment which re-routes footnotes and delivers them at
-  the end (there is also the |\savenotes/\spewnotes| syntax; it does create a
-  group like the environment),
-\item |footnote| and |footnotetext| environments to allow footnotes
-  with verbatim material.
-\end{itemize}
+\item[v1.1a (2019/11/07)] Abort under |beamer| (difficulty with |@makefntext|
+  and suspicion |beamer| does not need \fnh).
 
+\item[v1.1b (2021/01/26)] Fix incompatibility with the combination |memoir| +
+  |babel-french|.
+
+\item[v1.1c (2021/01/29)] Fix legacy bug of original package interfering with
+  \LaTeX2e mechanism to suppress indentation after mid-paragraph lists (when
+  |savenotes| environment directly wraps the enclosed list environment,
+  mid-paragraph).
+
+\end{description}
+\section{Usage}
+
+As summarized in the abstract, the package provides:
+\begin{savenotes}% juste pour vérifier le fix à 1.1c
+  \begin{itemize}
+  \item a |savenotes| environment which re-routes footnotes and delivers them
+    at the end (there is also the |\savenotes/\spewnotes| syntax; which does
+    create a group like the environment),
+  \item |footnote| and |footnotetext| environments to allow footnotes with
+    verbatim material.
+  \end{itemize}
+\end{savenotes}
 But the constructability of the |footnote/footnotetext| environments depends
 on how |\@makefntext| has been customized by the class or other packages; a
 warning is issued if the situation appears to be desperate.\footnote{original
   |footnote.sty| could end up in a low level \TeX\ error.}
 
-\begin{framed}
   Some details: \fnh inherits from |footnote| original package the aim to
   convert the macro |\@makefntext| into two parts, the first one to be inserted
   at the start of a footnote in environment form, the second one at its end.
   It thus hopes that the replacement text of |\@makefntext| contains only once
   its parameter token |#1|, and that it is used unbraced.
 
+\begin{savenotes}
+\begin{framed}
   \fnh has a more robust, but still naive, way of analysing this than the
   original package. But even seemingly innocent redefinitions such as the one
   of |beamer| which was last time I checked (that was in 2019):
@@ -406,11 +430,17 @@ macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark
 
   The package could possibly be much improved here, but at update |v1.1b| it
   simply adds a specific fix to handle a problem of another type arising with
-  |memoir| together with |babel-french|. This specific fix uses a bit daring
-  |\scantokens| so we have limited it to these exact circumstances. It has not
-  been thoroughly tested, please make bug reports if needed.
+  |memoir| together with |babel-french|%
+  \begin{footnote}
+    In the |babel-french| context, \fnh attempts to analyse |\@makefntextFB|
+    rather than |\@makefntext| itself. The problem arose in that (automated)
+    analysis.
+  \end{footnote}
+  This fix uses a bit daring |\scantokens| which could be useful to solve
+  other incompatibilities of the similar nature, but we have limited the fix
+  to those exact circumstances, until we get alerted by some bug report.
 \end{framed}
-
+\end{savenotes}
 
 It should be recalled that in case of |\footnotemark[N]| and
 |\footnotetext[N]{...}| mark-up |hyperref| creates no hyperlink. This is not
@@ -448,10 +478,10 @@ definition during the execution of |\begin{table}|\dots !
 {\centering
   \begin{tabular}{|c|c|}
     \hline
-    \strut Inside\footnote{Notice that as  frame
-      extended to the next page,
-      the end of the *savenotes* environment delivered its
-      footnotes only here.} a & tabular\begin{footnote}Alternatively a
+    \strut Inside\footnote{If the frame
+      extends to the next page,
+      the end of the *savenotes* environment delivers its intercepted
+      footnotes only there.} a & tabular\begin{footnote}Alternatively a
       *\savenotes/\spewnotes* pair
       could have been used.\end{footnote}\\\hline
 \end{tabular}\par}
@@ -593,6 +623,8 @@ A few items worth of mention:
    \fi\fi
   }%
 \end{verbatim}
+On |2021/01/29| the interference (lost of some |babel-french| customization)
+is still there, as I checked now. This has nothing to do with \fnh.
 % \endgroup
 \item some environments typeset multiple times their contents,
   which causes issues; \fnh takes provisions only to handle the
@@ -694,6 +726,7 @@ A few items worth of mention:
 %    \begin{macrocode}
 \newbox\FNH@notes
 \newdimen\FNH@width
+\newtoks\FNH@toks % 1.1c
 \let\FNH@colwidth\columnwidth
 \newif\ifFNH@savingnotes
 \AtBeginDocument {%
@@ -835,9 +868,37 @@ A few items worth of mention:
 % |v1.1| fixes the bug about disappearing footnotes if |savenotes| environment
 % is used inside a minipage. I had never really considered such usage, hence
 % missed realizing there was a bug.
+%
+% |v1.1c 2021/01/29| fixes a legacy bug from |footnote| package: if used
+% to enclose a list environment inside a paragraph, it broke the
+% mechanism which suppresses indentation following the list.
+%
+% Now, situation would be far simpler here if we did not have this extra
+% |\begingroup| |\endgroup| pair in |\FNH@savenotes/\FNG@spewnotes|.
+%
+% A priori, as far as I understand, testing the |\if@endpe| flag should be
+% enough, but let's be extra cautious and check that |\par| is not |\@@par|.
+% Attention here that this is not necessarily followed by |\end{savenotes}| and
+% we have to support the |\savenotes/\spewnotes| syntax. The complication is
+% added from it creating a group without being a genuine \LaTeX2e environment.
 %    \begin{macrocode}
 \def\FNH@spewnotes {%
-  \endgroup
+  \if@endpe\ifx\par\@@par\FNH@toks{}\else
+     \FNH@toks\expandafter{\expandafter
+              \def\expandafter\par\expandafter{\par}\@endpetrue}%
+     \expandafter\expandafter\expandafter
+     \FNH@toks
+     \expandafter\expandafter\expandafter
+     {\expandafter\the\expandafter\FNH@toks
+      \expandafter\def\expandafter\@par\expandafter{\@par}}%
+     \expandafter\expandafter\expandafter
+     \FNH@toks
+     \expandafter\expandafter\expandafter
+     {\expandafter\the\expandafter\FNH@toks
+      \expandafter\everypar\expandafter{\the\everypar}}\fi
+  \else\FNH@toks{}\fi
+  \expandafter
+  \endgroup\the\FNH@toks
   \ifFNH@savingnotes\else
    \ifvoid\FNH@notes\else
     \begingroup
