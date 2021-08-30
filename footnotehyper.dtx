@@ -1,20 +1,20 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <04-02-2021 at 12:57:09 CET>}
+\def\dtxtimestamp {Time-stamp: <13-08-2021 at 11:54:00 CEST>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.1d (2021/02/04)
+%% Version: 1.1e (2021/08/13)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %%
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2021/02/04}
-\def\docdate        {2021/02/04}
-\def\pkgversion     {v1.1d}
+\def\pkgdate        {2021/08/13}
+\def\docdate        {2021/08/13}
+\def\pkgversion     {v1.1e}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -25,7 +25,7 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.1d (2021/02/04)
+% Version: 1.1e (2021/08/13)
 % License: LPPL 1.3c
 % Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
 %
@@ -54,7 +54,7 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1d 2021/02/04)
+    Source:  footnotehyper.dtx (v1.1e 2021/08/13)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
@@ -381,7 +381,7 @@ loaded with its `hyperfootnotes=false` option. The order of loading of
 %
 See related remarks at end of \autoref{sec:notes}.
 
-\item[v1.1a (2019/11/07)] Abort under |beamer| (difficulty with |@makefntext|
+\item[v1.1a (2019/11/07)] Abort under |beamer| (difficulty with \cs{@makefntext}
   and suspicion |beamer| does not need \fnh).
 
 \item[v1.1b (2021/01/26)] Fix incompatibility with the combination |memoir| +
@@ -395,7 +395,7 @@ See related remarks at end of \autoref{sec:notes}.
 \item[v1.1d (2021/02/04)] Fix regression at |v1.1b| which caused a build crash
   whenever \fnh decided to raise a warning relative to |\@makefntext|.%
 %
-\footnote{Thanks to Leon K. for reporting the bug.}
+\footnote{Thanks to Leon Kiefer for reporting the bug.}
 
   Refactor analysis of \cs{@makefntext} for simpler and better support of
   |babel-french|.%
@@ -408,22 +408,29 @@ See related remarks at end of \autoref{sec:notes}.
 
   Add \verb=\iffootnotehyperparse= and \verb=\iffootnotehyperwarn= booleans.
 
+\item[v1.1e (2021/08/13)] Use \LaTeX\ environment hooks if available 
+  for |\makesavenoteenv|, in replacement of the original |footnote| package
+  code.
 \end{description}
 \section{Usage}
 
-As summarized in the abstract, the package provides:
+The package provides:
 \begin{savenotes}% juste pour vérifier le fix à 1.1c
   \begin{itemize}
   \item a |savenotes| environment which re-routes footnotes and delivers them
     at the end (there is also the |\savenotes/\spewnotes| syntax; which does
     create a group like the environment),
   \item |footnote| and |footnotetext| environments to allow footnotes with
-    verbatim material.
+    verbatim material,
+  \item a macro to patch environments to let them apply the |savenotes| mechanism
+    automatically.
   \end{itemize}
 \end{savenotes}
-Setting-up the environments proceeds from an analysis of the pre-existing
-internal \LaTeX\ macro |\@makefntext|. The next section discusses problems
-which may arise.
+The preliminary construction by the package of the |footnote| and
+|footnotetext| environments goes via an automated analysis of the \LaTeX\
+macro |\@makefntext|, as possibly customized by classes and/or
+packages. This is a rather fragile step, and the next section discusses
+problems which may arise.
 
 \subsection{Potential difficulties with the footnote and footnotetext
   environments}
@@ -474,16 +481,15 @@ which may arise.
       |\def\FNH@prefntext{\@makefntext{}}| approach is taken, despite the
       risks inherent to it.
 
-      You can provide your own definitions of
+      You can provide your own custom definitions for
       \cs{FNH@prefntext} and \cs{FNH@postfntext}. Then add
-      \cs{footnotehyperparsefalse} to the preamble.
+      to the preamble \cs{footnotehyperparsefalse}.
     \end{footnote}
 
   Some seemingly innocent redefinitions such as the one
   of |beamer| which was last time I checked (that was in 2019):
 \begin{verbatim}
-macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark
-{\@makefnmark }
+macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark {\@makefnmark }
 \usebeamertemplate ***{footnote}
 \end{verbatim}
   are not (easily) compatible with environment forms for footnotes
@@ -492,10 +498,10 @@ macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark
   \footnote{%\phantomsection\label{fn:beamer}% test, ça marche!
   Since |v1.1a|, \fnh simply aborts under |beamer| class.}
 
-  In case of such a problematic |\@makefntext| \fnh raises a warning, to
-  explain that footnotes typeset using the environment forms will be
-  dysfunctional (the footnote marker at bottom of page will be missing,
-  probably). Footnotes using |\footnote| are not impacted by this.
+In case of such a problematic |\@makefntext| \fnh raises a warning, to explain
+that footnotes typeset using the environment forms will use a fall-back layout
+(inherited from the |article| document class). Footnotes using |\footnote| are
+not impacted by this.
 
   % See \ref{fn:beamer} % test, ça marche, aussi avec environnement
 
@@ -526,23 +532,32 @@ Environments typesetting multiple times their contents are the most hostile to
 footnotes. Currently, \fnh only handles especially the |amsmath|
 environments (as in |footnote.sty|.)
 
-\subsection{A legacy macro from the original package, usage not recommended}
+\subsection{The \cs{makesavenoteenv} macro}
 
-Finally there is a |\makesavenoteenv| command which takes as
+Finally there is a |\makesavenoteenv| macro which takes as
 argument an environment name and patches it to do the
 |\savenotes/\spewnotes| automatically.%
-\begin{footnote}
-  For the
-record the syntax is either |\makesavenoteenv{foo}| which patches
-environment |foo| or |\makesavenoteenv[bar]{foo}| which defines
-environment |bar| as this patched version of |foo|.
-\end{footnote}
-It is safer to avoid it, as
-one never knows what happens with such patches: for example the |[H]|
-specifier provided by the |float| package overwrites the |\end{table}|
-definition during the execution of |\begin{table}|\dots !
 
-\subsection{Example of use}
+The syntax is either |\makesavenoteenv{foo}| which patches environment |foo|
+(since |1.1e|, via the hooks provided by \LaTeX\ since October 2020) to do
+automatically \cs{savenotes}/\cs{spewnotes}, or |\makesavenoteenv[bar]{foo}|
+which defines environment |bar| as |foo| inside a |savenotes| environment.
+
+With \LaTeX\ earlier than October 2020, the macro is the same as in the
+original |footnote| package and proceeds in a more brutal way than what is
+described in previous paragraph. It is safer to avoid it, as one never knows
+what happens with such patches: for example the |[H]| specifier provided by
+the |float| package overwrites the |\end{table}| definition during the
+execution of |\begin{table}|\dots!%
+%
+\footnote{By the way I have not checked if this |float| package feature
+  behaves nicely, or has been updated to be compatible, with the \LaTeX\ hook
+  mechanism of October 2020.}
+As another example, |\makesavenoteenv{tcolorbox}| with the original |footnote|
+package code breaks, but the new version activated with \LaTeX\ from October
+2020 or later appears to work.
+
+\subsection{Example of output, and of input}
 \begin{savenotes}
 \begin{framed}
 \DeleteShortVerb{\|}\MakeShortVerb{\*}%
@@ -565,7 +580,9 @@ Here is an illustrative example of usage of the |savenotes| environment:
   \footnote{\url{http://ctan.org/pkg/footnote}}
 
   Particularly you may check its |savenotes| environment.%
-  \footnote{\phantomsection\label{fn:floats}It doesn't bring any
+  \footnote{% here is how to add anchor for hyperlink target:
+  \phantomsection\label{fn:floats}% (this % to avoid space at start of paragraph)
+  It doesn't bring any
   feature to especially handle the issues related to footnotes in floating
   environments, though.}
 \end{framed}
@@ -574,7 +591,7 @@ Here is a link to an interesting footnote: \ref{fn:floats}.
 \end{verbatim}
 and the present frame has \cs{footnote}'s from inside a |tabular| and is
 inside a |savenotes| environment.%
-\begin{footnote}\phantomsection\label{fn:minipage}
+\begin{footnote}\phantomsection\label{fn:minipage}% (attention à l'espace)
   Here is an issue which has nothing (as I finally figured out) to
   do with |footnote|, and only indirectly with \LaTeX: if you embed
   a \emph{full-width} minipage (with initial \cs{noindent}) in any
@@ -621,27 +638,31 @@ Let's test an
   a^n + b^n &=c^n\;.
 \end{align}
 And a footnote with some verbatim material%
-\begin{footnote}
-  \verb|&$^%\[}$|
+\begin{footnote}\phantomsection\label{fn:verb}%
+  The footnote environment allows verbatim contents: \verb|&$^%\[}$|
 \end{footnote}.
 \end{framed}
 \end{savenotes}
 
-The last one was coded as:
+The input for the footnote \ref{fn:verb} was coded as:
 \begin{verbatim}
 And a footnote with some verbatim material%
 \begin{footnote}
-  \verb|&$^%\[}$|
+  The footnote environment allows verbatim contents: \verb|&$^%\[}$|
 \end{footnote}.
 \end{verbatim}
-Now some use of |\footnotemark|\footnotemark\ followed by a |footnotetext|
-environment.
+Now some use of |\footnotemark| followed by a |footnotetext| (here is the
+mark: \footnotemark)
+environment.% attention! sinon espace extra
+%
 \begin{footnotetext}
-  This one uses the normal footnote counter and the hyperlink works.
+  Notice that the hyperlinking works for |\footnotemark| associated to the
+  environment |footnotetext|.
 \end{footnotetext}
-And use of |\footnotemark[99]|\footnotemark[99] in association with a
-|footnotetext| environment using the same optional argument |[99]|.
-No hyperfootnote link was inserted.%
+And use of |\footnotemark[99]| in association with a
+|footnotetext| environment using the same optional argument |[99]| (here is
+the mark: \footnotemark[99], and you can see it is not an hyperlink).% !
+%
 \begin{footnotetext}[99]
   |hyperref| creates no hyperlink in this case, or in the
   |\footnotemark[N]/\footnotetext[N]{<foo>}| case. It does when
@@ -657,9 +678,11 @@ And a final footnote, done with |\begin{footnote}[57]|%
     latter was passed |hyperfootnotes=false| option.
 %  \end{framed}
 \end{footnote}.
-There is no problem with the hyperlink, then. Oh, and don't forget to read
+There is no problem with the hyperlink, then.%
+%
+\footnote{Oh, and don't forget to read
 this interesting footnote: \ref{fn:minipage} (just in case you skipped on
-first reading).
+first reading).}
 
 \section{Notes}\label{sec:notes}
 
@@ -765,6 +788,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %    \begin{macrocode}
 \newif\iffootnotehyperparse\footnotehyperparsetrue
 \newif\iffootnotehyperwarn \footnotehyperwarntrue
+\def\FNH@msgbk{^^J(footnotehyper)\@spaces}% make room for message lines
 \DeclareOption*%
     {\PackageWarning{footnotehyper}{Option `\CurrentOption' is unknown}}%
 \ProcessOptions\relax
@@ -947,7 +971,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 % mechanism which suppresses indentation following the list.
 %
 % Now, situation would be far simpler here if we did not have this extra
-% |\begingroup| |\endgroup| pair in |\FNH@savenotes/\FNG@spewnotes|.
+% |\begingroup| |\endgroup| pair in |\FNH@savenotes/\FNH@spewnotes|.
 %
 % A priori, as far as I understand, testing the |\if@endpe| flag should be
 % enough, but let's be extra cautious and check that |\par| is not |\@@par|.
@@ -1197,11 +1221,13 @@ is still there, as I checked now. This has nothing to do with \fnh.
    }%
    \iffootnotehyperwarn
     \PackageInfo{footnotehyper}%
-      {frenchb compatibility patch activated.^^J It will not work in
-       all circumstances.^^J In case of problems with the `footnote' or
-       `footnotetext' environments,^^J please send to the author a small
-       file demonstrating the problem.^^J To turn off this message, add
-       \string\footnotehyperwarnfalse\space to the preamble.^^J}%
+      {babel-french compatibility patch activated.\FNH@msgbk
+       It may not work with all combinations of classes/packages.\FNH@msgbk
+       In case of problems with the `footnote' or `footnotetext'\FNH@msgbk
+       environments, you may try sending to the author a small\FNH@msgbk
+       file demonstrating the problem.\FNH@msgbk
+       To turn off this message, add \string\footnotehyperwarnfalse\FNH@msgbk
+       to the preamble\@gobble}%
    \fi
 }%
 %    \end{macrocode}
@@ -1249,19 +1275,19 @@ is still there, as I checked now. This has nothing to do with \fnh.
       \def\FNH@prefntext{\@makefntext{}}%
       \iffootnotehyperwarn
         \PackageInfo{footnotehyper}%
-        {using \string\@makefntext{} approach.^^J
-         In case of problems with the footnote environments, please send^^J
-         to the author a small document source illustrating them. To turn^^J
-         off this message, add
-         \string\footnotehyperwarnfalse\space to preamble.^^J}%
+        {Using the \string\@makefntext{} approach (see doc).\FNH@msgbk
+         In case of dysfunctional footnote environments, you can\FNH@msgbk
+         try sending the author a small illustrative document.\FNH@msgbk
+         To turn off this message, add \string\footnotehyperwarnfalse\FNH@msgbk
+         to the preamble\@gobble}% "noline"
       \fi
     \else\FNH@bad@makefntext@alert
     \fi
 }%
 %    \end{macrocode}
-% Back to non |babel-french| context. Let's check that |pre| and |post| do not
-% contain some weird stuff from original |\@makefntext{#1}| containing
-% multiple times |#1|.
+% Let's check that |pre| and |post| do not
+% contain some weird stuff caused from an original |\@makefntext{#1}| containing
+% |#1| multiple times.
 %    \begin{macrocode}
 \def\FNH@check@b #1\relax{%
     \expandafter\expandafter\expandafter\FNH@check@c
@@ -1271,22 +1297,42 @@ is still there, as I checked now. This has nothing to do with \fnh.
 \def\FNH@check@c #11.2!3?4,#2#3\relax{%
     \ifx\FNH@check@c#2\else\FNH@bad@makefntext@alert\fi
 }%
+%    \end{macrocode}
+% Hard to decipher |\@makefntext|, so warn user and (|1.1e|) use as
+% fall-back the code from the |article| class with a safety |\@nameuse| layer.
+%    \begin{macrocode}
 \def\FNH@bad@makefntext@alert{%
     \iffootnotehyperwarn
     \PackageWarningNoLine{footnotehyper}%
-      {^^J The footnote environments will probably lack footnote numbers at^^J
-       bottom of pages, sorry.^^J
-       You may try to email the author this meaning of \string\@makefntext:^^J
-       \meaning\@makefntext^^J
-       together with the document preamble}%
+      {\FNH@msgbk
+       Failed to analyse \string\@makefntext\space into something usable.\FNH@msgbk
+       Using as fall-back the article class code.\FNH@msgbk
+       You may try to email the author this problematic meaning:\FNH@msgbk
+       \meaning\@makefntext\FNH@msgbk
+       together with the document preamble (in particular if\FNH@msgbk
+       footnote numbers do not show at bottom of page)}%
     \fi
-    \let\FNH@prefntext\@empty\let\FNH@postfntext\@empty
+    \let\FNH@prefntext \FNH@prefntext@fallback
+    \let\FNH@postfntext\FNH@postfntext@fallback
 }%
+\def\FNH@prefntext@fallback{% from article class code with \@nameuse added
+    \parindent 1em\noindent
+    \hb@xt@1.8em{\hss\@textsuperscript{\normalfont\@nameuse{@thefnmark}}}%
+}%
+\let\FNH@postfntext@fallback\@empty
 %    \end{macrocode}
 % \end{macro}\end{macro}\end{macro}
 % \begin{macro}{\makesavenoteenv}
-% Same as original. Not recommended. Safer to use explicitely
-% |savenotes| environment.
+% \begin{itemize}
+% \item with LaTeX prior to October 2020 release, this is the same as
+%   original. Not recommended. Safer to use explicitely |savenotes|
+%   environment.
+% \item with LaTeX from October 2020 or later, a safer approach is applied which
+%   goes either via the hook mechanism (for the use case with no optional
+%   argument), or via a |\newenvironment| and cautious
+%   use of the public |\begin| and |\end| interface (for the use case with an
+%   optional argument), rather than fiddling with |\foo| and |\endfoo| macros.
+% \end{itemize}
 %    \begin{macrocode}
 \def\makesavenoteenv{\@ifnextchar[\FNH@msne@ii\FNH@msne@i}%]
 \def\FNH@msne@i #1{%
@@ -1308,6 +1354,17 @@ is still there, as I checked now. This has nothing to do with \fnh.
     \noexpand\if@endpe\noexpand\@endpetrue\noexpand\fi
   }%
 }%
+\@ifl@t@r\fmtversion{2020/10/01}{%
+    \def\FNH@msne@i#1{%
+        \AddToHook{env/#1/before}{\savenotes}%
+        \AddToHook{env/#1/after}{\spewnotes}%
+    }%
+    \def\FNH@msne@ii[#1]#2{%
+        \newenvironment{#1}{\begin{savenotes}\begin{#2}}%
+                           {\end{#2}\end{savenotes}}%
+    }%
+  }%
+  {}%
 %    \end{macrocode}
 % \end{macro}
 % Original footnote.sty patches |\parbox|, we don't touch it. Also it defines a
