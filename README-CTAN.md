@@ -1,10 +1,11 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1e 2021/08/13)
+    Source:  footnotehyper.dtx (v1.1f 2025/11/15)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2021, 2025 Jean-Francois B.
+                                 <jfbu on github>.
 
 ABSTRACT
 ========
@@ -60,7 +61,7 @@ the smallest pdf file and is the officially preferred one as
 it allows to set options in footnotehyper.tex to customize the
 footnotehyper.pdf file:
 
-- scrdoc class options (paper size, font size, ...)
+- scrartcl class options (paper size, font size, ...)
 - with or without source code,
 - with dvipdfmx or with latex+dvips or pdflatex.
 

@@ -1,20 +1,21 @@
-% -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" -*-
+% -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" ; time-stamp-active: nil -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <13-08-2021 at 11:54:00 CEST>}
+\def\dtxtimestamp {Time-stamp: <15-11-2025 at 11:01:49 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.1e (2021/08/13)
+%% Version: 1.1f (2025/11/15)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2021, 2025 Jean-Francois B.
+%%                              <jfbu on github>.
 %%
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2021/08/13}
-\def\docdate        {2021/08/13}
-\def\pkgversion     {v1.1e}
+\def\pkgdate        {2025/11/15}
+\def\docdate        {2025/11/15}
+\def\pkgversion     {v1.1f}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -25,9 +26,10 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.1e (2021/08/13)
+% Version: 1.1f (2025/11/15)
 % License: LPPL 1.3c
-% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
+% Copyright (C) 2016-2021, 2025 Jean-Francois B.
+%%                             <jfbu on github>.
 %
 % This Work may be distributed and/or modified under the conditions
 % of the LaTeX Project Public License, version 1.3c. This version of
@@ -54,11 +56,12 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1e 2021/08/13)
+    Source:  footnotehyper.dtx (v1.1f 2025/11/15)
     Author:  Jean-Francois B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
+    Copyright (C) 2016-2021, 2025 Jean-Francois B.
+                                 <jfbu on github>.
 
 
 ABSTRACT
@@ -115,7 +118,7 @@ the smallest pdf file and is the officially preferred one as
 it allows to set options in footnotehyper.tex to customize the
 footnotehyper.pdf file:
 
-- scrdoc class options (paper size, font size, ...)
+- scrartcl class options (paper size, font size, ...)
 - with or without source code,
 - with dvipdfmx or with latex+dvips or pdflatex.
 
@@ -163,7 +166,7 @@ footnotehyper.pdf, footnotehyper.dvi.
 \chardef\NoSourceCode 0 % replace 0 by 1 for the doc *without* the source code
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesFile {\pkgname.tex}[Driver for \pkgname\space documentation]%
-\PassOptionsToClass   {a4paper,fontsize=11pt,oneside}{scrdoc}
+\PassOptionsToClass   {a4paper,fontsize=11pt,oneside}{scrartcl}
 \PassOptionsToPackage {english}{babel}
 \input \pkgname.dtx
 %%% Local Variables:
@@ -186,7 +189,7 @@ footnotehyper.pdf, footnotehyper.dvi.
         \chardef\Withdvipdfmx 0 % 0 = pdflatex or latex+dvips, 1 = dvipdfmx
         \chardef\NoSourceCode 0 % 0 =  include source code, 1 = do not
         \NeedsTeXFormat {LaTeX2e}%
-        \PassOptionsToClass   {a4paper,fontsize=11pt,oneside}{scrdoc}%
+        \PassOptionsToClass   {a4paper,fontsize=11pt,oneside}{scrartcl}%
         \PassOptionsToPackage {english}{babel}%
       \else % latex run is on \pkgname.tex
         \chardef\extractfiles 2 % do not extract files, only typeset
@@ -234,7 +237,42 @@ footnotehyper.pdf, footnotehyper.dvi.
 \ifdefined\MessageDeFin\AtEndDocument{\MessageDeFin}\fi
 %-------------------------------------------------------------------------------
 % START OF USER MANUAL TEX SOURCE
-\documentclass[abstract]{scrdoc}
+\documentclass {scrartcl}
+%%% START OF CUSTOM doc.sty LOADING
+\usepackage{doc}[=v2]
+\AtBeginDocument{\MakeShortVerb{\|}}
+\DeclareFontShape{OT1}{cmtt}{bx}{n}{<-> ssub * cmtt/m/n}{}
+\DeclareFontFamily{OMS}{cmtt}{\skewchar\font 48}  % '60
+\DeclareFontShape{OMS}{cmtt}{m}{n}{<-> ssub * cmsy/m/n}{}
+\DeclareFontShape{OMS}{cmtt}{bx}{n}{<-> ssub * cmsy/b/n}{}
+\DeclareFontShape{OT1}{cmss}{m}{it}{<->ssub*cmss/m/sl}{}
+\ifnum\NoSourceCode=1
+  \OnlyDescription
+\fi
+\CodelineNumbered
+\DisableCrossrefs
+% \setcounter{StandardModuleDepth}{1} % we don't use this mechanism currently
+\def\cmd#1{\cs{\expandafter\cmd@to@cs\string#1}}
+\def\cmd@to@cs#1#2{\char\number`#2\relax}
+% This is hyperref compatible (contrarily to using \bslash)
+% I need the \detokenize due to usage in implementation part with names
+% containing the underscore for example
+\DeclareRobustCommand\cs[1]{\texttt{\textbackslash\detokenize{#1}}}
+\providecommand\marg[1]{%
+  {\ttfamily\char`\{}\meta{#1}{\ttfamily\char`\}}}
+\providecommand\oarg[1]{%
+  {\ttfamily[}\meta{#1}{\ttfamily]}}
+\providecommand\parg[1]{%
+  {\ttfamily(}\meta{#1}{\ttfamily)}}
+
+% There is very little we seem to need from the scrdoc extras: page geometry
+% is set by geometry package and a4paper option from bnumexpr.tex file.  So it
+% seems I only need the hologo loading:
+\usepackage{hologo}
+%\DeclareRobustCommand*{\eTeX}{\hologo{eTeX}}%
+%\DeclareRobustCommand*{\LuaTeX}{\hologo{LuaTeX}}%
+%
+%%% end of ltxdoc+srcdoc emulation.
 
 \ifnum\NoSourceCode=1 \OnlyDescription\fi
 
@@ -257,6 +295,7 @@ footnotehyper.pdf, footnotehyper.dvi.
    \PassOptionsToPackage{bookmarks=true}{hyperref}
 \fi
 \makeatother
+\def\ctanpackage#1{\href{https://ctan.org/pkg/#1}{#1}}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -411,6 +450,9 @@ See related remarks at end of \autoref{sec:notes}.
 \item[v1.1e (2021/08/13)] Use \LaTeX\ environment hooks if available 
   for |\makesavenoteenv|, in replacement of the original |footnote| package
   code.
+\item[v1.1f (2025/11/15)] Fix compatibility with \ctanpackage{babel-french},
+  which was broken since the latter |v3.7e 2025-08-15| split of its Lua\LaTeX{}
+  code from its \hologo{pdfLaTeX} and \hologo{XeLaTeX} code.
 \end{description}
 \section{Usage}
 
@@ -1181,6 +1223,8 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %   As long as nothing else interferes |babel-french| should be ok with
 %   standard classes, KOMA and memoir.
 %
+%   |v1.1f| fixes compatibility with \ctanpackage{babel-french} under
+%   \hologo{pdfLaTeX} and \hologo{XeLaTeX}, broken since its |v3.7e| release.
 %    \begin{macrocode}
 \def\FNH@safeif#1{%
    \iftrue\csname if#1\endcsname\csname fi\endcsname\expandafter\@firstoftwo
@@ -1188,8 +1232,11 @@ is still there, as I checked now. This has nothing to do with \fnh.
    \fi
 }%
 \def\FNH@check{%
-   \ifx\@makefntextFB\@undefined\expandafter\FNH@check@
-                           \else\expandafter\FNH@frenchb@
+   \ifx\@makefntextFB\@undefined
+       \expandafter\FNH@check@
+   \else
+       \providecommand\localleftbox[1]{}%
+       \expandafter\FNH@frenchb@
    \fi
 }%
 \def\FNH@frenchb@{%

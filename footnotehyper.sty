@@ -23,12 +23,13 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2021/08/13 v1.1e hyperref aware footnote.sty (JFB)]
+ [2025/11/15 v1.1f hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.1e (2021/08/13)
+%% Version: 1.1f (2025/11/15)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2021 Jean-Francois B. <jfbu on github>.
+%% Copyright (C) 2016-2021, 2025 Jean-Francois B.
+%%                              <jfbu on github>.
 %%
 \newif\iffootnotehyperparse\footnotehyperparsetrue
 \newif\iffootnotehyperwarn \footnotehyperwarntrue
@@ -242,8 +243,11 @@
    \fi
 }%
 \def\FNH@check{%
-   \ifx\@makefntextFB\@undefined\expandafter\FNH@check@
-                           \else\expandafter\FNH@frenchb@
+   \ifx\@makefntextFB\@undefined
+       \expandafter\FNH@check@
+   \else
+       \providecommand\localleftbox[1]{}%
+       \expandafter\FNH@frenchb@
    \fi
 }%
 \def\FNH@frenchb@{%
