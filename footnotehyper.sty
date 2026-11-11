@@ -23,13 +23,13 @@
 %%
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{footnotehyper}%
- [2025/11/15 v1.1f hyperref aware footnote.sty (JFB)]
+ [2026/11/11 v1.1g hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.1f (2025/11/15)
+%% Version: 1.1g (2026/11/11)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2021, 2025 Jean-Francois B.
-%%                              <jfbu on github>.
+%% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
+%%                                     <jfbu on github>.
 %%
 \newif\iffootnotehyperparse\footnotehyperparsetrue
 \newif\iffootnotehyperwarn \footnotehyperwarntrue
@@ -273,10 +273,17 @@
           {\@makefntextORI{}}%
        }%
    }%
+   \ifdefined\FB@everyline %  frenchb>=4.1b 2026-11-01 (lualatex)
+   \def\FNH@postfntext{%
+     \let\FBeverypar@quote\FBeverypar@save
+     \localleftbox{\FB@everyline}%
+   }%
+   \else
    \def\FNH@postfntext{%
      \let\FBeverypar@quote\FBeverypar@save
      \localleftbox{\FBeveryline@quote}%
    }%
+   \fi
    \iffootnotehyperwarn
     \PackageInfo{footnotehyper}%
       {babel-french compatibility patch activated.\FNH@msgbk

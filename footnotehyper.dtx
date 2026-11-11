@@ -1,21 +1,21 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" ; time-stamp-active: nil -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <15-11-2025 at 11:01:49 CET>}
+\def\dtxtimestamp {Time-stamp: <11-11-2026 at 18:35:58 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.1f (2025/11/15)
+%% Version: 1.1g (2026/11/11)
 %% License: LPPL 1.3c
-%% Copyright (C) 2016-2021, 2025 Jean-Francois B.
-%%                              <jfbu on github>.
+%% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
+%%                                     <jfbu on github>.
 %%
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2025/11/15}
-\def\docdate        {2025/11/15}
-\def\pkgversion     {v1.1f}
+\def\pkgdate        {2026/11/11}
+\def\docdate        {2026/11/11}
+\def\pkgversion     {1.1g}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -26,9 +26,9 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.1f (2025/11/15)
+% Version: 1.1g (2026/11/11)
 % License: LPPL 1.3c
-% Copyright (C) 2016-2021, 2025 Jean-Francois B.
+% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                             <jfbu on github>.
 %
 % This Work may be distributed and/or modified under the conditions
@@ -44,7 +44,7 @@
 % Version 1.3 or later is part of all distributions of
 % LaTeX version 2005/12/01 or later.
 %
-% The Author of this Work is: Jean-Francois B. `<jfbu on github>`
+% The Author of this Work is: Jean-François B. `<jfbu on github>`
 %
 % This Work consists of the main source file footnotehyper.dtx and the
 % derived files footnotehyper.sty, footnotehyper.ins, footnotehyper.tex,
@@ -56,12 +56,12 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1f 2025/11/15)
-    Author:  Jean-Francois B.
+    Source:  footnotehyper.dtx (1.1g 2026/11/11)
+    Author:  Jean-François B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2021, 2025 Jean-Francois B.
-                                 <jfbu on github>.
+    Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
+                                        <jfbu on github>.
 
 
 ABSTRACT
@@ -80,11 +80,11 @@ allows to insert verbatim material.
 Earlier releases of the present `footnotehyper` package added
 patches for `hyperref` compatibility and some bugfixes, addressing
 in particular the incompatibility with `color/xcolor`, and with
-`babel-frenchb`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `v0.99` all macros are defined
+`babel-french`, and also fixing the `footnote` environment with
+optional argument `[NUM]`. Since `0.99` all macros are defined
 internally and the `footnote` package is not loaded at all.
 
-The same user interface is kept. Since `v1.0` it is possible to
+The same user interface is kept. Since `1.0` it is possible to
 use `footnotehyper` also in absence of `hyperref` or when the latter is
 loaded with its `hyperfootnotes=false` option. The order of loading of
 `footnotehyper` and `hyperref` is inconsequential.
@@ -95,7 +95,7 @@ INSTALLATION
 The recommended way is to first extract the package (.sty)
 and driver (.tex) files from footnotehyper.dtx via
 
-    tex footnotehyper.dtx
+    etex footnotehyper.dtx
 
 and then produce the documentation via
 
@@ -150,7 +150,7 @@ LaTeX version 2005/12/01 or later.
 
 The Author of this Work is:
 
-- Jean-Francois B. `<jfbu on github>`
+- Jean-François B. `<jfbu on github>`
 
 This Work consists of the main source file footnotehyper.dtx
 and the derived files footnotehyper.sty, footnotehyper.tex,
@@ -220,7 +220,7 @@ footnotehyper.pdf, footnotehyper.dvi.
     \def\pkgpreamble{\defaultpreamble^^J\MetaPrefix^^J%
     \string\NeedsTeXFormat{LaTeX2e}^^J%
     \string\ProvidesPackage{\pkgname}\perCent^^J%
-    \space[\pkgdate\space\pkgversion\space\pkgdescription]}%
+    \space[\pkgdate\space v\pkgversion\space\pkgdescription]}%
     \generate{\nopreamble\nopostamble
     \file{README.md}{\from{\pkgname.dtx}{readme}}%
     \usepostamble\defaultpostamble
@@ -375,11 +375,11 @@ allows to insert verbatim material.
 Earlier releases of the present \fnh package added
 patches for `hyperref` compatibility and some bugfixes, addressing
 in particular the incompatibility with `color/xcolor`, and with
-`babel-frenchb`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `v0.99` all macros are defined
+`babel-french`, and also fixing the `footnote` environment with
+optional argument `[NUM]`. Since `0.99` all macros are defined
 internally and the `footnote` package is not loaded at all.
 
-The same user interface is kept. Since `v1.0` it is possible to
+The same user interface is kept. Since `1.0` it is possible to
 use \fnh also in absence of `hyperref` or when the latter is
 loaded with its `hyperfootnotes=false` option. The order of loading of
 \fnh and `hyperref` is inconsequential.
@@ -396,42 +396,42 @@ loaded with its `hyperfootnotes=false` option. The order of loading of
 \section{Changes}
 
 \begin{description}
-\item[v0.9c (2016/04/19)] First release: adapt original package to be
+\item[0.9c (2016/04/19)] First release: adapt original package to be
   |hyperref| and |color/xcolor| compatible.
 
-\item[v0.9e (2016/04/30)] Abort in absence of |hyperref|. Compatibility with
+\item[0.9e (2016/04/30)] Abort in absence of |hyperref|. Compatibility with
   |babel-french|.
 
-\item[v0.99 (2017/02/16)] Do not load package
+\item[0.99 (2017/02/16)] Do not load package
   |footnote.sty|\footnote{\url{http://ctan.org/pkg/footnote}} anymore. 
 
   From then on \fnh is
   incompatible with it at it uses the same user interface.
 
-\item[v1.0 (2017/03/07)] Be usable also in absence of |hyperref| or when the
+\item[1.0 (2017/03/07)] Be usable also in absence of |hyperref| or when the
   latter was passed |hyperfootnotes=false| option.
 
-\item[v1.1 (2018/01/23)] Fix bug which arose when |savenotes| environment was used
+\item[1.1 (2018/01/23)] Fix bug which arose when |savenotes| environment was used
   \emph{inside} a minipage: footnotes were disappearing!%
 %
 \footnote{Thanks to François Pantigny for reporting the bug. A later
   suggestion of the same is to let the package do nothing under Beamer class,
-  and this is what |v1.1a 2019/11/07| does.}
+  and this is what |1.1a 2019/11/07| does.}
 %
 See related remarks at end of \autoref{sec:notes}.
 
-\item[v1.1a (2019/11/07)] Abort under |beamer| (difficulty with \cs{@makefntext}
+\item[1.1a (2019/11/07)] Abort under |beamer| (difficulty with \cs{@makefntext}
   and suspicion |beamer| does not need \fnh).
 
-\item[v1.1b (2021/01/26)] Fix incompatibility with the combination |memoir| +
+\item[1.1b (2021/01/26)] Fix incompatibility with the combination |memoir| +
   |babel-french|.
 
-\item[v1.1c (2021/01/29)] Fix legacy bug of original package interfering with
+\item[1.1c (2021/01/29)] Fix legacy bug of original package interfering with
   \LaTeX2e mechanism to suppress indentation after mid-paragraph lists (when
   |savenotes| environment directly wraps the enclosed list environment,
   mid-paragraph).
 
-\item[v1.1d (2021/02/04)] Fix regression at |v1.1b| which caused a build crash
+\item[1.1d (2021/02/04)] Fix regression at |1.1b| which caused a build crash
   whenever \fnh decided to raise a warning relative to |\@makefntext|.%
 %
 \footnote{Thanks to Leon Kiefer for reporting the bug.}
@@ -447,12 +447,14 @@ See related remarks at end of \autoref{sec:notes}.
 
   Add \verb=\iffootnotehyperparse= and \verb=\iffootnotehyperwarn= booleans.
 
-\item[v1.1e (2021/08/13)] Use \LaTeX\ environment hooks if available 
+\item[1.1e (2021/08/13)] Use \LaTeX\ environment hooks if available 
   for |\makesavenoteenv|, in replacement of the original |footnote| package
   code.
-\item[v1.1f (2025/11/15)] Fix compatibility with \ctanpackage{babel-french},
+\item[1.1f (2025/11/15)] Fix compatibility with \ctanpackage{babel-french},
   which was broken since the latter |v3.7e 2025-08-15| split of its Lua\LaTeX{}
   code from its \hologo{pdfLaTeX} and \hologo{XeLaTeX} code.
+\item[1.1g (2026/11/11)] Fix compatibility with \ctanpackage{babel-french}
+  |v4.1b 2026-11-01| for compilation with \hologo{LuaLaTeX}.
 \end{description}
 \section{Usage}
 
@@ -538,7 +540,7 @@ macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark {\@makefnmark }
   allowing verbatim material, as they require fetching the footnote
   contents.%
   \footnote{%\phantomsection\label{fn:beamer}% test, ça marche!
-  Since |v1.1a|, \fnh simply aborts under |beamer| class.}
+  Since |1.1a|, \fnh simply aborts under |beamer| class.}
 
 In case of such a problematic |\@makefntext| \fnh raises a warning, to explain
 that footnotes typeset using the environment forms will use a fall-back layout
@@ -666,7 +668,7 @@ C
 \end{verbatim}\end{minipage}\par\medskip
 
   If you try it out you will see an extra blank line in PDF output above the
-  second C. Starting with |v0.99| the |\end{savenotes}| emits an
+  second C. Starting with |0.99| the |\end{savenotes}| emits an
   \cs{ignorespacesafterend} which avoids this generic \TeX/\LaTeX\
   problem. For good measure there is now an \cs{ignorespaces} in
   |\begin{savenotes}|.
@@ -716,7 +718,7 @@ And a final footnote, done with |\begin{footnote}[57]|%
 %                                % framed inserted vertical spacing
 %  \begin{framed}
 %    \noindent
-    \fnh works since |v1.0| also in absence of |hyperref| or when the
+    \fnh works since |1.0| also in absence of |hyperref| or when the
     latter was passed |hyperfootnotes=false| option.
 %  \end{framed}
 \end{footnote}.
@@ -805,7 +807,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 \fi
 \string\NeedsTeXFormat\string{LaTeX2e\string}\par
 \string\ProvidesPackage\string{\pkgname\string}\@percentchar\par
-\noindent\space [\pkgdate\space\pkgversion\space\pkgdescription]\par
+\noindent\space [\pkgdate\space v\pkgversion\space\pkgdescription]\par
 \nointerlineskip
 \global\@inlabelfalse
 \endtrivlist
@@ -836,7 +838,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 \ProcessOptions\relax
 %    \end{macrocode}
 % \end{macro}
-% |v1.1a| lets the package abort under Beamer class and warn user.
+% |1.1a| lets the package abort under Beamer class and warn user.
 %    \begin{macrocode}
 \@ifclassloaded{beamer}
     {\PackageWarningNoLine{footnotehyper}{This package is
@@ -844,8 +846,8 @@ is still there, as I checked now. This has nothing to do with \fnh.
      \endinput}
     {}%
 %    \end{macrocode}
-% Versions up to |v0.9f| loaded |footnote.sty|, with lots of patching
-% afterwards. Starting with |v0.99|, \fnh does everything by itself with |FNH@|
+% Versions up to |0.9f| loaded |footnote.sty|, with lots of patching
+% afterwards. Starting with |0.99|, \fnh does everything by itself with |FNH@|
 % prefix. Brief overview of some of the fixed issues:
 % \begin{itemize}[nosep]
 % \item there was incompatibility with |hyperref|,
@@ -860,7 +862,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 % optional argument |[N]|.
 % \end{itemize}
 %
-% \noindent Starting with |v1.0|, \fnh may be used also in absence
+% \noindent Starting with |1.0|, \fnh may be used also in absence
 % of |hyperref|.
 %    \begin{macrocode}
 \newbox\FNH@notes
@@ -972,8 +974,8 @@ is still there, as I checked now. This has nothing to do with \fnh.
 % \begin{macro}{\FNH@savenotes}
 % Same as original apart from using |hyperref|-aware \cs{FNH@hyper@fntext},
 % and taking into account |hyperref|'s custom \cs{@xfootnotenext}. This was
-% missed by |v0.9f| hence |\footnotetext[N]{..}| did not work
-% inside |savenotes| environment. Fixed for |v0.99|.
+% missed by |0.9f| hence |\footnotetext[N]{..}| did not work
+% inside |savenotes| environment. Fixed for |0.99|.
 % 
 % Maybe I should change the way \cs{@minipagerestore} is handled.
 %    \begin{macrocode}
@@ -1004,11 +1006,11 @@ is still there, as I checked now. This has nothing to do with \fnh.
 % \cs{H@@footnotetext} |hyperref|'s preserved original
 % meaning of \cs{@footnotetext} not creating a link target.
 %
-% |v1.1| fixes the bug about disappearing footnotes if |savenotes| environment
+% |1.1| fixes the bug about disappearing footnotes if |savenotes| environment
 % is used inside a minipage. I had never really considered such usage, hence
 % missed realizing there was a bug.
 %
-% |v1.1c 2021/01/29| fixes a legacy bug from |footnote| package: if used
+% |1.1c 2021/01/29| fixes a legacy bug from |footnote| package: if used
 % to enclose a list environment inside a paragraph, it broke the
 % mechanism which suppresses indentation following the list.
 %
@@ -1064,7 +1066,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %
 %   Furthermore, independently of presence of the |\color/xcolor| issue, the
 %   |footnote.sty|'s |footnote| environment raised an error if used with an
-%   optional argument. |v0.9f| addresses this issue.
+%   optional argument. |0.9f| addresses this issue.
 %
 %   The |footnotetext| environment adds a complication, in case of optional
 %   argument we should not try to set up a link due to the fact that |hyperref|
@@ -1075,8 +1077,8 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %   To handle all of this we code things completely differently from
 %   |footnote.sty|.
 % 
-%   The |v0.9f| |\begin{footnotetext}[N]| inside |savenotes| tried to create
-%   an hyperref target. Fixed for |v0.99|.
+%   The |0.9f| |\begin{footnotetext}[N]| inside |savenotes| tried to create
+%   an hyperref target. Fixed for |0.99|.
 %
 %   Note: the |footnote.sty| code did a |\leavevmode\unskip| at entrance of
 %   |footnote| environment, which \fnh has not kept.
@@ -1179,14 +1181,14 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %   the method here will alert the user if the argument
 %   of |\@makefntext| is not visible at top level in its meaning or is used
 %   there multiple times. We also insert here some code to handle especially
-%   the case of |babel-frenchb|.
+%   the case of |babel-french|.
 %
-%   Refactoring at |v1.1d|. This will make \fnh compatible with |cleveref| for
+%   Refactoring at |1.1d|. This will make \fnh compatible with |cleveref| for
 %   example, if nothing else interferes. Not all combinations of classes and
 %   packages can be handled and we can not hardcode a pre-analysis for all
 %   possible cases. Of course, one can not expect \fnh to be compatible with
 %   other footnote dedicated packages, but at best only with slight
-%   modifications of \LaTeX's defaults. At |v1.1d| the |babel-french| context
+%   modifications of \LaTeX's defaults. At |1.1d| the |babel-french| context
 %   is handled especially (to support it better with KOMAscript classes and
 %   simplify handling the |memoir| situation); there was no real other way
 %   than hardcode it more or less, but it can possibly break in presence of
@@ -1203,10 +1205,10 @@ is still there, as I checked now. This has nothing to do with \fnh.
 \AtBeginDocument{\iffootnotehyperparse\expandafter\FNH@check\fi}%
 %    \end{macrocode}
 %
-%   As |\ifFBFrenchFootnotes| is not a \TeX\ boolean if |babel-frenchb| isn't
+%   As |\ifFBFrenchFootnotes| is not a \TeX\ boolean if |babel-french| isn't
 %   loaded, we have to work around this for |\if..\fi| pairs.
 %
-%   |v1.1d| fixes a |v1.1b| bug: any situation in |\FNH@check@a| causing the
+%   |1.1d| fixes a |1.1b| bug: any situation in |\FNH@check@a| causing the
 %   |\FNH@bad@makefntext@alert| branch to be chosen crashed the build due
 %   precisely to this problem with |\ifFBFrenchFootnotes| status. I had taken
 %   precautions for the |\else| branch but not for the ``warning'' branch.
@@ -1223,7 +1225,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %   As long as nothing else interferes |babel-french| should be ok with
 %   standard classes, KOMA and memoir.
 %
-%   |v1.1f| fixes compatibility with \ctanpackage{babel-french} under
+%   |1.1f| fixes compatibility with \ctanpackage{babel-french} under
 %   \hologo{pdfLaTeX} and \hologo{XeLaTeX}, broken since its |v3.7e| release.
 %    \begin{macrocode}
 \def\FNH@safeif#1{%
@@ -1262,10 +1264,21 @@ is still there, as I checked now. This has nothing to do with \fnh.
           {\@makefntextORI{}}%
        }%
    }%
+%    \end{macrocode}
+% babel-french 4.1b 2026-11-01 does not have |\FBeveryline@quote|
+% with \hologo{LuaLaTeX} but |\FB@everyline|.
+%    \begin{macrocode}
+   \ifdefined\FB@everyline %  frenchb>=4.1b 2026-11-01 (lualatex)
+   \def\FNH@postfntext{%
+     \let\FBeverypar@quote\FBeverypar@save
+     \localleftbox{\FB@everyline}%
+   }%
+   \else
    \def\FNH@postfntext{%
      \let\FBeverypar@quote\FBeverypar@save
      \localleftbox{\FBeveryline@quote}%
    }%
+   \fi
    \iffootnotehyperwarn
     \PackageInfo{footnotehyper}%
       {babel-french compatibility patch activated.\FNH@msgbk
@@ -1279,7 +1292,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
 }%
 %    \end{macrocode}
 % \end{macro}
-%   ``Daring analysis'' is un understatement. At |v1.1b| we added a dangerous
+%   ``Daring analysis'' is un understatement. At |1.1b| we added a dangerous
 %   twist to fix a memoir + frenchb triggered issue: if the
 %   |\@makefntext|, as in memoir + frenchb situation, uses |\def| syntax to
 %   define a macro with parameter we had a problem with the |#| token not
@@ -1287,11 +1300,11 @@ is still there, as I checked now. This has nothing to do with \fnh.
 %   |\FNH@check@a|. As expedient work-around we fixed this by adding a
 %   |\scantokens| wrapper.
 %
-%   At |v1.1d| I refactored the |babel-french| situation, moving it to an
-%   entirely dedicated \cs{FNH@frenchb@}, and dropped the |v1.1b| usage of
+%   At |1.1d| I refactored the |babel-french| situation, moving it to an
+%   entirely dedicated \cs{FNH@frenchb@}, and dropped the |1.1b| usage of
 %   |\scantokens|.
 %
-%   |v1.1d| adds \cs{FNH@checkagain@} which will identify circumstances likely
+%   |1.1d| adds \cs{FNH@checkagain@} which will identify circumstances likely
 %   to be safe for the approach via |\def\FNH@prefntext{\@makefntext{}}|. For
 %   example this is what will happen with |cleveref| (if not modified by other
 %   packages).

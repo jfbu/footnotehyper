@@ -1,11 +1,11 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (v1.1f 2025/11/15)
-    Author:  Jean-Francois B.
+    Source:  footnotehyper.dtx (1.1g 2026/11/11)
+    Author:  Jean-François B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
-    Copyright (C) 2016-2021, 2025 Jean-Francois B.
-                                 <jfbu on github>.
+    Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
+                                        <jfbu on github>.
 
 ABSTRACT
 ========
@@ -23,11 +23,11 @@ allows to insert verbatim material.
 Earlier releases of the present `footnotehyper` package added
 patches for `hyperref` compatibility and some bugfixes, addressing
 in particular the incompatibility with `color/xcolor`, and with
-`babel-frenchb`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `v0.99` all macros are defined
+`babel-french`, and also fixing the `footnote` environment with
+optional argument `[NUM]`. Since `0.99` all macros are defined
 internally and the `footnote` package is not loaded at all.
 
-The same user interface is kept. Since `v1.0` it is possible to
+The same user interface is kept. Since `1.0` it is possible to
 use `footnotehyper` also in absence of `hyperref` or when the latter is
 loaded with its `hyperfootnotes=false` option. The order of loading of
 `footnotehyper` and `hyperref` is inconsequential.
@@ -38,7 +38,7 @@ INSTALLATION
 The recommended way is to first extract the package (.sty)
 and driver (.tex) files from footnotehyper.dtx via
 
-    tex footnotehyper.dtx
+    etex footnotehyper.dtx
 
 and then produce the documentation via
 
@@ -92,7 +92,7 @@ LaTeX version 2005/12/01 or later.
 
 The Author of this Work is:
 
-- Jean-Francois B. `<jfbu on github>`
+- Jean-François B. `<jfbu on github>`
 
 This Work consists of the main source file footnotehyper.dtx
 and the derived files footnotehyper.sty, footnotehyper.tex,
