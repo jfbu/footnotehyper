@@ -21,12 +21,12 @@
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
 %%
-\NeedsTeXFormat{LaTeX2e}
+\NeedsTeXFormat{LaTeX2e}[2026/11/01]
 \ProvidesPackage{footnotehyper}%
- [2026/11/11 v1.1g hyperref aware footnote.sty (JFB)]
+ [2026/11/12 v2.0 hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 1.1g (2026/11/11)
+%% Version: 2.0 (2026/11/12)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                                     <jfbu on github>.
@@ -70,10 +70,16 @@
 }%
 \def\FNH@hyper@fntext{\FNH@fntext\FNH@hyper@fntext@i}%
 \def\FNH@nohyp@fntext{\FNH@fntext\FNH@nohyp@fntext@i}%
-\def\FNH@fntext #1{\ifx\ifmeasuring@\@undefined
-    \expandafter\@secondoftwo\else\expandafter\@firstofone\fi
-    {\ifmeasuring@\expandafter\@gobbletwo\fi}#1%
+\def\FNH@fntext{\FNH@measuring@gobblethree\FNH@notfirstchoice@gobbletwo}%
+\def\FNH@measuring@gobblethree{\ifx\ifmeasuring@\@undefined
+    \expandafter\@gobble\else\expandafter\@firstofone\fi
+    {\ifmeasuring@\expandafter\FNH@gobblethree\fi}%
 }%
+\def\FNH@notfirstchoice@gobbletwo{\ifx\iffirstchoice@\@undefined
+    \expandafter\@gobble\else\expandafter\@firstofone\fi
+    {\iffirstchoice@\else\expandafter\@gobbletwo\fi}%
+}%
+\long\def\FNH@gobblethree#1#2#3{}%
 \long\def\FNH@hyper@fntext@i#1{%
   \global\setbox\FNH@notes\vbox
   {\unvbox\FNH@notes
@@ -152,6 +158,11 @@
   \endgroup\the\FNH@toks
   \ifFNH@savingnotes\else
    \ifvoid\FNH@notes\else
+    \FNH@delivernotes
+   \fi
+  \fi
+}%
+\def\FNH@delivernotes {%
     \begingroup
      \let\@makefntext\@empty
      \let\@finalstrut\@gobble
@@ -162,8 +173,6 @@
         \expandafter\FNH@H@@footnotetext
      \fi{\unvbox\FNH@notes}%
     \endgroup
-   \fi
-  \fi
 }%
 \def\FNH@footnote@envname    {footnote}%
 \def\FNH@footnotetext@envname{footnotetext}%
@@ -383,6 +392,114 @@
     }%
   }%
   {}%
+\@ifundefined{fnote_footnotetext:n}{\endinput}{}%
+\let\FNH@check\@empty
+\def\FNH@prefntext{\@makefntext{}}%
+\long\def\FNH@DM@save#1{%
+  \global\setbox\FNH@notes\vbox{\unvbox\FNH@notes\columnwidth\FNH@width#1}%
+}%
+\NewSocketPlug{fntext/process}{footnotehyper}%
+   {\FNH@measuring@gobblethree\FNH@DM@dispatch\FNH@DM@save{#1}}%
+\let\FNH@DM@dispatch\FNH@notfirstchoice@gobbletwo
+\AtBeginDocument{%
+  \@nameuse{tag_if_active:T}{\let\FNH@DM@dispatch\FNH@DM@tagged}%
+}%
+\def\FNH@DM@insertsetup{%
+  \reset@font\footnotesize
+  \interlinepenalty\interfootnotelinepenalty
+  \splittopskip\footnotesep
+  \splitmaxdepth\dp\strutbox
+  \floatingpenalty\@MM
+}%
+\newbox\FNH@DM@undo
+\let\FNH@DM@provmark\@undefined
+\long\def\FNH@DM@tagged#1#2{%
+  \FNH@DM@iffirstchoice
+    {\@nameuse{tag_if_active:TF}%
+       {\FNH@DM@forget}%
+       {\global\setbox\FNH@DM@undo\copy\FNH@notes
+        \global\let\FNH@DM@provmark\@thefnmark}%
+     #1{#2}}%
+    {\@nameuse{tag_if_active:TF}%
+       {\ifx\FNH@DM@provmark\@thefnmark
+          \global\setbox\FNH@notes\box\FNH@DM@undo
+        \fi
+        \FNH@DM@forget
+        #1{#2}}%
+       {}}%
+}%
+\def\FNH@DM@iffirstchoice{%
+  \ifx\iffirstchoice@\@undefined
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\FNH@DM@iffirstchoice@i
+  \fi
+}%
+\def\FNH@DM@iffirstchoice@i{%
+  \iffirstchoice@\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
+}%
+\def\FNH@DM@forget{%
+  \global\let\FNH@DM@provmark\@undefined
+  \global\setbox\FNH@DM@undo\box\voidb@x
+}%
+\def\FNH@savenotes{%
+  \begingroup
+  \ifFNH@savingnotes\else
+    \FNH@savingnotestrue
+    \FNH@DM@forget
+    \AssignSocketPlug{fntext/process}{footnotehyper}%
+    \FNH@width\columnwidth
+    \let\FNH@colwidth\FNH@width
+    \global\setbox\FNH@notes\box\voidb@x
+    \let\FNH@thempfn\thempfn
+    \let\FNH@mpfn\@mpfn
+    \ifx\@minipagerestore\relax\let\@minipagerestore\@empty\fi
+    \expandafter\def\expandafter\@minipagerestore\expandafter{%
+      \@minipagerestore
+      \let\thempfn\FNH@thempfn
+      \let\@mpfn\FNH@mpfn
+      \AssignSocketPlug{fntext/process}{footnotehyper}%
+    }%
+  \fi
+}%
+\def\FNH@delivernotes{%
+  \UseSocket{fntext/process}{\FNH@DM@insertsetup\unvbox\FNH@notes}%
+}%
+\def\FNH@startfntext{%
+  \UseHook{fntext/before}%
+  \UseTaggingSocket{fntext/begin}%
+  \setbox\z@\vbox\bgroup
+    \UseHook{fntext}%
+    \reset@font\footnotesize
+    \interlinepenalty\interfootnotelinepenalty
+    \splittopskip\footnotesep
+    \splitmaxdepth\dp\strutbox
+    \floatingpenalty\@MM
+    \hsize\FNH@colwidth
+    \@parboxrestore
+    \UseTaggingSocket{para/restore}%
+    \parindent 1em
+    \def\@currentcounter{footnote}%
+    \protected@edef\@currentlabel{\p@footnote\@thefnmark}%
+    \UseHook{fntext/para}%
+    \color@begingroup
+      \AssignTaggingSocketPlug{fntext/text}{transparent}%
+      \FNH@prefntext
+      \UseSocket{fntext/begin}%
+      \UseHook{fntext/begin}%
+      \ignorespaces
+}%
+\def\FNH@endfntext{%
+      \UseHook{fntext/end}%
+      \UseSocket{fntext/end}%
+      \FNH@postfntext
+      \par
+    \color@endgroup
+  \egroup
+  \UseSocket{fntext/process}{\FNH@DM@insertsetup\unvbox\z@}%
+  \UseTaggingSocket{fntext/end}%
+  \UseHook{fntext/after}%
+}%
 \endinput
 %%
 %% End of file `footnotehyper.sty'.

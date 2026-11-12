@@ -1,11 +1,11 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" ; time-stamp-active: nil -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <11-11-2026 at 18:35:58 CET>}
+\def\dtxtimestamp {Time-stamp: <12-11-2026 at 14:30:41 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 1.1g (2026/11/11)
+%% Version: 2.0 (2026/11/12)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                                     <jfbu on github>.
@@ -13,9 +13,9 @@
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2026/11/11}
-\def\docdate        {2026/11/11}
-\def\pkgversion     {1.1g}
+\def\pkgdate        {2026/11/12}
+\def\docdate        {2026/11/12}
+\def\pkgversion     {2.0}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -26,7 +26,7 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 1.1g (2026/11/11)
+% Version: 2.0 (2026/11/12)
 % License: LPPL 1.3c
 % Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                             <jfbu on github>.
@@ -56,7 +56,7 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (1.1g 2026/11/11)
+    Source:  footnotehyper.dtx (2.0 2026/11/12)
     Author:  Jean-François B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
@@ -67,27 +67,30 @@
 ABSTRACT
 ========
 
-The `footnote` package by Mark Wooding (`1997/01/28` `1.13`)
-allows to gather footnotes (`\begin{savenotes}`) and later insert
-them (after `\end{savenotes}`) at the bottom of the page, even
-if the intervening material consists of tabulars, minipages or
-framed contents for example. One can also use the
-`\savenotes/\spewnotes` syntax.
+The `footnotehyper` package gathers footnotes (`\begin{savenotes}`) and
+delivers them later (at `\end{savenotes}`), even if the intervening
+material consists, for example, of tabulars, minipages or framed
+contents. It also provides a `footnote` environment whose contents may
+include verbatim material.
 
-Also, `footnote.sty` provides a `footnote` environment which
-allows to insert verbatim material.
+It is a successor to the long obsolete `footnote` package by Mark Wooding
+(`1.13 1997/01/28`). Originally (`0.9c 2016/04/19`) `footnotehyper`
+patched that package for `hyperref` compatibility and fixed some of its
+bugs, among them its incompatibility with `color/xcolor` and with
+`babel-french`, and the failure of its `footnote` environment when used
+with an optional argument `[NUM]`.
 
-Earlier releases of the present `footnotehyper` package added
-patches for `hyperref` compatibility and some bugfixes, addressing
-in particular the incompatibility with `color/xcolor`, and with
-`babel-french`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `0.99` all macros are defined
-internally and the `footnote` package is not loaded at all.
+Since `0.99 2017/02/16` all macros are defined internally and the
+`footnote` package is not loaded at all. Its user interface is kept,
+hence the two packages cannot be used together.
 
-The same user interface is kept. Since `1.0` it is possible to
-use `footnotehyper` also in absence of `hyperref` or when the latter is
-loaded with its `hyperfootnotes=false` option. The order of loading of
-`footnotehyper` and `hyperref` is inconsequential.
+Since `1.0 2017/03/07` `footnotehyper` can also be used in the absence
+of `hyperref`, or when the latter is loaded with its
+`hyperfootnotes=false` option. The order in which `footnotehyper` and
+`hyperref` are loaded is inconsequential.
+
+Since `2.0 2026/11/12` tagging is supported (tested with pdfLaTeX and
+LuaLaTeX). The LaTeX release 2026-11-01 or later is required.
 
 INSTALLATION
 ============
@@ -218,7 +221,7 @@ footnotehyper.pdf, footnotehyper.dvi.
     \input docstrip.tex
     \askforoverwritefalse
     \def\pkgpreamble{\defaultpreamble^^J\MetaPrefix^^J%
-    \string\NeedsTeXFormat{LaTeX2e}^^J%
+    \string\NeedsTeXFormat{LaTeX2e}[2026/11/01]^^J%
     \string\ProvidesPackage{\pkgname}\perCent^^J%
     \space[\pkgdate\space v\pkgversion\space\pkgdescription]}%
     \generate{\nopreamble\nopostamble
@@ -298,7 +301,6 @@ footnotehyper.pdf, footnotehyper.dvi.
 \def\ctanpackage#1{\href{https://ctan.org/pkg/#1}{#1}}
 
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage {babel}
 
 \usepackage[hscale=0.72,vscale=0.7]{geometry}
@@ -362,27 +364,31 @@ pdfpagemode=UseNone}
 
 \MakeShortVerb{\`}%
 \begin{abstract}
-The `footnote` package by \textsc{Mark~Wooding} (`1997/01/28` `1.13`)
-allows to gather footnotes (`\begin{savenotes}`) and later insert
-them (after `\end{savenotes}`) at the bottom of the page, even
-if the intervening material consists of tabulars, minipages or
-framed contents for example. One can also use the
-`\savenotes/\spewnotes` syntax.
+The \fnh package gathers footnotes (`\begin{savenotes}`) and
+delivers them later (at `\end{savenotes}`), even if the intervening
+material consists, for example, of tabulars, minipages or framed
+contents. It also provides a `footnote` environment whose contents may
+include verbatim material.
 
-Also, `footnote.sty` provides a `footnote` environment which
-allows to insert verbatim material.
+It is a successor to the long obsolete `footnote` package by
+\textsc{Mark~Wooding} (`1.13 1997/01/28`). Originally (`0.9c 2016/04/19`)
+\fnh patched that package for `hyperref` compatibility and fixed some of
+its bugs, among them its incompatibility with `color/xcolor` and with
+`babel-french`, and the failure of its `footnote` environment when used
+with an optional argument `[NUM]`.
 
-Earlier releases of the present \fnh package added
-patches for `hyperref` compatibility and some bugfixes, addressing
-in particular the incompatibility with `color/xcolor`, and with
-`babel-french`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `0.99` all macros are defined
-internally and the `footnote` package is not loaded at all.
+Since `0.99 2017/02/16` all macros are defined internally and the
+`footnote` package is not loaded at all. Its user interface is kept,
+hence the two packages cannot be used together.
 
-The same user interface is kept. Since `1.0` it is possible to
-use \fnh also in absence of `hyperref` or when the latter is
-loaded with its `hyperfootnotes=false` option. The order of loading of
-\fnh and `hyperref` is inconsequential.
+Since `1.0 2017/03/07` \fnh can also be used in the absence of
+`hyperref`, or when the latter is loaded with its `hyperfootnotes=false`
+option. The order in which \fnh and `hyperref` are loaded is
+inconsequential.
+
+Since `2.0 2026/11/12` tagging is supported (tested with
+\hologo{pdfLaTeX} and \hologo{LuaLaTeX}). The \LaTeX\ release `2026-11-01`
+or later is required.
 \end{abstract}
 \DeleteShortVerb{\`}
 
@@ -406,17 +412,17 @@ loaded with its `hyperfootnotes=false` option. The order of loading of
   |footnote.sty|\footnote{\url{http://ctan.org/pkg/footnote}} anymore. 
 
   From then on \fnh is
-  incompatible with it at it uses the same user interface.
+  incompatible with it as it uses the same user interface.
 
 \item[1.0 (2017/03/07)] Be usable also in absence of |hyperref| or when the
   latter was passed |hyperfootnotes=false| option.
 
-\item[1.1 (2018/01/23)] Fix bug which arose when |savenotes| environment was used
-  \emph{inside} a minipage: footnotes were disappearing!%
+\item[1.1 (2018/01/23)] Fix bug which arose when the |savenotes| environment
+  was used \emph{inside} a minipage: footnotes were disappearing!%
 %
 \footnote{Thanks to François Pantigny for reporting the bug. A later
-  suggestion of the same is to let the package do nothing under Beamer class,
-  and this is what |1.1a 2019/11/07| does.}
+  suggestion by the same was to let the package do nothing under the Beamer
+  class, and this is what |1.1a 2019/11/07| does.}
 %
 See related remarks at end of \autoref{sec:notes}.
 
@@ -442,8 +448,8 @@ See related remarks at end of \autoref{sec:notes}.
   context has been tested with |babel-french|: standard classes, |KOMA|-script,
   |memoir|. Extra packages may make the \fnh environments cause breakage.}
 %
-  Better support
-  contexts such as presence of package |cleveref|.%
+  Better support of
+  contexts such as the presence of package |cleveref|.%
 
   Add \verb=\iffootnotehyperparse= and \verb=\iffootnotehyperwarn= booleans.
 
@@ -455,6 +461,15 @@ See related remarks at end of \autoref{sec:notes}.
   code from its \hologo{pdfLaTeX} and \hologo{XeLaTeX} code.
 \item[1.1g (2026/11/11)] Fix compatibility with \ctanpackage{babel-french}
   |v4.1b 2026-11-01| for compilation with \hologo{LuaLaTeX}.
+\item[2.0 (2026/11/12)] Compatibility with documents using
+  |\DocumentMetadata|, tagged or not, for the \LaTeX\ release |2026-11-01|:
+  see \autoref{sec:tagging}. Documents not using |\DocumentMetadata| are
+  handled as by |1.1g|, apart from a bug fix: a footnote in the argument of
+  the |\text| macro of |amsmath|, in the scope of |savenotes|, was delivered
+  four times. The package now requests \LaTeX\ |2026/11/01|.%
+%
+\footnote{Thanks to Fable 5.2 (Anthropic) for doing all the work. Complaints
+  have to go to it: \url{mailto:fable@anthropic.com}, subject line "\fnh\unskip".}
 \end{description}
 \section{Usage}
 
@@ -462,8 +477,8 @@ The package provides:
 \begin{savenotes}% juste pour vérifier le fix à 1.1c
   \begin{itemize}
   \item a |savenotes| environment which re-routes footnotes and delivers them
-    at the end (there is also the |\savenotes/\spewnotes| syntax; which does
-    create a group like the environment),
+    at the end (there is also the |\savenotes/\spewnotes| syntax, which
+    creates a group as the environment does),
   \item |footnote| and |footnotetext| environments to allow footnotes with
     verbatim material,
   \item a macro to patch environments to let them apply the |savenotes| mechanism
@@ -480,10 +495,12 @@ problems which may arise.
   environments}
 
   What is discussed here only affects the \emph{environments} |footnote| and
-  |footnotetext| not the macros \cs{footnote} and \cs{footnotetext}.
+  |footnotetext|, not the macros \cs{footnote} and \cs{footnotetext}. And it
+  only applies to documents not using |\DocumentMetadata|: for the others see
+  \autoref{sec:tagging}.
 
-  \fnh inherits from |footnote| original package the aim to
-  convert |\@makefntext| into two parts, the first one to be inserted
+  \fnh inherits from the original |footnote| package the aim of
+  converting |\@makefntext| into two parts, the first one to be inserted
   at the start of a footnote in environment form, the second one (usually
   empty) at its end.%
 %
@@ -498,7 +515,7 @@ problems which may arise.
   with the |article| class.
 
   Known bug (may be promoted to feature at some point): the analysis is done
-  only once at begin document, whereas the |article.cls|'s redefines
+  only once at begin document, whereas |article.cls| redefines
   |\@makefntext| during execution of |\maketitle|. However, it does not look
   really urgent to support at all costs usage of the environment |footnote| in
   the |\author| etc... data which contributes to the |\maketitle| expansion.%
@@ -531,7 +548,7 @@ problems which may arise.
     \end{footnote}
 
   Some seemingly innocent redefinitions such as the one
-  of |beamer| which was last time I checked (that was in 2019):
+  of |beamer| which was, last time I checked (that was in 2019):
 \begin{verbatim}
 macro:#1->\def \insertfootnotetext {#1}\def \insertfootnotemark {\@makefnmark }
 \usebeamertemplate ***{footnote}
@@ -563,18 +580,49 @@ not impacted by this.
 It should be recalled that in case of |\footnotemark[N]| and
 |\footnotetext[N]{...}| mark-up |hyperref| creates no hyperlink. This is not
 changed by \fnh and applies also to the |\begin{footnotetext}[N]| case.
+(In documents using |\DocumentMetadata| the links are created by the \LaTeX\
+kernel, and they are created in all these cases.)
 Without optional argument the link is created, and the link is created also
 for |\footnote[N]| or |\begin{footnote}[N]|.
 
-This package does not handle especially floating environments, except that one
-can always surround them in the source in a |savenotes| environment and one
+This package does not handle floating environments specially, except that one
+can always surround them in the source with a |savenotes| environment and one
 knows that the footnotes will be delivered at the |\end{savenotes}|\dots which
 may well be one page earlier than the actual location of the floating material
 in the produced document !
 
-Environments typesetting multiple times their contents are the most hostile to
-footnotes. Currently, \fnh only handles especially the |amsmath|
-environments (as in |footnote.sty|.)
+Environments typesetting their contents multiple times are the most hostile to
+footnotes. Currently, \fnh handles specially only the |amsmath|
+environments (as |footnote.sty| does) and, since |2.0|, the |\text| macro
+of |amsmath|: see \autoref{sec:notes}.
+
+\subsection{Documents using \cs{DocumentMetadata}}\label{sec:tagging}
+
+Since |2.0| the package is usable in documents using |\DocumentMetadata|,
+with tagging activated or not, with \hologo{pdfLaTeX} or \hologo{LuaLaTeX}
+and \LaTeX\ |2026-11-01| or later. In such documents:
+\begin{itemize}
+\item footnotes inside the |savenotes| environment are typeset, tagged and
+  hyperlinked by the \LaTeX\ kernel, only their delivery is delayed,
+\item the |footnote| and |footnotetext| environments execute the same hooks
+  and sockets as the kernel footnotes, except for the |fntext/make| socket,
+\item \cs{@makefntext} is not analysed and the booleans
+  \cs{iffootnotehyperparse} and \cs{iffootnotehyperwarn} are without
+  effect; \cs{FNH@prefntext} executes |\@makefntext{}| and
+  \cs{FNH@postfntext} is empty,
+\item the link target is created also in the |\begin{footnotetext}[N]| case,
+  as the kernel does for |\footnotetext[N]{...}|,
+\item in a tagged document, a footnote typeset while tagging is suspended
+  (for example inside a Ti\emph{k}Z node, or after |\SuspendTagging|) is
+  saved by |savenotes| and delivered, but it is not tagged; this is also what
+  happens to such a footnote without \fnh, when it is not lost,
+\item only one footnote is supported in the argument of the |\text| macro
+  of |amsmath|,
+\item there is no specific code for |babel-french|, and none is needed:
+  in such documents |babel-french| (tested with |v4.1c 2026-11-08|)
+  customizes footnotes via the kernel hooks and sockets, which the
+  |footnote| and |footnotetext| environments execute.
+\end{itemize}
 
 \subsection{The \cs{makesavenoteenv} macro}
 
@@ -642,7 +690,7 @@ inside a |savenotes| environment.%
   environment not doing \cs{ignorespacesafterend}, be careful to add
   a \% either immediately after the |\end{minipage}| (or a |\relax|
   or a |\par|) or after the surrounding environment |\end{foo}| or
-  use |\end{minipage}\end{foo}| else the output may have an extra
+  use |\end{minipage}\end{foo}|, or else the output may have an extra
   blank line if the source has a blank line after the |foo| environment.
   Here is a typical example, with a |tabular| rather:
   \makeatletter
@@ -695,9 +743,8 @@ And a footnote with some verbatim material%
   The footnote environment allows verbatim contents: \verb|&$^%\[}$|
 \end{footnote}.
 \end{verbatim}
-Now some use of |\footnotemark| followed by a |footnotetext| (here is the
-mark: \footnotemark)
-environment.% attention! sinon espace extra
+Now some use of |\footnotemark| followed by a |footnotetext| environment
+(here is the mark: \footnotemark).% attention! sinon espace extra
 %
 \begin{footnotetext}
   Notice that the hyperlinking works for |\footnotemark| associated to the
@@ -718,8 +765,8 @@ And a final footnote, done with |\begin{footnote}[57]|%
 %                                % framed inserted vertical spacing
 %  \begin{framed}
 %    \noindent
-    \fnh works since |1.0| also in absence of |hyperref| or when the
-    latter was passed |hyperfootnotes=false| option.
+    \fnh works since |1.0| also in the absence of |hyperref| or when the
+    latter was passed the |hyperfootnotes=false| option.
 %  \end{framed}
 \end{footnote}.
 There is no problem with the hyperlink, then.%
@@ -730,7 +777,7 @@ first reading).}
 
 \section{Notes}\label{sec:notes}
 
-A few items worth of mention:
+A few items worth mentioning:
 \begin{itemize}[nosep]
 \item the |footnote| package patches the \LaTeX\ kernel |\parbox|.
   \fnh doesn't (but the code can be found commented-out at the
@@ -761,12 +808,15 @@ A few items worth of mention:
    \fi\fi
   }%
 \end{verbatim}
-On |2021/01/29| the interference (lost of some |babel-french| customization)
+On |2021/01/29| the interference (loss of some |babel-french| customization)
 is still there, as I checked now. This has nothing to do with \fnh.
 % \endgroup
-\item some environments typeset multiple times their contents,
+\item some environments typeset their contents multiple times,
   which causes issues; \fnh takes provisions only to handle the
-  |amsmath| measuring step.
+  |amsmath| measuring step and, since |2.0|, the |\text| macro of |amsmath|,
+  which typesets its argument four times. Only one footnote is supported
+  in a |\text|: |amsmath| steps counters only in the first of the four
+  typesettings, which is not always the one used in the output.
 \item
   \LaTeX2e has some ``features'' when using footnotes in |minipage|'s
   which are themselves in a |minipage| which may also have footnotes externally
@@ -774,12 +824,44 @@ is still there, as I checked now. This has nothing to do with \fnh.
   sub-|minipages|, to see.
 
   \fnh behaves like original package |footnote| when the |savenotes|
-  environment is used \emph{inside} a minipage. Only reasonable usage in case
-  of nested minipages seems to use only a single top level (i.e. external)
+  environment is used \emph{inside} a minipage. The only reasonable usage in
+  case of nested minipages seems to be a single top level (i.e. external)
   |savenotes| environment. But there will anyhow be collisions of the
   alphabetic enumerations. These collisions are there with or without \fnh (or
   |footnote.sty|.) I did not make any attempt, nor intend to in future, to
-  address in an automatized manner these problematic contexts.
+  address in an automated manner these problematic contexts.
+\item the body of an |amsmath| environment such as |align| is read as a macro
+  argument: the |footnote| environment can be used there (for example in an
+  |\intertext|) but not with verbatim material.
+\item the environments |footnote| and |footnotetext| are not reliable inside a
+  |tabularx|, which handles the |\footnote| macro by itself: use the macro
+  there.
+\end{itemize}
+
+The next items were added at |2.0|. They are about documents using
+|\DocumentMetadata| and describe the situation with the \LaTeX\ release
+|2026-11-01|, which may evolve:
+\begin{itemize}[nosep]
+\item the tests were done with \hologo{pdfLaTeX} and \hologo{LuaLaTeX},
+  PDF 2.0, and mostly the |article| class. A brief test with \hologo{XeLaTeX}
+  was successful. PDF 1.7 was not tested.
+\item the notes saved by |savenotes| are tagged at the location of their
+  footnote marks, not at the location where they are delivered: in the
+  structure of the document each note is next to its mark, whatever the
+  page it ends up on.
+\item a footnote typeset while tagging is suspended is delivered but gets no
+  structure. The typical case is a footnote in a Ti\emph{k}Z node. With
+  \hologo{pdfLaTeX} its text is then neither tagged nor marked as an artifact,
+  which a PDF/UA validation will report; with \hologo{LuaLaTeX} it is marked
+  as an artifact.
+\item with the |para| option of |footmisc|, the |footnote| and |footnotetext|
+  environments produce ordinary paragraphs, not run-in notes. Footnotes using
+  |\footnote| are not impacted.
+\item some contexts have problems with or without \fnh: the |side| option of
+  |footmisc| triggers tagging warnings, and the |memoir| class fails when
+  |hyperref| is loaded.
+\item the KOMA-Script classes currently refuse |\DocumentMetadata|, so tagging
+  is not available with them.
 \end{itemize}
 
 \StopEventually{\end{document}\endinput}
@@ -805,7 +887,7 @@ is still there, as I checked now. This has nothing to do with \fnh.
   \everypar{\global\advance\c@CodelineNo\@ne
   \llap{\theCodelineNo\ \hskip\@totalleftmargin}}%
 \fi
-\string\NeedsTeXFormat\string{LaTeX2e\string}\par
+\string\NeedsTeXFormat\string{LaTeX2e\string}[2026/11/01]\par
 \string\ProvidesPackage\string{\pkgname\string}\@percentchar\par
 \noindent\space [\pkgdate\space v\pkgversion\space\pkgdescription]\par
 \nointerlineskip
@@ -902,13 +984,25 @@ is still there, as I checked now. This has nothing to do with \fnh.
 % wants to handle environments doing multiple passes: but the footnote counter
 % must have been taken care of elsewhere. The code currently handles only
 % the case of |amsmath| environments.
+%
+% |2.0| fixes a bug: the |\text| macro of |amsmath| typesets its argument
+% four times, hence a footnote located there was saved four times. Only the
+% first one is now kept, the one for which \cs{iffirstchoice@} is true and
+% counters get stepped. The two tests are done by separate macros, each one
+% gobbling what follows it up to and including the footnote text.
 %    \begin{macrocode}
 \def\FNH@hyper@fntext{\FNH@fntext\FNH@hyper@fntext@i}%
 \def\FNH@nohyp@fntext{\FNH@fntext\FNH@nohyp@fntext@i}%
-\def\FNH@fntext #1{\ifx\ifmeasuring@\@undefined
-    \expandafter\@secondoftwo\else\expandafter\@firstofone\fi
-    {\ifmeasuring@\expandafter\@gobbletwo\fi}#1%
+\def\FNH@fntext{\FNH@measuring@gobblethree\FNH@notfirstchoice@gobbletwo}%
+\def\FNH@measuring@gobblethree{\ifx\ifmeasuring@\@undefined
+    \expandafter\@gobble\else\expandafter\@firstofone\fi
+    {\ifmeasuring@\expandafter\FNH@gobblethree\fi}%
 }%
+\def\FNH@notfirstchoice@gobbletwo{\ifx\iffirstchoice@\@undefined
+    \expandafter\@gobble\else\expandafter\@firstofone\fi
+    {\iffirstchoice@\else\expandafter\@gobbletwo\fi}%
+}%
+\long\def\FNH@gobblethree#1#2#3{}%
 %    \end{macrocode}
 % \end{macro}\end{macro}\end{macro}
 % \begin{macro}{\FNH@hyper@fntext@i}
@@ -1042,6 +1136,11 @@ is still there, as I checked now. This has nothing to do with \fnh.
   \endgroup\the\FNH@toks
   \ifFNH@savingnotes\else
    \ifvoid\FNH@notes\else
+    \FNH@delivernotes
+   \fi
+  \fi
+}%
+\def\FNH@delivernotes {%
     \begingroup
      \let\@makefntext\@empty
      \let\@finalstrut\@gobble
@@ -1052,10 +1151,13 @@ is still there, as I checked now. This has nothing to do with \fnh.
         \expandafter\FNH@H@@footnotetext
      \fi{\unvbox\FNH@notes}%
     \endgroup
-   \fi
-  \fi
 }%
 %    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\FNH@delivernotes}
+% At |2.0| the delivery of the saved notes was moved from \cs{FNH@spewnotes}
+% into this macro, which gets another definition for documents using
+% |\DocumentMetadata|.
 % \end{macro}
 % \begin{macro}{\FNH@footnote}
 % \begin{macro}{\FNH@footnotetext}
@@ -1427,6 +1529,223 @@ is still there, as I checked now. This has nothing to do with \fnh.
   {}%
 %    \end{macrocode}
 % \end{macro}
+% \subsection{Documents using \cs{DocumentMetadata}}
+%
+% Added at |2.0|. With |\DocumentMetadata|, tagging activated or not, \LaTeX\
+% replaces its footnote code by the one from |latex-lab-footnotes.ltx|, and
+% |hyperref| does not patch footnotes anymore. What precedes is then not
+% usable: the remainder of the file replaces it. It is skipped if
+% |\DocumentMetadata| was not used, as recognized from the kernel
+% \cs{fnote_footnotetext:n} not being defined.
+%    \begin{macrocode}
+\@ifundefined{fnote_footnotetext:n}{\endinput}{}%
+%    \end{macrocode}
+% \begin{macro}{\FNH@prefntext}
+% \begin{macro}{\FNH@check}
+% The kernel \cs{@makefntext}, or the one of the class as patched by the
+% kernel at begin document, hands over its argument braced to a socket,
+% so no analysis is attempted. The |babel-french| specific code is not
+% used either: with |\DocumentMetadata|, |babel-french| uses the kernel
+% hooks |fntext/para| and |fnmark/before| and the socket |fntext/mark|,
+% and they are all executed by \cs{FNH@startfntext}, the last one via
+% \cs{@makefntext}.
+%    \begin{macrocode}
+\let\FNH@check\@empty
+\def\FNH@prefntext{\@makefntext{}}%
+%    \end{macrocode}
+% \end{macro}\end{macro}
+% \begin{macro}{\FNH@DM@save}
+% \begin{macro}{\FNH@DM@dispatch}
+% \begin{macro}{\FNH@DM@insertsetup}
+% Inside |savenotes|, \cs{@footnotetext} keeps its kernel meaning, hence
+% each footnote gets its structure, its label and its link target from the
+% kernel. Only the last step is modified, via a plug for the kernel socket
+% |fntext/process|: the typeset note is appended to \cs{FNH@notes} in place
+% of being inserted. The kernel sets \cs{hsize} from \cs{columnwidth}, so we
+% reset the latter to its value at start of the |savenotes| scope. As
+% previously, nothing is saved during the measuring step of |amsmath|
+% environments.
+%
+% Regarding the four typesettings done by the |\text| macro of |amsmath|:
+% in a document using |\DocumentMetadata| without tagging, the
+% \cs{iffirstchoice@} test is used as above. In a tagged document, see
+% \cs{FNH@DM@tagged} next.
+%
+% \cs{FNH@DM@insertsetup} holds the parameters which must be in force at
+% the end of an |\insert| and were lost when its future contents were first
+% put in a box.
+%    \begin{macrocode}
+\long\def\FNH@DM@save#1{%
+  \global\setbox\FNH@notes\vbox{\unvbox\FNH@notes\columnwidth\FNH@width#1}%
+}%
+\NewSocketPlug{fntext/process}{footnotehyper}%
+   {\FNH@measuring@gobblethree\FNH@DM@dispatch\FNH@DM@save{#1}}%
+\let\FNH@DM@dispatch\FNH@notfirstchoice@gobbletwo
+\AtBeginDocument{%
+  \@nameuse{tag_if_active:T}{\let\FNH@DM@dispatch\FNH@DM@tagged}%
+}%
+\def\FNH@DM@insertsetup{%
+  \reset@font\footnotesize
+  \interlinepenalty\interfootnotelinepenalty
+  \splittopskip\footnotesep
+  \splitmaxdepth\dp\strutbox
+  \floatingpenalty\@MM
+}%
+%    \end{macrocode}
+% \end{macro}\end{macro}\end{macro}
+% \begin{macro}{\FNH@DM@tagged}
+% \begin{macro}{\FNH@DM@iffirstchoice}
+% \begin{macro}{\FNH@DM@forget}
+% This is \cs{FNH@DM@dispatch} in a tagged document. Its first argument is
+% \cs{FNH@DM@save}, its second argument is the note.
+%
+% Among its four typesettings of the argument of |\text|, the kernel tags
+% the one which is used in the output and suspends tagging in the three
+% others. The tagged one is the one to save, but it is not always the first
+% one, and it does not exist if |\text| itself is used at a location where
+% tagging is suspended. And a footnote not in a |\text| has to be saved even
+% if tagging is suspended there (it then gets no tagging, same as it would
+% in absence of |savenotes|): this happens inside a Ti\emph{k}Z node, a
+% typical use case of |savenotes|. As the first typesetting done by |\text|
+% can not be told apart from material not inside |\text|, we proceed as
+% follows:
+% \begin{itemize}[nosep]
+% \item \cs{iffirstchoice@} is true or does not exist: the note is saved.
+%   If tagging is suspended, we keep a copy of the earlier contents of
+%   \cs{FNH@notes} and record the footnote mark,
+% \item \cs{iffirstchoice@} is false and tagging is not suspended: the note
+%   is saved. If the recorded footnote mark is the current one, we were in
+%   the previous case for the first typesetting of this same |\text|, and
+%   the note saved at that time is first removed,
+% \item \cs{iffirstchoice@} is false and tagging is suspended: the note is
+%   dropped.
+% \end{itemize}
+% Counters are stepped only in the first of the four typesettings, so
+% the footnote mark is the same in all of them, if there is only one
+% footnote in the |\text|.
+%    \begin{macrocode}
+\newbox\FNH@DM@undo
+\let\FNH@DM@provmark\@undefined
+\long\def\FNH@DM@tagged#1#2{%
+  \FNH@DM@iffirstchoice
+    {\@nameuse{tag_if_active:TF}%
+       {\FNH@DM@forget}%
+       {\global\setbox\FNH@DM@undo\copy\FNH@notes
+        \global\let\FNH@DM@provmark\@thefnmark}%
+     #1{#2}}%
+    {\@nameuse{tag_if_active:TF}%
+       {\ifx\FNH@DM@provmark\@thefnmark
+          \global\setbox\FNH@notes\box\FNH@DM@undo
+        \fi
+        \FNH@DM@forget
+        #1{#2}}%
+       {}}%
+}%
+\def\FNH@DM@iffirstchoice{%
+  \ifx\iffirstchoice@\@undefined
+    \expandafter\@firstoftwo
+  \else
+    \expandafter\FNH@DM@iffirstchoice@i
+  \fi
+}%
+\def\FNH@DM@iffirstchoice@i{%
+  \iffirstchoice@\expandafter\@firstoftwo\else\expandafter\@secondoftwo\fi
+}%
+\def\FNH@DM@forget{%
+  \global\let\FNH@DM@provmark\@undefined
+  \global\setbox\FNH@DM@undo\box\voidb@x
+}%
+%    \end{macrocode}
+% \end{macro}\end{macro}\end{macro}
+% \begin{macro}{\FNH@savenotes}
+% A |minipage| assigns its own plug to |fntext/process|, but it does so
+% before executing \cs{@minipagerestore}.
+%    \begin{macrocode}
+\def\FNH@savenotes{%
+  \begingroup
+  \ifFNH@savingnotes\else
+    \FNH@savingnotestrue
+    \FNH@DM@forget
+    \AssignSocketPlug{fntext/process}{footnotehyper}%
+    \FNH@width\columnwidth
+    \let\FNH@colwidth\FNH@width
+    \global\setbox\FNH@notes\box\voidb@x
+    \let\FNH@thempfn\thempfn
+    \let\FNH@mpfn\@mpfn
+    \ifx\@minipagerestore\relax\let\@minipagerestore\@empty\fi
+    \expandafter\def\expandafter\@minipagerestore\expandafter{%
+      \@minipagerestore
+      \let\thempfn\FNH@thempfn
+      \let\@mpfn\FNH@mpfn
+      \AssignSocketPlug{fntext/process}{footnotehyper}%
+    }%
+  \fi
+}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\FNH@delivernotes}
+% At the end of the |savenotes| scope the plug which was active outside of
+% it is active again: it receives all the saved notes at once. It is the one
+% of the |minipage| environment if |savenotes| was used inside a minipage.
+%    \begin{macrocode}
+\def\FNH@delivernotes{%
+  \UseSocket{fntext/process}{\FNH@DM@insertsetup\unvbox\FNH@notes}%
+}%
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}{\FNH@startfntext}
+% \begin{macro}{\FNH@endfntext}
+% The |footnote| and |footnotetext| environments. This is the kernel
+% \cs{fnote_footnotetext:n} cut into two halves, with the |fntext/process|
+% socket being used only once the note has been typeset in a box. All
+% hooks and sockets of the kernel are executed, except for the |fntext/make|
+% socket which is replaced by \cs{FNH@prefntext} and \cs{FNH@postfntext}.
+%
+% As \cs{FNH@prefntext} executes \cs{@makefntext} with an empty argument,
+% the tagging socket |fntext/text| is made transparent: else it would
+% produce an empty marked content. The text of the note is tagged by the
+% paragraph it belongs to.
+%
+% \cs{FNH@endfntext@fntext} is not used: the kernel creates a link target
+% also for |\footnotetext[N]|.
+%    \begin{macrocode}
+\def\FNH@startfntext{%
+  \UseHook{fntext/before}%
+  \UseTaggingSocket{fntext/begin}%
+  \setbox\z@\vbox\bgroup
+    \UseHook{fntext}%
+    \reset@font\footnotesize
+    \interlinepenalty\interfootnotelinepenalty
+    \splittopskip\footnotesep
+    \splitmaxdepth\dp\strutbox
+    \floatingpenalty\@MM
+    \hsize\FNH@colwidth
+    \@parboxrestore
+    \UseTaggingSocket{para/restore}%
+    \parindent 1em
+    \def\@currentcounter{footnote}%
+    \protected@edef\@currentlabel{\p@footnote\@thefnmark}%
+    \UseHook{fntext/para}%
+    \color@begingroup
+      \AssignTaggingSocketPlug{fntext/text}{transparent}%
+      \FNH@prefntext
+      \UseSocket{fntext/begin}%
+      \UseHook{fntext/begin}%
+      \ignorespaces
+}%
+\def\FNH@endfntext{%
+      \UseHook{fntext/end}%
+      \UseSocket{fntext/end}%
+      \FNH@postfntext
+      \par
+    \color@endgroup
+  \egroup
+  \UseSocket{fntext/process}{\FNH@DM@insertsetup\unvbox\z@}%
+  \UseTaggingSocket{fntext/end}%
+  \UseHook{fntext/after}%
+}%
+%    \end{macrocode}
+% \end{macro}\end{macro}
 % Original footnote.sty patches |\parbox|, we don't touch it. Also it defines a
 % |minipage*|  environment, we don't do it.
 %    \begin{macrocode}

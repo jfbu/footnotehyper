@@ -1,6 +1,6 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (1.1g 2026/11/11)
+    Source:  footnotehyper.dtx (2.0 2026/11/12)
     Author:  Jean-François B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
@@ -10,27 +10,30 @@
 ABSTRACT
 ========
 
-The `footnote` package by Mark Wooding (`1997/01/28` `1.13`)
-allows to gather footnotes (`\begin{savenotes}`) and later insert
-them (after `\end{savenotes}`) at the bottom of the page, even
-if the intervening material consists of tabulars, minipages or
-framed contents for example. One can also use the
-`\savenotes/\spewnotes` syntax.
+The `footnotehyper` package gathers footnotes (`\begin{savenotes}`) and
+delivers them later (at `\end{savenotes}`), even if the intervening
+material consists, for example, of tabulars, minipages or framed
+contents. It also provides a `footnote` environment whose contents may
+include verbatim material.
 
-Also, `footnote.sty` provides a `footnote` environment which
-allows to insert verbatim material.
+It is a successor to the long obsolete `footnote` package by Mark Wooding
+(`1.13 1997/01/28`). Originally (`0.9c 2016/04/19`) `footnotehyper`
+patched that package for `hyperref` compatibility and fixed some of its
+bugs, among them its incompatibility with `color/xcolor` and with
+`babel-french`, and the failure of its `footnote` environment when used
+with an optional argument `[NUM]`.
 
-Earlier releases of the present `footnotehyper` package added
-patches for `hyperref` compatibility and some bugfixes, addressing
-in particular the incompatibility with `color/xcolor`, and with
-`babel-french`, and also fixing the `footnote` environment with
-optional argument `[NUM]`. Since `0.99` all macros are defined
-internally and the `footnote` package is not loaded at all.
+Since `0.99 2017/02/16` all macros are defined internally and the
+`footnote` package is not loaded at all. Its user interface is kept,
+hence the two packages cannot be used together.
 
-The same user interface is kept. Since `1.0` it is possible to
-use `footnotehyper` also in absence of `hyperref` or when the latter is
-loaded with its `hyperfootnotes=false` option. The order of loading of
-`footnotehyper` and `hyperref` is inconsequential.
+Since `1.0 2017/03/07` `footnotehyper` can also be used in the absence
+of `hyperref`, or when the latter is loaded with its
+`hyperfootnotes=false` option. The order in which `footnotehyper` and
+`hyperref` are loaded is inconsequential.
+
+Since `2.0 2026/11/12` tagging is supported (tested with pdfLaTeX and
+LuaLaTeX). The LaTeX release 2026-11-01 or later is required.
 
 INSTALLATION
 ============
