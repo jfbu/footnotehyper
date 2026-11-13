@@ -6,7 +6,7 @@
 
 ## PDF Tagging
 
-`footnotehyper 1.0 2026/11/12` was the first release compatible with the LaTeX `\DocumentMetadata` command, for documents being tagged or not.
+`footnotehyper 2.0 2026/11/12` was the first release compatible with the LaTeX `\DocumentMetadata` command, for documents being tagged or not.
 
 ## License
 
