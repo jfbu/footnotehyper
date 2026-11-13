@@ -1,6 +1,6 @@
 <!-- -->
 
-    Source:  footnotehyper.dtx (2.0 2026/11/12)
+    Source:  footnotehyper.dtx (2.1-dev 2026/12/01)
     Author:  Jean-François B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c

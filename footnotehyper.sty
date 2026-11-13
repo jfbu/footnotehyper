@@ -23,10 +23,10 @@
 %%
 \NeedsTeXFormat{LaTeX2e}[2026/11/01]
 \ProvidesPackage{footnotehyper}%
- [2026/11/12 v2.0 hyperref aware footnote.sty (JFB)]
+ [2026/12/01 v2.1-dev hyperref aware footnote.sty (JFB)]
 %%
 %% Package: footnotehyper
-%% Version: 2.0 (2026/11/12)
+%% Version: 2.1-dev (2026/12/01)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                                     <jfbu on github>.
@@ -362,36 +362,14 @@
 }%
 \let\FNH@postfntext@fallback\@empty
 \def\makesavenoteenv{\@ifnextchar[\FNH@msne@ii\FNH@msne@i}%]
-\def\FNH@msne@i #1{%
-  \expandafter\let\csname FNH$#1\expandafter\endcsname %$
-                  \csname #1\endcsname
-  \expandafter\let\csname endFNH$#1\expandafter\endcsname %$
-                  \csname end#1\endcsname
-  \FNH@msne@ii[#1]{FNH$#1}%$
+\def\FNH@msne@i#1{%
+    \AddToHook{env/#1/before}{\savenotes}%
+    \AddToHook{env/#1/after}{\spewnotes}%
 }%
 \def\FNH@msne@ii[#1]#2{%
-  \expandafter\edef\csname#1\endcsname{%
-    \noexpand\savenotes
-    \expandafter\noexpand\csname#2\endcsname
-  }%
-  \expandafter\edef\csname end#1\endcsname{%
-    \expandafter\noexpand\csname end#2\endcsname
-    \noexpand\expandafter
-    \noexpand\spewnotes
-    \noexpand\if@endpe\noexpand\@endpetrue\noexpand\fi
-  }%
+    \newenvironment{#1}{\begin{savenotes}\begin{#2}}%
+                       {\end{#2}\end{savenotes}}%
 }%
-\@ifl@t@r\fmtversion{2020/10/01}{%
-    \def\FNH@msne@i#1{%
-        \AddToHook{env/#1/before}{\savenotes}%
-        \AddToHook{env/#1/after}{\spewnotes}%
-    }%
-    \def\FNH@msne@ii[#1]#2{%
-        \newenvironment{#1}{\begin{savenotes}\begin{#2}}%
-                           {\end{#2}\end{savenotes}}%
-    }%
-  }%
-  {}%
 \@ifundefined{fnote_footnotetext:n}{\endinput}{}%
 \let\FNH@check\@empty
 \def\FNH@prefntext{\@makefntext{}}%

@@ -1,11 +1,11 @@
 % -*- coding: utf-8; time-stamp-format: "%02d-%02m-%:y at %02H:%02M:%02S %Z" ; time-stamp-active: nil -*-
 %<*none>
-\def\dtxtimestamp {Time-stamp: <12-11-2026 at 14:30:41 CET>}
+\def\dtxtimestamp {Time-stamp: <13-11-2026 at 11:59:31 CET>}
 %</none>
 %<*!readme>
 %%
 %% Package: footnotehyper
-%% Version: 2.0 (2026/11/12)
+%% Version: 2.1-dev (2026/12/01)
 %% License: LPPL 1.3c
 %% Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                                     <jfbu on github>.
@@ -13,9 +13,9 @@
 %</!readme>
 %<*tex>
 \def\pkgname        {footnotehyper}
-\def\pkgdate        {2026/11/12}
-\def\docdate        {2026/11/12}
-\def\pkgversion     {2.0}
+\def\pkgdate        {2026/12/01}
+\def\docdate        {2026/12/01}
+\def\pkgversion     {2.1-dev}
 \def\pkgdescription {hyperref aware footnote.sty (JFB)}
 %</tex>
 %<*none>
@@ -26,7 +26,7 @@
     \catcode32=13\catcode`\\=12^^Brelax^^A
 ^^Bfirstofone{^^Bendgroup^^Bdef^^BpkgLicense^^A
 {% Package: footnotehyper
-% Version: 2.0 (2026/11/12)
+% Version: 2.1-dev (2026/12/01)
 % License: LPPL 1.3c
 % Copyright (C) 2016-2021, 2025, 2026 Jean-François B.
 %%                             <jfbu on github>.
@@ -56,7 +56,7 @@
 %<*readme>
 <!-- -->
 
-    Source:  footnotehyper.dtx (2.0 2026/11/12)
+    Source:  footnotehyper.dtx (2.1-dev 2026/12/01)
     Author:  Jean-François B.
     Info:    hyperref aware footnote.sty
     License: LPPL 1.3c
@@ -1485,48 +1485,22 @@ The next items were added at |2.0|. They are about documents using
 %    \end{macrocode}
 % \end{macro}\end{macro}\end{macro}
 % \begin{macro}{\makesavenoteenv}
-% \begin{itemize}
-% \item with LaTeX prior to October 2020 release, this is the same as
-%   original. Not recommended. Safer to use explicitely |savenotes|
-%   environment.
-% \item with LaTeX from October 2020 or later, a safer approach is applied which
-%   goes either via the hook mechanism (for the use case with no optional
+%   As we require since |2.0| LaTeX from November 2026 or later, in particular
+%   from October 2020 or later, we can use the hook mechanism
+%   (for the use case with no optional
 %   argument), or via a |\newenvironment| and cautious
 %   use of the public |\begin| and |\end| interface (for the use case with an
-%   optional argument), rather than fiddling with |\foo| and |\endfoo| macros.
-% \end{itemize}
+%   optional argument).
 %    \begin{macrocode}
 \def\makesavenoteenv{\@ifnextchar[\FNH@msne@ii\FNH@msne@i}%]
-\def\FNH@msne@i #1{%
-  \expandafter\let\csname FNH$#1\expandafter\endcsname %$
-                  \csname #1\endcsname
-  \expandafter\let\csname endFNH$#1\expandafter\endcsname %$
-                  \csname end#1\endcsname
-  \FNH@msne@ii[#1]{FNH$#1}%$
+\def\FNH@msne@i#1{%
+    \AddToHook{env/#1/before}{\savenotes}%
+    \AddToHook{env/#1/after}{\spewnotes}%
 }%
 \def\FNH@msne@ii[#1]#2{%
-  \expandafter\edef\csname#1\endcsname{%
-    \noexpand\savenotes
-    \expandafter\noexpand\csname#2\endcsname
-  }%
-  \expandafter\edef\csname end#1\endcsname{%
-    \expandafter\noexpand\csname end#2\endcsname
-    \noexpand\expandafter
-    \noexpand\spewnotes
-    \noexpand\if@endpe\noexpand\@endpetrue\noexpand\fi
-  }%
+    \newenvironment{#1}{\begin{savenotes}\begin{#2}}%
+                       {\end{#2}\end{savenotes}}%
 }%
-\@ifl@t@r\fmtversion{2020/10/01}{%
-    \def\FNH@msne@i#1{%
-        \AddToHook{env/#1/before}{\savenotes}%
-        \AddToHook{env/#1/after}{\spewnotes}%
-    }%
-    \def\FNH@msne@ii[#1]#2{%
-        \newenvironment{#1}{\begin{savenotes}\begin{#2}}%
-                           {\end{#2}\end{savenotes}}%
-    }%
-  }%
-  {}%
 %    \end{macrocode}
 % \end{macro}
 % \subsection{Documents using \cs{DocumentMetadata}}
