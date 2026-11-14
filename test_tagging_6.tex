@@ -1,0 +1,40 @@
+\DocumentMetadata
+  {
+    lang=en-US,
+    pdfversion=2.0,
+    pdfstandard=ua-2,
+    tagging=on,
+  }
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage{footnotehyper}
+\makesavenoteenv{tabular}
+\makesavenoteenv[notedminipage]{minipage}
+\makesavenoteenv{center}
+
+\title{footnotehyper tagging test - makesavenoteenv}
+
+\begin{document}
+
+Text\footnote{before}.
+
+\begin{tabular}{cc}
+text\footnote{first} & more\begin{footnote}second\end{footnote}
+ text\footnote{third} \\
+even more text\footnote{fourth} & blub
+\end{tabular}
+
+\begin{notedminipage}{4cm}
+text\footnote{fifth} text\begin{footnote}sixth\end{footnote}
+\end{notedminipage}
+
+\begin{center}
+centered\footnote{seventh}
+\begin{tabular}{c}
+nested\footnote{eighth}
+\end{tabular}
+\end{center}
+
+Text\footnote{after}.
+
+\end{document}

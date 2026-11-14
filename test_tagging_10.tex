@@ -1,0 +1,38 @@
+% XFAIL pdflatex: notes saved while tagging is suspended are not tagged
+\DocumentMetadata
+  {
+    lang=en-US,
+    pdfversion=2.0,
+    pdfstandard=ua-2,
+    tagging=on,
+  }
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{hyperref}
+\usepackage{footnotehyper}
+
+\title{footnotehyper tagging test - suspended tagging}
+
+\begin{document}
+
+Before\footnote{first, tagged}.
+
+% tagging is suspended inside the node: the note must be delivered
+\begin{savenotes}
+\begin{tikzpicture}[alt={a node}]
+\node[draw] {node text\footnote{second, in a node, not tagged}};
+\end{tikzpicture}
+\end{savenotes}
+
+\begin{savenotes}
+In savenotes: \SuspendTagging{test}suspended\footnote{third, not
+  tagged}\ResumeTagging{test} and active\footnote{fourth, tagged}, and
+inline math $x=y\text{ (text\footnote{fifth, tagged})}$, and inline math
+\SuspendTagging{test}$x=y\text{ (text\footnote{sixth, not
+    tagged})}$\ResumeTagging{test}.
+\end{savenotes}
+
+After\footnote{last, tagged}.
+
+\end{document}

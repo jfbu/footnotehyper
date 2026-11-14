@@ -1,0 +1,36 @@
+\DocumentMetadata
+  {
+    lang=en-US,
+    pdfversion=2.0,
+    pdfstandard=ua-2,
+    tagging=on,
+  }
+\documentclass{article}
+\usepackage{footmisc}
+\usepackage{hyperref}
+\usepackage{footnotehyper}
+
+\title{footnotehyper tagging test - footmisc}
+
+\begin{document}
+
+Text\footnote{macro} and\begin{footnote}env \verb|%| form\end{footnote} and a
+mark\footnotemark\begin{footnotetext}text env\end{footnotetext}.
+
+\begin{savenotes}
+\begin{tabular}{cc}
+text\footnote{first} & more\begin{footnote}second\end{footnote} \\
+even more text\footnote{third} & blub
+\end{tabular}
+\end{savenotes}
+
+\begin{minipage}{5cm}
+text\footnote{mp first}
+\begin{savenotes}
+\begin{tabular}{c}
+x\footnote{mp second}\begin{footnote}mp third\end{footnote}
+\end{tabular}
+\end{savenotes}
+\end{minipage}
+
+\end{document}

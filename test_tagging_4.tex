@@ -1,0 +1,36 @@
+\DocumentMetadata
+  {
+    lang=en-US,
+    pdfversion=2.0,
+    pdfstandard=ua-2,
+    tagging=on,
+  }
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{footnotehyper}
+
+\title{footnotehyper tagging test - amsmath}
+
+\begin{document}
+
+Text\footnote{before} and
+\begin{savenotes}
+\begin{align}
+  E&=mc^2\;,
+\intertext{was too easy\footnote{There is also $E=h\nu$.}, let's
+  try\begin{footnote}env form\end{footnote}:}
+  a^n + b^n &=c^n\;.
+\end{align}
+\end{savenotes}
+and\footnote{after} more
+\begin{savenotes}
+\begin{gather}
+  a=b\text{ (obviously\footnote{in gather})}\\
+  c=d
+\end{gather}
+\end{savenotes}
+end\footnote{last} and inline
+\begin{savenotes}$x=y\text{ (in text style\footnote{inline})}$\end{savenotes}.
+
+\end{document}

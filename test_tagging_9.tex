@@ -1,0 +1,40 @@
+\DocumentMetadata
+  {
+    lang=fr-FR,
+    pdfversion=2.0,
+    pdfstandard=ua-2,
+    tagging=on,
+  }
+\documentclass[french]{article}
+\ifdefined\directlua\else\usepackage[T1]{fontenc}\fi
+\usepackage{babel}
+\usepackage{hyperref}
+\usepackage{footnotehyper}
+
+\title{footnotehyper tagging test - babel-french}
+
+\begin{document}
+
+Texte\footnote{macro : avec ponctuation ; haute !} et\begin{footnote}env
+\verb|%| forme : ponctuation ?\end{footnote} et une
+marque\footnotemark\begin{footnotetext}text env\end{footnotetext}.
+
+\begin{savenotes}
+\begin{tabular}{cc}
+texte\footnote{premier} & plus\begin{footnote}second\end{footnote} \\
+encore\footnote{troisième} & blub
+\end{tabular}
+\end{savenotes}
+
+% footnotes inside a second level quotation
+\frquote{Une citation de premier niveau contenant \frquote{une citation de
+second niveau assez longue pour occuper plusieurs
+lignes\begin{footnote}env dans une citation, assez longue pour occuper elle
+aussi plus d'une ligne, et même au moins deux lignes, pour être bien certain
+que les guillemets ne s'y invitent pas.\end{footnote} et encore plusieurs
+lignes\footnote{macro dans une citation, assez longue pour occuper elle
+aussi plus d'une ligne, et même au moins deux lignes, sans guillemets.} et
+encore du texte, et encore du texte, et encore du texte, et encore du texte,
+et encore du texte} pour finir.}
+
+\end{document}

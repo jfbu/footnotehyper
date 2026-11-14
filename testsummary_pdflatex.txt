@@ -1,0 +1,107 @@
+pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)
+LaTeX2e <2026-11-01>
+L3 programming layer <2026-09-09>
+Package: footnotehyper 2026/11/12 v2.0 hyperref aware footnote.sty (JFB)
+Package: tagpdf 2026-10-29 v1.0i  LaTeX kernel code for PDF tagging 
+File: latex-lab-footnotes.ltx 2026-09-02 v0.8q changes to the footnote interfac
+Package: hyperref 2026-11-03 v7.01t Hypertext links for LaTeX
+
+PASS test_tagging_1.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'first'
+  NOTE  p1 mark '2' -> p1 label '2' : 'second'
+  NOTE  p1 mark '3' -> p1 label '3' : 'third'
+  NOTE  p1 mark '4' -> p1 label '4' : 'fourth'
+  COUNT   4 note(s), 4 mark(s), 0 link(s) inside marks
+PASS test_tagging_2.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'first'
+  NOTE  p1 mark '2' -> p1 label '2' : 'second'
+  NOTE  p1 mark '3' -> p1 label '3' : 'third'
+  NOTE  p1 mark '4' -> p1 label '4' : 'first'
+  NOTE  p1 mark '5' -> p1 label '5' : 'second'
+  NOTE  p1 mark '6' -> p1 label '6' : 'third'
+  COUNT   6 note(s), 6 mark(s), 0 link(s) inside marks
+PASS test_tagging_3.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'env &$^%\\[}$ form'
+  NOTE  p1 mark '57' -> p1 label '57' : 'env with optional argument and a seco...'
+  NOTE  p1 mark '2' -> p1 label '2' : 'text env %'
+  NOTE  p1 mark '99' -> p1 label '99' : 'text env opt'
+  NOTE  p1 mark '3' -> p1 label '3' : 'macro form'
+  NOTE  p1 mark '4' -> p1 label '4' : 'first'
+  NOTE  p1 mark '5' -> p1 label '5' : 'second #'
+  NOTE  p1 mark '12' -> p1 label '12' : 'fourth'
+  NOTE  p1 mark '6' -> p1 label '6' : 'third'
+  NOTE  p1 mark 'a' -> p1 label 'a' : 'mp first'
+  NOTE  p1 mark 'b' -> p1 label 'b' : 'mp second'
+  NOTE  p1 mark 'c' -> p1 label 'c' : 'mp third'
+  COUNT   12 note(s), 12 mark(s), 12 link(s) inside marks
+PASS test_tagging_4.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'before'
+  NOTE  p1 mark '2' -> p1 label '2' : 'There is also E = hν.'
+  NOTE  p1 mark '3' -> p1 label '3' : 'env form'
+  NOTE  p1 mark '4' -> p1 label '4' : 'after'
+  NOTE  p1 mark '5' -> p1 label '5' : 'in gather'
+  NOTE  p1 mark '6' -> p1 label '6' : 'last'
+  NOTE  p1 mark '7' -> p1 label '7' : 'inline'
+  COUNT   7 note(s), 7 mark(s), 7 link(s) inside marks
+PASS test_tagging_5.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'An ordinary footnote on the first page.'
+  NOTE  p1 mark '2' -> p1 label '2' : 'first saved note'
+  NOTE  p1 mark '3' -> p1 label '3' : 'second saved note, a long one. The qu...'
+  NOTE  p1 mark '4' -> p2 label '4' : 'third saved note'
+  NOTE  p2 mark '5' -> p4 label '5' : 'fourth saved note'
+  NOTE  p2 mark '6' -> p4 label '6' : 'fifth saved note'
+  NOTE  p4 mark '7' -> p4 label '7' : 'sixth saved note, its mark is on the ...'
+  NOTE  p4 mark '8' -> p4 label '8' : 'last'
+  COUNT   8 note(s), 8 mark(s), 8 link(s) inside marks
+PASS test_tagging_6.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'before'
+  NOTE  p1 mark '2' -> p1 label '2' : 'first'
+  NOTE  p1 mark '3' -> p1 label '3' : 'second'
+  NOTE  p1 mark '4' -> p1 label '4' : 'third'
+  NOTE  p1 mark '5' -> p1 label '5' : 'fourth'
+  NOTE  p1 mark '6' -> p1 label '6' : 'fifth'
+  NOTE  p1 mark '7' -> p1 label '7' : 'sixth'
+  NOTE  p1 mark '8' -> p1 label '8' : 'seventh'
+  NOTE  p1 mark '9' -> p1 label '9' : 'eighth'
+  NOTE  p1 mark '10' -> p1 label '10' : 'after'
+  COUNT   10 note(s), 10 mark(s), 10 link(s) inside marks
+XFAIL test_tagging_7.tex: fails at compilation 1 of 7 (recent KOMA-Script classes refuse \DocumentMetadata)
+  ! Fatal Class scrartcl Error: \DocumentMetadata not supported!
+  (scrartcl)                    Note: This class currently does not support
+  (scrartcl)                    usage of \DocumentMetadata.
+PASS test_tagging_8.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'macro'
+  NOTE  p1 mark '2' -> p1 label '2' : 'env % form'
+  NOTE  p1 mark '3' -> p1 label '3' : 'text env'
+  NOTE  p1 mark '4' -> p1 label '4' : 'first'
+  NOTE  p1 mark '5' -> p1 label '5' : 'second'
+  NOTE  p1 mark '6' -> p1 label '6' : 'third'
+  NOTE  p1 mark 'a' -> p1 label 'a' : 'mp first'
+  NOTE  p1 mark 'b' -> p1 label 'b' : 'mp second'
+  NOTE  p1 mark 'c' -> p1 label 'c' : 'mp third'
+  COUNT   9 note(s), 9 mark(s), 9 link(s) inside marks
+PASS test_tagging_9.tex
+  NOTE  p1 mark '1' -> p1 label '1.' : 'macro : avec ponctuation; haute!'
+  NOTE  p1 mark '2' -> p1 label '2.' : 'env % forme : ponctuation?'
+  NOTE  p1 mark '3' -> p1 label '3.' : 'text env'
+  NOTE  p1 mark '4' -> p1 label '4.' : 'premier'
+  NOTE  p1 mark '5' -> p1 label '5.' : 'second'
+  NOTE  p1 mark '6' -> p1 label '6.' : 'troisième'
+  NOTE  p1 mark '7' -> p1 label '7.' : 'env dans une citation, assez longue p...'
+  NOTE  p1 mark '8' -> p1 label '8.' : 'macro dans une citation, assez longue...'
+  COUNT   8 note(s), 8 mark(s), 8 link(s) inside marks
+XFAIL test_tagging_10.tex: fails the structure checks (fnchecks.py) (notes saved while tagging is suspended are not tagged)
+  NOTE  p1 mark '1' -> p1 label '1' : 'first, tagged'
+  NOTE  p1 mark '4' -> p1 label '4' : 'fourth, tagged'
+  NOTE  p1 mark '5' -> p1 label '5' : 'fifth, tagged'
+  NOTE  p1 mark '7' -> p1 label '7' : 'last, tagged'
+  UNTAGGED p1: 24 text operator(s) outside marked content
+  COUNT   4 note(s), 4 mark(s), 4 link(s) inside marks
+PASS test_tagging_11.tex
+  NOTE  p1 mark '1' -> p1 label '1' : 'first'
+  NOTE  p1 mark '2' -> p1 label '2' : 'second'
+  NOTE  p1 mark '3' -> p1 label '3' : 'third'
+  NOTE  p1 mark '4' -> p1 label '4' : 'fourth'
+  COUNT   4 note(s), 4 mark(s), 0 link(s) inside marks
+
+FAIL=0, PASS=9, XFAIL=2, XPASS=0, TOTAL=11
