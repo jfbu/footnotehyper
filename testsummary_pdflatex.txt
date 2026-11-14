@@ -97,11 +97,5 @@ XFAIL test_tagging_10.tex: fails the structure checks (fnchecks.py) (notes saved
   NOTE  p1 mark '7' -> p1 label '7' : 'last, tagged'
   UNTAGGED p1: 24 text operator(s) outside marked content
   COUNT   4 note(s), 4 mark(s), 4 link(s) inside marks
-PASS test_tagging_11.tex
-  NOTE  p1 mark '1' -> p1 label '1' : 'first'
-  NOTE  p1 mark '2' -> p1 label '2' : 'second'
-  NOTE  p1 mark '3' -> p1 label '3' : 'third'
-  NOTE  p1 mark '4' -> p1 label '4' : 'fourth'
-  COUNT   4 note(s), 4 mark(s), 0 link(s) inside marks
 
-FAIL=0, PASS=9, XFAIL=2, XPASS=0, TOTAL=11
+FAIL=0, PASS=8, XFAIL=2, XPASS=0, TOTAL=10
