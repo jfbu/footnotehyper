@@ -1,7 +1,7 @@
 pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)
 LaTeX2e <2026-11-01>
 L3 programming layer <2026-09-09>
-Package: footnotehyper 2026/11/12 v2.0 hyperref aware footnote.sty (JFB)
+Package: footnotehyper 2026/12/01 v2.1-dev hyperref aware footnote.sty (JFB)
 Package: tagpdf 2026-10-29 v1.0i  LaTeX kernel code for PDF tagging 
 File: latex-lab-footnotes.ltx 2026-09-02 v0.8q changes to the footnote interfac
 Package: hyperref 2026-11-03 v7.01t Hypertext links for LaTeX
