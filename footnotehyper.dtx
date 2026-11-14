@@ -796,9 +796,9 @@ A few items worth mentioning:
   For the record here is a patch (last tested briefly with
 % PUTAIN BORDEL ! LaTeX Error: Text for \verb command ended by end of
 % line. À CHAQUE FOIS ÇA M'AGAÇE. Bon, je n'ai pas mon patch habituel ici.
-  |hyperref 2016/06/24 v6.83q| and |frenchb 2017/01/30 v3.2g|):
-% pour le cas où mis dans commentaires de code
-% \begingroup\makeatletter\let\check@percent\@gobble
+  |hyperref 2016/06/24 v6.83q| and |frenchb 2017/01/30 v3.2g|): (go to next
+  page, please)
+\clearpage \xdef\foo{************************************************CLEARPAGE on line \the\inputlineno}\AtEndDocument{\typeout{\foo}}
 \begin{verbatim}
   \AtBeginDocument{%
    \let\@xfootnotemarkORIFB \@xfootnotemark
@@ -810,7 +810,6 @@ A few items worth mentioning:
 \end{verbatim}
 On |2021/01/29| the interference (loss of some |babel-french| customization)
 is still there, as I checked now. This has nothing to do with \fnh.
-% \endgroup
 \item some environments typeset their contents multiple times,
   which causes issues; \fnh takes provisions only to handle the
   |amsmath| measuring step and, since |2.0|, the |\text| macro of |amsmath|,
@@ -865,9 +864,6 @@ The next items were added at |2.0|. They are about documents using
 \end{itemize}
 
 \StopEventually{\end{document}\endinput}
-\makeatletter
-    \let\check@percent\original@check@percent
-\makeatother
 
 \newgeometry{left=4cm, hscale=0.72}
 \section{Implementation}
@@ -1721,8 +1717,9 @@ The next items were added at |2.0|. They are about documents using
 %    \end{macrocode}
 % \end{macro}\end{macro}
 % Original footnote.sty patches |\parbox|, we don't touch it. Also it defines a
-% |minipage*|  environment, we don't do it.
-%    \begin{macrocode}
+% |minipage*|  environment, we don't do it.  Here is the original code
+% from \ctanpackage{footnote}.sty:
+%    \begin{verbatim}
 % \makesavenoteenv[minipage*]{minipage}
 % \let\fn@parbox\parbox
 % \def\parbox{\@ifnextchar[{\fn@parbox@i{}}{\fn@parbox@ii{}}}
@@ -1730,6 +1727,8 @@ The next items were added at |2.0|. They are about documents using
 %   \@ifnextchar[{\fn@parbox@i{#1[#2]}}{\fn@parbox@ii{#1[#2]}}%
 % }
 % \long\def\fn@parbox@ii#1#2#3{\savenotes\fn@parbox#1{#2}{#3}\spewnotes}
+%    \end{verbatim}
+%    \begin{macrocode}
 \endinput
 %    \end{macrocode}
 % \MakePercentComment
